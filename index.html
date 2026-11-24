@@ -18,7 +18,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Sana tu Mentte", "url": "https://sanatumentte.net/", "logo": "https://sanatumentte.net/img/logo.png", "image": "https://sanatumentte.net/img/compartir.jpg", "description": "Psicóloga online con enfoque cognitivo-conductual. Ansiedad, autoestima, heridas del pasado, propósito y relaciones. Integración de la fe, si así lo deseas.", "slogan": "Psicología + fe, con amor y evidencia", "founder": {"@type": "Person", "name": "Camila Salazar Ramírez", "jobTitle": "Psicóloga"}, "knowsLanguage": "es", "sameAs": ["https://instagram.com/sanatumentte", "https://www.tiktok.com/@sanatumentte", "https://www.youtube.com/@Sanatumentte1"]}</script>
 <link rel="icon" href="img/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="comun.css?v=6">
+<link rel="stylesheet" href="comun.css?v=7">
 <style>
 /* HERO */
 /* BANNER PRINCIPAL */
@@ -865,7 +865,7 @@ body.ready .nv1{animation:bnUp 1s cubic-bezier(.2,.7,.2,1) 1.1s forwards}
 
 <div class="pay" id="pay" role="dialog" aria-modal="true" aria-label="Agendar sesión"><div class="pay-box"><button class="pay-x" id="payX" type="button" aria-label="Cerrar">×</button><div id="payBody"></div></div></div>
 <script src="tests-data.js?v=5"></script>
-<script src="comun.js?v=6"></script>
+<script src="comun.js?v=7"></script>
 <script>
 /* Reseñas escritas por pacientes (texto tal cual lo enviaron) */
 const SHOTS=[
@@ -976,7 +976,7 @@ evMini.onclick=evOpen;
 evp.querySelector('[data-finder]').addEventListener('click',()=>{evp.classList.remove('show');evMini.classList.add('show')});
 function evSchedule(){let min=false;try{min=sessionStorage.getItem('evMin')==='1'}catch(e){}
   if(min){evMini.classList.add('show');return}
-  setTimeout(()=>{if(!modal.classList.contains('open'))evOpen();else evMini.classList.add('show')},2000)}
+  setTimeout(()=>{if(window.evNoAbrir){evMini.classList.add('show');return}if(!modal.classList.contains('open'))evOpen();else evMini.classList.add('show')},2000)}
 /* Previsualización de la canción en YouTube: carga el video al tocar y pausa la música de fondo */
 (function(){const b=document.getElementById('ytpPlay');if(!b)return;b.onclick=()=>{
   const bg=document.getElementById('bgm'),sn=document.getElementById('snd');if(bg&&!bg.paused){bg.pause();if(sn)sn.classList.remove('play')}

@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sana tu Mentte · Psi. Camila Salazar Ramírez</title>
+<meta name="description" content="Psicóloga online con enfoque cognitivo-conductual. Ansiedad, autoestima, heridas del pasado, propósito y relaciones. Integración de la fe, si así lo deseas.">
+<link rel="icon" href="img/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comun.css?v=6">
+<style>
+/* HERO */
+/* BANNER PRINCIPAL */
+.banner{position:relative;height:calc(100svh - var(--navh));min-height:560px;max-height:860px;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 82% 8%,rgba(245,232,218,.28),transparent 60%),linear-gradient(180deg,#1d6a7b 0%,#165a6c 55%,#114c5c 100%);color:var(--crema)}
+.bn-beam{position:absolute;right:-10%;top:-20%;width:55%;height:140%;background:linear-gradient(100deg,transparent 30%,rgba(245,232,218,.13) 50%,transparent 70%);transform:rotate(18deg);pointer-events:none}
+.bn-floor{position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(8,36,44,.35))}
+.bn-word{position:absolute;left:0;right:0;top:20%;text-align:center;font-family:"Playfair Display",serif;font-weight:400;text-transform:uppercase;color:var(--crema);font-size:min(9.4vw,150px);line-height:.9;letter-spacing:.01em;white-space:nowrap;z-index:1;margin:0}
+.bn-word span{display:inline-block}
+.bn-photo{position:absolute;bottom:0;left:62%;transform:translateX(-50%);height:84%;width:auto;max-width:none;z-index:2;filter:drop-shadow(0 30px 40px rgba(0,0,0,.25))}
+.bn-fade{display:none}
+.bn-left{position:absolute;left:max(4vw,22px);top:calc(20% + min(9.4vw,150px) + 26px);z-index:3;max-width:360px}
+.bn-logo{width:64px;margin-bottom:14px}
+.bn-tag{font-size:13px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;color:var(--crema)}
+.bn-line{display:block;width:150px;height:1px;background:var(--dorado);margin:16px 0 12px}
+.bn-name{font-family:"Playfair Display",serif;font-style:italic;font-size:18px;color:var(--dorado)}
+/* animación de aparición (tras la entrada) */
+.bn-word .l1,.bn-word .l2,.bn-left,.bn-photo{opacity:0}
+body.ready .bn-word .l1{animation:bnUp 1.2s cubic-bezier(.2,.7,.2,1) .1s forwards}
+body.ready .bn-word .l2{animation:bnUp 1.2s cubic-bezier(.2,.7,.2,1) .25s forwards}
+body.ready .bn-photo{animation:bnPh 1.4s cubic-bezier(.2,.7,.2,1) .35s forwards}
+body.ready .bn-left{animation:bnUp 1s cubic-bezier(.2,.7,.2,1) .8s forwards}
+@keyframes bnUp{from{opacity:0;transform:translateY(30px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes bnPh{from{opacity:0;transform:translate(-50%,40px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(prefers-reduced-motion:reduce){.bn-word .l1,.bn-word .l2,.bn-left,.bn-photo{opacity:1!important;animation:none!important}}
+@media(max-width:820px){
+ .banner{max-height:780px;min-height:600px}
+ .bn-word{top:6%;font-size:21vw;white-space:normal;line-height:.9}
+ .bn-word span{display:block}
+ .bn-photo{left:54%;height:74%}
+ .bn-fade{display:block;position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(180deg,rgba(17,76,92,0),rgba(17,76,92,.96) 75%);z-index:2}
+ .bn-left{top:auto;bottom:22px;left:22px;right:22px;max-width:none;text-align:center}
+ .bn-logo{width:44px;margin:0 auto 8px}
+ .bn-tag{font-size:10.5px;letter-spacing:.22em}
+ .bn-line{width:100px;margin:12px auto 8px}
+ .bn-name{font-size:16px}
+}
+
+.hero{padding:70px 0 70px;background:linear-gradient(180deg,var(--fondo),var(--crema))}
+/* Fondo difuminado del inicio (imagen única: img/fondo_hero1.jpg) */
+.hero{position:relative;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-60px;background:url(img/fondo_hero1.jpg) center/cover;filter:blur(16px) saturate(1.05);z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(251,246,239,.5) 0%,rgba(251,246,239,.72) 45%,rgba(248,240,229,.9) 70%);z-index:-1}
+.hero .hand{color:#a8694a;text-shadow:0 1px 10px rgba(255,250,240,.9)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.hero-h{font-family:"Playfair Display",serif;font-weight:400;color:var(--petroleo);font-size:clamp(40px,5vw,72px);line-height:1.02}
+.hero-h i{color:var(--verde)}
+.hero .hand{font-size:clamp(22px,2.4vw,30px);color:var(--terracota);display:flex;flex-wrap:wrap;gap:8px 6px;margin-top:18px;text-shadow:none}
+.hero .hand .hw{font-weight:400;display:inline-block;background:#fffaf0;padding:6px 16px 9px;opacity:0;transform:translateY(8px) rotate(var(--r,-2deg));clip-path:polygon(0 12%,4% 0,18% 7%,36% 1%,55% 8%,74% 0,92% 6%,100% 14%,97% 50%,100% 86%,93% 100%,72% 93%,50% 100%,28% 94%,8% 100%,0 88%,3% 50%)}
+.hero .hand .hw:nth-child(2n){--r:1.6deg;clip-path:polygon(0 8%,6% 1%,24% 7%,45% 0,66% 6%,88% 1%,100% 10%,98% 52%,100% 90%,88% 100%,62% 94%,40% 100%,16% 93%,3% 100%,0 85%,2% 48%)}
+.hero .hand .hw:nth-child(3n){--r:-1deg}
+body.ready .rv.on .hand .hw{animation:hwIn .5s cubic-bezier(.2,.9,.3,1.2) forwards;animation-delay:calc(.45s + var(--k,0)*.28s)}
+.hero .hand .hw:nth-child(1){--k:0}.hero .hand .hw:nth-child(2){--k:1}.hero .hand .hw:nth-child(3){--k:2}.hero .hand .hw:nth-child(4){--k:3}.hero .hand .hw:nth-child(5){--k:4}.hero .hand .hw:nth-child(6){--k:5}.hero .hand .hw:nth-child(7){--k:6}
+@keyframes hwIn{to{opacity:1;transform:translateY(0) rotate(var(--r,-2deg))}}
+@media(prefers-reduced-motion:reduce){body.ready .rv.on .hand .hw{animation-duration:.01s;animation-delay:0s}}
+.hero p{font-size:16.5px;color:var(--suave);margin:0 0 24px;max-width:520px}
+.ha{margin-bottom:26px}
+.b1-role{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--petroleo)}
+.b1-role::before{content:"";width:28px;height:2px;background:var(--dorado)}
+.hero p.b1-lead{font-family:"Playfair Display",serif;font-size:clamp(24px,2.5vw,32px);color:var(--petroleo);margin:10px 0 16px;max-width:none}
+.b1-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.b1-pill{display:inline-flex;align-items:center;gap:9px;padding:9px 18px 9px 9px;border-radius:99px;font-weight:600;font-size:15px;color:#fff;box-shadow:0 10px 22px rgba(22,90,108,.12);transition:transform .3s}
+.b1-pill:hover{transform:translateY(-3px)}
+.b1-pill i{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;flex:0 0 30px}
+.b1-pill svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.b1-pill.p1{background:var(--petroleo)}.b1-pill.p2{background:var(--salvia)}.b1-pill.p3{background:var(--terracota)}.b1-pill.p4{background:var(--dorado);color:var(--petroleo)}
+.b1-duo{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;max-width:600px}
+.b1-duo div{background:#fff;border-radius:20px;padding:16px 18px;font-size:14px;line-height:1.55;color:var(--suave);box-shadow:0 8px 20px rgba(22,90,108,.06)}
+.b1-duo small{display:table;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:99px;margin-bottom:8px;color:var(--petroleo)}
+.b1-duo .c small{background:rgba(129,169,167,.25)}.b1-duo .f small{background:rgba(218,187,129,.35)}
+.b1-duo b{color:var(--petroleo)}
+.pp{opacity:0;transform:translateY(14px) scale(.9)}
+body.ready .rv.on .pp{animation:ppIn .6s cubic-bezier(.2,.9,.3,1.3) forwards;animation-delay:calc(.25s + var(--i)*.12s)}
+@keyframes ppIn{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.pp{opacity:1;transform:none}}
+@media(max-width:600px){.b1-duo{grid-template-columns:1fr}.b1-pill{font-size:14px}}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:24px;font-size:13px;color:var(--suave)}
+.trust span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--dorado);margin-right:8px;vertical-align:middle}
+.arch-wrap{position:relative;padding:16px}
+.arch{position:relative;height:600px;border-radius:999px 999px 0 0;background:radial-gradient(circle at 50% 30%,#aac6c4,var(--salvia) 72%);overflow:hidden;outline:1px solid var(--dorado);outline-offset:14px}
+.arch img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:93%;width:auto;max-width:none}
+.badge{position:absolute;right:-10px;top:80px;width:140px;height:140px;z-index:3}
+.badge svg{width:100%;height:100%;animation:spin 24s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.leaf{position:absolute;right:-40px;bottom:-26px;width:210px;transform:rotate(-10deg);z-index:2;filter:drop-shadow(0 14px 18px rgba(0,0,0,.18))}
+
+/* EVALUACIÓN */
+.eval{background:var(--petroleo);color:#fff;padding:90px 0;position:relative;overflow:hidden}
+.eval::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:var(--verde);opacity:.35;right:-160px;top:-200px}
+.ev-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative}
+.eval .kicker{color:var(--dorado)}
+.eval .h2{color:#fff}.eval .h2 i{color:var(--crema)}
+.eval .lead{color:rgba(255,255,255,.85);margin:14px 0 26px}
+.ev-steps{list-style:none;display:grid;gap:14px;margin-bottom:30px;counter-reset:e}
+.ev-steps li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;font-size:15px;counter-increment:e}
+.ev-steps li::before{content:counter(e);width:44px;height:44px;border-radius:50%;border:1.5px solid var(--dorado);color:var(--dorado);display:grid;place-items:center;font-family:"Playfair Display",serif;font-size:20px}
+.ev-steps b{display:block;font-weight:600}
+.ev-steps span{opacity:.8;font-size:14px}
+.ev-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:13px;opacity:.8}
+.ev-img{border-radius:999px 999px 26px 26px;overflow:hidden;height:480px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.ev-img img{width:100%;height:100%;object-fit:cover}
+.mock{background:var(--fondo);color:var(--tinta);border-radius:26px;padding:28px;box-shadow:0 30px 60px rgba(0,0,0,.25);transform:rotate(1.5deg)}
+.mock .mprog{margin-bottom:6px}
+.mock .q{font-family:"Playfair Display",serif;font-size:22px;color:var(--petroleo);line-height:1.3;margin:14px 0 16px}
+.mock .o{background:#fff;border:1.5px solid var(--beige);border-radius:12px;padding:11px 16px;font-size:14px;margin-bottom:8px}
+.mock .o.sel{border-color:var(--verde);background:#eaf3f2;font-weight:600}
+
+/* ÁREAS */
+.areas{padding:100px 0 90px}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;gap:14px}
+.tile{position:relative;border-radius:24px;overflow:hidden;color:#fff;cursor:pointer;border:0;text-align:left;background:var(--petroleo)}
+.tile.wide{grid-column:span 2}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,90,108,0) 30%,rgba(22,90,108,.92))}
+.tile:hover img{transform:scale(1.06)}
+.tile .lab{position:absolute;left:20px;right:20px;bottom:18px;z-index:2}
+.tile h3{font-family:"Playfair Display",serif;font-weight:400;font-size:24px;line-height:1.1}
+.tile .kw{font-size:12.5px;line-height:1.45;opacity:.92;margin-top:6px;max-width:420px}
+.tile .go{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.6);padding-bottom:2px}
+
+/* SOBRE MÍ */
+.about{background:var(--beige);padding:100px 0;position:relative}
+.ab-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:center}
+.pol{background:#fff;padding:14px 14px 54px;box-shadow:0 24px 50px rgba(0,0,0,.16);transform:rotate(-3deg);position:relative;max-width:420px}
+.pol img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.pol span{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:"Shadows Into Light Two",cursive;font-size:25px;color:var(--petroleo)}
+.tape{position:absolute;width:110px;height:30px;background:rgba(245,232,218,.85);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.paper{background:#fffdf7;padding:46px 44px;box-shadow:0 18px 44px rgba(0,0,0,.12);position:relative;background-image:repeating-linear-gradient(transparent 0 33px,#ece3d4 33px 34px)}
+.paper h2{font-family:"Playfair Display",serif;font-weight:400;font-size:42px;line-height:1.05;color:var(--petroleo)}
+.paper h2 i{color:var(--verde)}
+.paper .role{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracota);font-weight:600;margin:6px 0 14px}
+.paper p{font-size:15.5px;line-height:2.19;color:#34545d}
+.paper mark{background:linear-gradient(transparent 55%,rgba(218,187,129,.55) 55%);color:inherit}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.facts div{background:var(--fondo);border-radius:14px;padding:12px 14px;line-height:1.3}
+.facts b{display:block;font-family:"Playfair Display",serif;font-size:26px;color:var(--petroleo);font-weight:400}
+.facts span{font-size:12.5px;color:var(--suave)}
+/* trayectoria */
+.tray{margin-top:0}
+.strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-top:26px;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--salvia) transparent}.strip .ach{flex:0 0 calc(25% - 12px);scroll-snap-align:start}
+.ach{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 12px 30px rgba(22,90,108,.08);display:flex;flex-direction:column}
+.ach .ph{aspect-ratio:4/3;background:var(--salvia) center/cover;position:relative;display:grid;place-items:center;color:#fff}
+.ach .ph em{font-family:"Playfair Display",serif;font-size:46px;font-style:italic;opacity:.9}
+.ach.has .ph em{display:none}
+.ach .ph small{position:absolute;top:12px;left:12px;background:var(--crema);color:var(--petroleo);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:99px}
+.ach div.t{padding:16px 18px 20px;flex:1;display:flex;flex-direction:column}
+.ach h4{font-family:"Playfair Display",serif;font-weight:400;font-size:18px;color:var(--petroleo);line-height:1.25}
+.ach p{font-size:13px;color:var(--suave);margin-top:4px;flex:1}
+.ach a{font-size:13px;font-weight:600;color:var(--verde);margin-top:8px}
+.ach:nth-child(4n+2) .ph{background-color:var(--terracota)}.ach:nth-child(4n+3) .ph{background-color:var(--petroleo)}.ach:nth-child(4n+4) .ph{background-color:var(--dorado)}
+
+/* PROCESO */
+.proc{padding:96px 0;background:#fff}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:36px}
+.step{background:var(--fondo);border-radius:22px;padding:24px 22px 26px}
+.step:nth-child(2n){background:var(--crema)}
+.step b{font-family:"Playfair Display",serif;font-style:italic;font-weight:400;font-size:58px;line-height:.9;color:var(--dorado);display:block}
+.step h3{font-family:"Playfair Display",serif;font-weight:400;font-size:21px;color:var(--petroleo);margin:10px 0 4px;line-height:1.15}
+.step p{font-size:14px;color:var(--suave)}
+
+/* PRECIOS */
+.prices .hab{margin:14px auto 0;font:400 clamp(24px,2.6vw,32px)/1.25 "Playfair Display",serif;color:#165a6c}
+.prices{padding:100px 0;background:linear-gradient(180deg,var(--crema),var(--fondo))}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:940px;margin:40px auto 0}
+.plan{border-radius:28px;padding:40px;background:#fff;box-shadow:0 20px 50px rgba(22,90,108,.08);display:flex;flex-direction:column;position:relative}
+.plan.pop{background:var(--petroleo);color:#fff}
+.plan .tag{position:absolute;top:20px;right:20px;background:var(--crema);color:var(--petroleo);font-size:11px;font-weight:700;letter-spacing:.14em;padding:7px 14px;border-radius:99px}
+.plan small{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--terracota)}
+.plan.pop small{color:var(--dorado)}
+.plan h3{font-family:"Playfair Display",serif;font-weight:400;font-size:30px;margin:6px 0 8px;color:var(--petroleo)}
+.plan.pop h3{color:#fff}
+.plan .n{font-family:"Playfair Display",serif;font-size:80px;line-height:.9;color:var(--petroleo)}
+.plan.pop .n{color:#fff}
+.plan .n span{font-size:15px;font-family:Montserrat;font-weight:600;vertical-align:top;margin-right:6px}
+.plan .per{font-size:14px;opacity:.8;margin:6px 0 16px}
+.plan ul{list-style:none;margin-bottom:18px;flex:1}
+.plan li{padding:9px 0 9px 26px;border-bottom:1px solid rgba(22,90,108,.1);font-size:15px;position:relative}
+.plan.pop li{border-color:rgba(255,255,255,.15)}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--verde);font-weight:700}
+.plan.pop li::before{color:var(--lima)}
+.plan .ideal{font-size:14px;font-style:italic;opacity:.85;margin-bottom:20px}
+.priv{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:940px;margin:26px auto 0}
+.priv div{background:#fff;border-radius:16px;padding:16px 18px}
+.priv b{display:block;font-family:"Playfair Display",serif;font-weight:400;font-size:17px;color:var(--petroleo)}
+.priv span{font-size:13px;color:var(--suave);line-height:1.5;display:block;margin-top:2px}
+
+/* TESTIMONIOS */
+.testi{padding:100px 0;background:var(--salvia)}
+.testi .h2{color:#fff}.testi .h2 i{color:var(--petroleo)}.testi .kicker{color:#fff}
+.t-grid{display:grid;grid-template-columns:1fr 320px;gap:36px;margin-top:36px;align-items:start}
+.t-grid>*{min-width:0}
+.shots{columns:2;column-gap:20px}
+.shot{break-inside:avoid;margin-bottom:20px}
+.rvw{position:relative;background:#fffdf7;border-radius:24px;padding:26px 24px 20px;box-shadow:0 18px 40px rgba(14,40,48,.16);overflow:hidden}
+.rvw-q{position:absolute;right:18px;top:-14px;font-family:"Playfair Display",serif;font-size:120px;line-height:1;color:var(--dorado);opacity:.35;pointer-events:none}
+.rvw-st{color:var(--dorado);font-size:17px;letter-spacing:3px;margin-bottom:10px}
+.rvw h3{font-family:"Playfair Display",serif;font-weight:400;font-style:italic;font-size:22px;line-height:1.25;color:var(--petroleo);margin-bottom:12px;padding-right:20px}
+.rvw-body{font-size:14.5px;line-height:1.6;color:var(--suave);max-height:7.9em;overflow:hidden;position:relative;transition:max-height .5s}
+.rvw-body::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3em;background:linear-gradient(transparent,#fffdf7);transition:opacity .3s}
+.rvw.open .rvw-body{max-height:80em}.rvw.open .rvw-body::after{opacity:0}
+.rvw-body p+p{margin-top:9px}
+.rvw-more{border:0;background:none;color:var(--verde);font:600 13px Montserrat,system-ui,sans-serif;padding:8px 0 0;cursor:pointer;border-bottom:1px solid currentColor}
+.rvw-ft{display:flex;align-items:center;gap:11px;margin-top:16px;padding-top:14px;border-top:1px solid var(--beige);flex-wrap:wrap}
+.rvw-av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--salvia);color:#fff;font-family:"Playfair Display",serif;font-size:17px}
+.rvw-ft b{display:block;font-size:14px;color:var(--petroleo)}
+.rvw-ft small{font-size:12px;color:var(--suave)}
+.rvw-tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.rvw-tags em{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--petroleo);background:rgba(129,169,167,.2);padding:5px 10px;border-radius:99px}
+.vcard{background:#fffdf7;border-radius:24px;padding:14px 14px 18px;box-shadow:0 18px 40px rgba(14,40,48,.16);overflow:hidden}
+.vcard video{display:block;width:100%;aspect-ratio:9/16;border-radius:16px;background:#0e2830;object-fit:cover}
+.vcard .vft{display:flex;align-items:center;gap:11px;margin-top:14px;padding:0 6px;flex-wrap:wrap}
+.vcard .vft b{display:block;font-size:14px;color:var(--petroleo)}
+.vcard .vft small{font-size:12px;color:var(--suave)}
+.vcard .vtag{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--petroleo);background:rgba(129,169,167,.2);padding:5px 10px;border-radius:99px}
+.shot img.real{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.wa{background:#efe7dc;border-radius:20px;padding:20px 16px;box-shadow:0 18px 40px rgba(0,0,0,.16)}
+.bub{background:#fff;border-radius:4px 16px 16px 16px;padding:13px 15px 8px;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14.5px;line-height:1.45;color:#111;position:relative}
+.bub::before{content:"";position:absolute;left:-8px;top:0;border-top:10px solid #fff;border-left:10px solid transparent}
+.bub p+p{margin-top:9px}
+.bub time{display:block;text-align:right;font-size:11.5px;color:#8a8a8a;margin-top:4px}
+.side{position:sticky;top:calc(var(--navh) + 24px);background:#fffdf7;border-radius:26px;padding:30px;box-shadow:0 20px 50px rgba(0,0,0,.12)}
+.side h3{font-family:"Playfair Display",serif;font-weight:400;font-size:27px;color:var(--petroleo);line-height:1.15;margin-bottom:8px}
+.side p{font-size:14.5px;color:var(--suave);margin-bottom:18px}
+.side .btn{width:100%;margin-bottom:10px}
+.side .stars{font-size:24px;color:var(--dorado);letter-spacing:4px}
+
+/* RECURSOS teaser */
+.res{padding:90px 0;background:var(--fondo)}
+.res-card{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+.rc{border-radius:22px;overflow:hidden;position:relative;min-height:230px;color:#fff;display:flex;align-items:flex-end;padding:22px}
+.rc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* tarjeta sin foto todavía */
+.rc-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding-bottom:60px;background:linear-gradient(150deg,#81a9a7,#165a6c);color:#f5e8da;font:600 12px Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.rc-ph svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:1.5;opacity:.9}
+.rc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,90,108,0) 20%,rgba(22,90,108,.9))}
+.rc div{position:relative;z-index:2}
+.rc small{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--crema)}
+.rc h3{font-family:"Playfair Display",serif;font-weight:400;font-size:24px;line-height:1.15}
+
+/* FAQ */
+.faq{padding:100px 0;background:var(--crema)}
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.faq details{background:#fff;border-radius:16px;margin-bottom:10px}
+.faq summary{list-style:none;cursor:pointer;padding:20px 24px;font-family:"Playfair Display",serif;font-size:19px;color:var(--petroleo);display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:Montserrat;font-size:24px;color:var(--terracota);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 24px 20px;color:var(--suave);font-size:15px}
+
+/* CTA */
+.cta{position:relative;text-align:center;color:#fff;padding:140px 20px;overflow:hidden}
+.cta .bg{position:absolute;inset:-4%;background:url(img/campo.jpg) center/cover;animation:kb 26s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.1)}}
+.cta::after{content:"";position:absolute;inset:0;background:rgba(22,90,108,.5)}
+.cta>*:not(.bg){position:relative;z-index:2}
+.cta h2{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(40px,6.2vw,78px);line-height:1.02;margin-bottom:26px}
+.cta h2 i{color:var(--crema)}
+
+/* VENTANA FLOTANTE */
+
+/* VENTANA EMERGENTE · EVALUACIÓN */
+.evp{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;background:rgba(10,38,46,.55);backdrop-filter:blur(5px);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
+.evp.show{opacity:1;visibility:visible}
+.evp-box{position:relative;width:min(940px,100%);max-height:calc(100vh - 40px);overflow:auto;display:grid;grid-template-columns:1.15fr .85fr;background:var(--petroleo);color:#fff;border-radius:30px;box-shadow:0 40px 90px rgba(0,0,0,.4);transform:translateY(30px) scale(.96);transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.evp.show .evp-box{transform:none}
+.evp-box::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:var(--verde);opacity:.35;right:20%;top:-220px;pointer-events:none}
+.evp-txt{position:relative;padding:34px 36px 26px}
+.evp-k{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--dorado);font-weight:600}
+.evp h2{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.08;margin:8px 0 10px}
+.evp h2 i{color:var(--crema)}
+.evp-lead{color:rgba(255,255,255,.85);font-size:15px;margin-bottom:18px}
+.evp-steps{list-style:none;display:grid;gap:10px;margin-bottom:20px;counter-reset:e}
+.evp-steps li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;font-size:14.5px;counter-increment:e}
+.evp-steps li::before{content:counter(e);width:40px;height:40px;border-radius:50%;border:1.5px solid var(--dorado);color:var(--dorado);display:grid;place-items:center;font-family:"Playfair Display",serif;font-size:18px}
+.evp-steps b{display:block;font-weight:600}
+.evp-steps span{opacity:.8;font-size:13.5px}
+.evp-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;opacity:.8}
+.evp-img{position:relative;min-height:100%}
+.evp-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;border-radius:0 30px 30px 0}
+.evp-x{position:absolute;top:14px;right:14px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--petroleo);font-size:22px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.evmini{position:fixed;left:18px;bottom:18px;z-index:55;display:flex;align-items:center;gap:10px;border:0;cursor:pointer;background:var(--petroleo);color:#fff;font:600 14px Montserrat,system-ui,sans-serif;padding:13px 20px 13px 16px;border-radius:99px;box-shadow:0 14px 30px rgba(14,40,48,.3);transform:translateY(160%);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.evmini.show{transform:none}
+.evmini .dot{width:10px;height:10px;border-radius:50%;background:var(--dorado);box-shadow:0 0 0 0 rgba(218,187,129,.7);animation:evPulse 2s infinite}
+@keyframes evPulse{70%{box-shadow:0 0 0 10px rgba(218,187,129,0)}100%{box-shadow:0 0 0 0 rgba(218,187,129,0)}}
+@media(max-width:760px){
+  .evp{padding:12px;align-items:end}
+  .evp-box{grid-template-columns:1fr;border-radius:26px;max-height:calc(100vh - 24px)}
+  .evp-img{display:none}
+  .evp-txt{padding:34px 22px 24px}
+  .evp-lead{font-size:14.5px}
+  .evmini{left:12px;bottom:14px;font-size:13px;padding:11px 16px 11px 13px}
+}
+/* PESTAÑA LATERAL · CRÉDITO */
+.credito{display:inline-block;margin-top:16px;max-width:230px;font-size:13px;line-height:1.4;color:var(--petroleo);text-decoration:none;background:var(--crema);border:1px solid var(--dorado);border-radius:14px;padding:11px 15px;box-shadow:0 8px 20px rgba(22,90,108,.12);transition:transform .25s,box-shadow .25s}
+.credito b{display:block;font-family:"Playfair Display",serif;font-weight:500;font-size:16px;color:var(--petroleo)}
+.credito .tel{font:600 13px Montserrat,sans-serif;color:#047578;white-space:nowrap;margin-left:4px}
+.credito:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(22,90,108,.2)}
+/* ENTRADA */
+.intro{position:fixed;inset:0;z-index:200;background:#0f4352;display:grid;place-items:center;overflow:hidden;cursor:pointer;transition:transform 1s cubic-bezier(.7,0,.2,1),opacity 1s}
+/* Salida: el bloque se recoge, se lanza hacia adelante y se disuelve */
+.intro.out{pointer-events:none;background-color:rgba(15,67,82,0);transition:background-color .45s ease .5s}
+.intro.out .glow,.intro.out::after,.intro.out .in-hint{opacity:0;transition:opacity .4s ease .45s}
+.intro.out .in-box{animation:launch 1s cubic-bezier(.55,0,.25,1) forwards}
+@keyframes launch{0%{transform:scale(1)}26%{transform:scale(.82);opacity:1;filter:none}55%{opacity:1}100%{transform:scale(7);opacity:0;filter:blur(12px)}}
+.intro .glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+.intro .g1{width:70vmax;height:70vmax;background:radial-gradient(circle,#047578,transparent 65%);left:-20vmax;top:-25vmax;animation:drift1 9s ease-in-out infinite alternate}
+.intro .g2{width:60vmax;height:60vmax;background:radial-gradient(circle,#81a9a7,transparent 62%);right:-25vmax;bottom:-25vmax;opacity:.35;animation:drift2 11s ease-in-out infinite alternate}
+.intro .g3{width:40vmax;height:40vmax;background:radial-gradient(circle,#dabb81,transparent 60%);left:30%;top:55%;opacity:.16;animation:drift1 13s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(12vmax,10vmax) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-10vmax,-8vmax) scale(1.1)}}
+.intro::after{content:"";position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* Biblia antes del logo */
+.in-bible{position:absolute;inset:0;z-index:3;overflow:hidden;animation:ibOut .75s ease-in 1.25s forwards;pointer-events:none}
+.in-bible .ph{position:absolute;inset:0;background:url(img/biblia_mesa.jpg) 48% 45%/cover;transform-origin:48% 45%;animation:ibZoom 2s cubic-bezier(.45,0,.2,1) forwards}
+.in-bible .bloom{position:absolute;left:48%;top:45%;width:80vmin;height:80vmin;margin:-40vmin 0 0 -40vmin;border-radius:50%;background:radial-gradient(circle,#fffaf0,rgba(255,236,190,.85) 25%,rgba(218,187,129,0) 65%);opacity:0;transform:scale(.2);mix-blend-mode:screen;animation:ibBloom 1.1s ease-out .55s forwards}
+@media(orientation:portrait){
+  .in-bible::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 120% 70% at 50% 45%,#e2c299,#b88a5c 55%,#7a5233)}
+  .in-bible .ph{inset:auto;left:-25vw;right:-25vw;top:calc(45% - 40vw);height:80vw;background-size:cover;background-position:50% 50%;transform-origin:50% 50%;-webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
+  .in-bible .bloom{left:50%}
+}
+@keyframes ibZoom{from{transform:scale(1.02);filter:brightness(.8)}to{transform:scale(1.6);filter:brightness(1.2)}}
+@keyframes ibBloom{to{opacity:1;transform:scale(2.6)}}
+@keyframes ibOut{to{opacity:0;filter:blur(16px)}}
+.in-box{position:relative;z-index:2;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center;padding:0 24px}
+.in-logo{position:relative;width:min(180px,42vw);height:min(180px,42vw);display:grid;place-items:center;margin-bottom:26px}
+.in-logo img{width:60%;animation:lg 1.3s cubic-bezier(.2,.7,.2,1) 1.3s both}
+@keyframes lg{0%{transform:scale(2.6);filter:blur(14px);opacity:0}60%{opacity:1}100%{transform:none;filter:none;opacity:1}}
+.in-logo svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.in-logo circle{fill:none;stroke:#dabb81;stroke-width:1.2;stroke-dasharray:402;stroke-dashoffset:402;animation:draw 1s 2s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.in-name{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(30px,7vw,74px);letter-spacing:.16em;line-height:1;white-space:nowrap}
+.in-name span{display:inline-block;opacity:0;filter:blur(12px);animation:ltr .9s cubic-bezier(.2,.7,.2,1) forwards}
+.in-name i{color:#dabb81}
+@keyframes ltr{to{opacity:1;filter:none}}
+.in-tag{font-family:"Shadows Into Light Two",cursive;font-size:clamp(20px,2.4vw,28px);color:#f5e8da;margin-top:14px;opacity:0;animation:fade .8s 3.2s forwards}
+@keyframes fade{to{opacity:1}}
+.in-line{width:min(240px,60vw);height:1px;background:rgba(255,255,255,.2);margin-top:30px;position:relative;overflow:hidden}
+.in-line i{position:absolute;inset:0;background:#dabb81;transform:scaleX(0);transform-origin:left;animation:ln 1.6s 2.4s cubic-bezier(.6,0,.3,1) forwards}
+@keyframes ln{to{transform:none}}
+.in-hint{position:absolute;bottom:28px;left:0;right:0;text-align:center;z-index:2;color:rgba(255,255,255,.7);font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:fade 1s 2.2s forwards}
+body.intro-on{overflow:hidden}
+/* botón de música */
+.snd{position:fixed;right:18px;bottom:86px;z-index:46;width:46px;height:46px;border-radius:50%;border:0;background:var(--petroleo);color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .4s}
+.snd.vis{opacity:1;pointer-events:auto}
+.snd .bars{display:flex;gap:3px;align-items:flex-end;height:16px}
+.snd .bars i{width:3px;background:#fff;border-radius:2px;height:4px}
+.snd.play .bars i{animation:eq 1s ease-in-out infinite}
+.snd.play .bars i:nth-child(2){animation-delay:.2s}.snd.play .bars i:nth-child(3){animation-delay:.4s}.snd.play .bars i:nth-child(4){animation-delay:.1s}
+@keyframes eq{50%{height:16px}}
+.snd:not(.play)::after{content:"";position:absolute;width:26px;height:2px;background:var(--dorado);transform:rotate(-45deg)}
+@media(prefers-reduced-motion:reduce){.intro *{animation-duration:.01s!important;animation-delay:0s!important}}
+
+@media(max-width:1000px){
+ .hero-grid,.ab-grid,.ev-grid,.faq-grid,.t-grid{grid-template-columns:1fr}
+ .hero{padding-top:30px}
+ .arch{height:460px}.badge{right:0;top:10px;width:104px;height:104px}.leaf{width:140px;right:-10px}
+ .ev-grid{gap:36px}.ev-img{height:300px}.mock{transform:none}
+ /* carruseles horizontales para acortar la página */
+ .bento,.strip,.steps,.res-card{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:4px 22px 14px;margin-left:-22px;margin-right:-22px;scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding-inline:22px}
+ .bento::-webkit-scrollbar,.strip::-webkit-scrollbar,.steps::-webkit-scrollbar,.res-card::-webkit-scrollbar{display:none}
+ .tile,.ach,.step,.rc{flex:0 0 72%;scroll-snap-align:start}
+ .tile{height:300px}.tile.wide{grid-column:auto}
+ .strip .ach{flex-basis:64%}.step{flex-basis:62%}
+ .shots{columns:auto;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:4px 22px 14px;margin:0 -22px;scrollbar-width:none;scroll-padding-inline:22px}
+ .shots::-webkit-scrollbar{display:none}
+ .shot{flex:0 0 84%;scroll-snap-align:start;margin:0}
+ .side{position:static}
+ .plans,.priv{grid-template-columns:1fr}
+ .paper{padding:34px 24px}.facts{grid-template-columns:repeat(3,1fr)}
+ .swipe{display:block!important}
+}
+/* VENTANA DE PAGO */
+.pay{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:16px;background:rgba(10,38,46,.6);backdrop-filter:blur(5px);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.pay.show{opacity:1;visibility:visible}
+.pay-box{position:relative;width:min(520px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--fondo);color:var(--tinta);border-radius:28px;padding:34px 30px 28px;box-shadow:0 40px 90px rgba(0,0,0,.4);transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.pay.show .pay-box{transform:none}
+.pay-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:0;background:#fff;color:var(--petroleo);font-size:22px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.pay-k{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:var(--terracota)}
+.pay-box h2{font-family:"Playfair Display",serif;font-weight:400;font-size:30px;line-height:1.1;color:var(--petroleo);margin:8px 40px 16px 0}
+.pay-plans{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay-plan{display:flex;flex-direction:column;gap:2px;text-align:left;background:#fff;border:1.5px solid var(--beige);border-radius:16px;padding:12px 14px;color:var(--tinta)}
+.pay-plan b{font-size:14px;color:var(--petroleo)}
+.pay-plan span{font-family:"Playfair Display",serif;font-size:22px;color:var(--petroleo)}
+.pay-plan.on{border-color:var(--verde);background:#eaf3f2}
+.pay-sub{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--terracota);margin:20px 0 8px}
+.pay-m{display:grid;gap:8px}
+.pay-meth{display:flex;align-items:center;gap:14px;text-align:left;background:#fff;border:1.5px solid transparent;border-radius:16px;padding:12px 16px;color:var(--tinta);box-shadow:0 8px 20px rgba(22,90,108,.06);transition:transform .2s,border-color .2s}
+.pay-meth:hover{transform:translateY(-2px);border-color:var(--salvia)}
+.pay-meth i{flex:0 0 38px;height:38px;border-radius:50%;background:var(--petroleo);color:#fff;display:grid;place-items:center;font:600 17px "Playfair Display",serif;font-style:normal}
+.pay-meth span{flex:1}
+.pay-meth b{display:block;font-size:15px;color:var(--petroleo)}
+.pay-meth small{font-size:12.5px;color:var(--suave)}
+.pay-meth em{font-style:normal;color:var(--verde);font-weight:700}
+.pay-note{font-size:13px;color:var(--suave);margin-top:14px;line-height:1.5}
+.pay-note.warn{background:var(--lima);color:var(--petroleo);border-radius:12px;padding:10px 14px}
+.pay-ok{width:56px;height:56px;border-radius:50%;background:var(--lima);color:var(--petroleo);display:grid;place-items:center;font-size:28px;margin-bottom:12px}
+.pay-back{background:none;border:0;color:var(--verde);font-weight:600;font-size:13.5px;margin-top:14px;padding:4px 0}
+.pay-box .btn{width:100%;margin-top:6px}
+@media(max-width:480px){.pay{align-items:end;padding:10px}.pay-box{padding:28px 20px 22px;border-radius:24px}.pay-box h2{font-size:26px}}
+.pay-cal{position:relative;height:430px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 8px 20px rgba(22,90,108,.08);margin-top:6px}
+.pay-cal iframe{width:100%;height:100%;border:0;display:block}
+.pay-cal .lock{position:absolute;inset:0;cursor:not-allowed;background:transparent}
+.pay-cal-tag{display:inline-block;background:var(--lima);color:var(--petroleo);font-size:12px;font-weight:700;letter-spacing:.06em;padding:5px 12px;border-radius:99px;margin-bottom:10px}
+.pay-meth .pm-lg{flex:0 0 112px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#fff;padding:4px 8px;box-sizing:border-box}
+.pay-meth .pm-lg img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.pay-meth .pm-lg.ho{background:#ff4a00}
+.pay-meth .pm-lg b{display:block;font:800 13px Montserrat,system-ui,sans-serif;color:#165a6c;letter-spacing:.02em}
+.po{background:#fff;border-radius:14px;padding:12px 16px;margin-top:12px;box-shadow:0 8px 20px rgba(22,90,108,.06)}
+.po h4{margin:0 0 6px;font-size:15px;color:#165a6c}
+.po-r{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-top:1px solid #f0e7da;font-size:14px}
+.po-r:first-of-type{border-top:0}
+.po-r{align-items:center}
+.po-r b{flex:1}
+.po-c{flex:0 0 auto;border:1.5px solid #81a9a7;background:#fff;color:#165a6c;border-radius:99px;padding:5px 12px;font:600 12px Montserrat,system-ui,sans-serif;cursor:pointer}
+.po-c.ok{background:#047578;border-color:#047578;color:#fff}
+.po-r span{color:#6b7c80}.po-r b{text-align:right;color:#165a6c;word-break:break-all;user-select:all;-webkit-user-select:all}
+.swipe{display:none;font-size:12.5px;color:var(--suave);margin-top:4px}
+@media(max-width:560px){
+ .areas,.proc,.prices,.testi,.res,.faq,.about{padding:70px 0}.eval{padding:70px 0}
+ .priv{grid-template-columns:1fr 1fr}
+ .facts b{font-size:22px}
+}
+
+/* ===== MI TRAYECTORIA ===== */
+/* solo colores de la marca: petróleo #165a6c · salvia #81a9a7 · dorado #dabb81 · beige #e7decf · verde #047578 · crema #f5e8da · terracota #c9987c · fondo #faf4ec · lima #dfeccd */
+.rec{position:relative;overflow:hidden;padding:84px 0 96px;background:#faf4ec;color:#165a6c}
+.rec::before,.rec::after{content:"";position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.rec::before{width:460px;height:460px;background:#dfeccd;right:-140px;top:-120px;opacity:.9}
+.rec::after{width:420px;height:420px;background:#e7decf;left:-160px;bottom:10%;opacity:.9}
+.rec .w,.rec .trk{position:relative;z-index:1}
+.rec-head{text-align:center}
+.rec .kick{font:600 11.5px Montserrat,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#c9987c}
+.rec .ttl{margin:6px 0 0;font:400 clamp(44px,5.6vw,72px)/1.05 "Shadows Into Light Two",cursive;color:#165a6c}
+.rec .ttl .a{display:inline-block;color:#c9987c;transform:rotate(-6deg);margin-right:.12em}
+.rec .ttl .b{display:inline-block;padding:0 .14em;background:linear-gradient(transparent 58%,#dfeccd 58%,#dfeccd 90%,transparent 90%)}
+.rec .ttl-bar{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.rec .ttl-bar i{display:block;height:6px;border-radius:6px}
+.rec .ttl-bar i:nth-child(1){width:70px;background:#165a6c}.rec .ttl-bar i:nth-child(2){width:34px;background:#c9987c}.rec .ttl-bar i:nth-child(3){width:18px;background:#dabb81}
+
+/* pista que se desliza */
+.rec .trk{--fw:min(34vw,400px);--fh:calc(var(--fw) * .8);--gap:86px;
+ display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;
+ padding:56px max(22px,calc((100vw - 1196px)/2)) 12px;scroll-padding-inline:max(22px,calc((100vw - 1196px)/2));cursor:grab}
+.rec .trk::-webkit-scrollbar{display:none}
+.rec .trk.drag{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.rec .it{flex:0 0 var(--fw);scroll-snap-align:start;position:relative;opacity:.5;transition:opacity .6s}
+.rec .it.vis{opacity:1}
+/* línea que une cada foto con la siguiente */
+.rec .it::after{content:"";position:absolute;top:calc(var(--fh) / 2 - 1.5px);left:calc(100% + 12px);width:calc(var(--gap) - 24px);height:3px;border-radius:3px;background:linear-gradient(90deg,var(--c),var(--c2))}
+.rec .it::before{content:"";position:absolute;top:calc(var(--fh) / 2 - 8px);left:calc(100% + var(--gap) / 2 - 8px);width:16px;height:16px;border-radius:50%;background:#faf4ec;box-shadow:inset 0 0 0 3px var(--c2),0 0 0 5px #faf4ec;z-index:1}
+.rec .it:last-child::after,.rec .it:last-child::before{display:none}
+
+/* fotos: rectángulo simple, sin marco */
+.rec .fo{position:relative;height:var(--fh)}
+.rec .card{position:absolute;inset:0;border-radius:14px;overflow:hidden;box-shadow:0 22px 40px rgba(22,90,108,.2);background:#e7decf}
+.rec .card img,.rec .card .ph{width:100%;height:100%;object-fit:cover;display:flex;pointer-events:none}
+.rec .vw{position:relative;width:100%;height:100%}
+.rec .vw video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+/* botón para ver el video completo, en su formato vertical y con sonido */
+.rec .play{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;
+  font:700 14px Montserrat,sans-serif;color:#165a6c;background:#dfeccd;padding:10px 20px 10px 12px;border-radius:999px;box-shadow:0 8px 22px rgba(22,90,108,.28);white-space:nowrap;transition:transform .2s}
+.rec .play:hover{transform:translateX(-50%) scale(1.05)}
+.rec .play:focus-visible{outline:3px solid #dabb81;outline-offset:3px}
+.rec .play span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#165a6c}
+.rec .play svg{width:12px;height:12px;fill:#dfeccd;margin-left:2px}
+.rec-vmod{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(22,90,108,.88);backdrop-filter:blur(6px)}
+.rec-vmod.on{display:flex}
+.rec-vmod video{height:min(86vh,calc((100vw - 32px) * 16 / 9));aspect-ratio:9/16;max-width:100%;border-radius:18px;background:#165a6c;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.rec-vmod .x{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;background:#f5e8da;color:#165a6c;font:400 28px/1 Montserrat,sans-serif}
+.rec-vmod .x:focus-visible{outline:3px solid #dabb81;outline-offset:3px}
+/* el último hito une la práctica clínica y Sana tu Mentte: la segunda parte va en un recuadro con diseño propio */
+.rec .fin-box{position:relative;margin-top:26px;padding:30px 28px 28px;border-radius:22px;color:#f5e8da;
+ background:radial-gradient(ellipse 70% 60% at 100% 0%,rgba(129,169,167,.45),transparent 60%),linear-gradient(150deg,#165a6c,#047578);
+ box-shadow:0 22px 44px rgba(22,90,108,.28),0 0 0 5px #faf4ec,0 0 0 7px #dabb81}
+.rec .fin-box::before{content:"“";position:absolute;right:22px;top:-8px;font:400 130px/1 "Playfair Display",serif;color:#dabb81;opacity:.35}
+.rec .kick-fin{display:inline-block;font:400 22px "Shadows Into Light Two",cursive;color:#165a6c;background:#dfeccd;padding:2px 14px 4px;border-radius:8px;transform:rotate(-3deg)}
+.rec .tx .fin-box h3{color:#fff}
+.rec .tx .fin-box h3 i{color:#dabb81;background:none}
+.rec .fin-box .lead{color:#dfeccd;border-left-color:#dabb81}
+.rec .tx .fin-box p.rest{color:#f5e8da}
+.rec .tx .fin-box mark{background:#dabb81;color:#165a6c;box-shadow:none}
+.rec .ph{flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:16px;color:#fff;background:linear-gradient(150deg,var(--c),var(--c2));font:700 11px Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.rec .ph svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.5;opacity:.85}
+.rec .ph small{font:500 12.5px Montserrat,sans-serif;letter-spacing:0;text-transform:none;opacity:.85}
+/* varias fotos: la principal al frente y las otras a los lados, detrás */
+.rec .deck{touch-action:pan-y;cursor:grab;outline:none}
+.rec .deck:focus-visible{outline:2px dashed var(--c);outline-offset:10px}
+.rec .deck .card{left:18%;right:18%;transform-origin:50% 50%;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s,filter .4s,box-shadow .4s}
+.rec .deck .card:not(.front){filter:brightness(.86);cursor:pointer;box-shadow:0 10px 20px rgba(22,90,108,.18)}
+.rec .deck .card.front{box-shadow:0 26px 46px rgba(22,90,108,.28)}
+.rec .deck .card:nth-child(2) .ph{background:linear-gradient(150deg,var(--c2),var(--c))}
+.rec .deck .card:nth-child(3) .ph{background:linear-gradient(150deg,#81a9a7,#165a6c)}
+.rec .deck .card:nth-child(4) .ph{background:linear-gradient(150deg,#c9987c,#dabb81)}
+.rec .dk{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;font:700 12px Montserrat,sans-serif;color:var(--c)}
+.rec .dk{flex-wrap:wrap;row-gap:14px}
+.rec .dk .dots{display:flex;gap:8px;order:3;flex-basis:100%;justify-content:center;flex-wrap:wrap}
+.rec .dk .dots button{width:48px;height:36px;border-radius:8px;border:2px solid transparent;padding:0;background:var(--c) center/cover no-repeat;opacity:.55;cursor:pointer;transition:all .3s}
+.rec .dk .dots button.on{opacity:1;border-color:var(--c);transform:translateY(-3px);box-shadow:0 6px 12px rgba(22,90,108,.25)}
+.rec .dk .sw{font-weight:500;color:#165a6c;opacity:.75;display:flex;align-items:center;gap:6px}
+.rec .dk .sw svg{width:22px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6}
+
+/* texto llamativo */
+.rec .tx{padding-top:26px}
+.rec .tx-top{display:flex;align-items:flex-end;gap:12px}
+.rec .bn{font:400 58px/.85 "Playfair Display",serif;letter-spacing:-.04em;color:var(--c)}
+.rec .tag{font:800 11px Montserrat,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--ct);background:var(--c);padding:6px 12px;border-radius:99px;margin-bottom:6px}
+.rec .tx h3{margin:12px 0 10px;font:400 28px/1.15 "Shadows Into Light Two",cursive;color:#165a6c}
+.rec .tx h3 i{font-style:normal;color:var(--c);padding:0 .08em;background:linear-gradient(transparent 58%,var(--t) 58%,var(--t) 92%,transparent 92%)}
+.rec .it:nth-child(4n) h3 i{color:#c9987c}
+.rec .lead{margin:0 0 12px;padding-left:14px;border-left:4px solid var(--c);font:italic 500 17px/1.5 "Playfair Display",serif;color:var(--cl)}
+.rec .tx p.rest{margin:0;font-size:15px;line-height:1.8;color:#165a6c}
+.rec .tx mark{color:#165a6c;font-weight:700;padding:1px 6px;border-radius:6px;background:var(--t);box-shadow:inset 0 -3px 0 var(--c2);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.rec .lead mark{font-style:italic;color:#165a6c}
+.rec .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.rec .chips span{display:inline-flex;align-items:center;gap:8px;font:700 12px Montserrat,sans-serif;padding:7px 14px 7px 8px;border-radius:99px;color:#fff;background:var(--c)}
+.rec .chips span:nth-child(2){background:#c9987c}.rec .chips span:nth-child(3){background:#047578}
+.rec .chips span::before{content:"★";width:20px;height:20px;border-radius:50%;background:#f5e8da;color:#c9987c;display:grid;place-items:center;font-size:11px}
+
+/* avance */
+.rec .foot{display:flex;align-items:center;gap:16px;margin-top:30px}
+.rec .prog{flex:1;height:4px;border-radius:4px;background:rgba(22,90,108,.12);overflow:hidden}
+.rec .prog i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#165a6c,#c9987c,#dabb81)}
+.rec .hint{font:400 20px "Shadows Into Light Two",cursive;color:#c9987c;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.rec .hint svg{width:26px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;animation:recNudge 1.6s ease-in-out infinite}
+@keyframes recNudge{50%{transform:translateX(6px)}}
+
+/* cierre */
+.rec .end{margin:78px auto 0;max-width:980px;text-align:center}
+.rec .end .q{display:block;font:400 90px/.5 "Playfair Display",serif;color:#c9987c;height:34px}
+.rec .end p{margin:0;font:400 clamp(24px,3vw,36px)/1.25 "Playfair Display",serif;color:#165a6c}
+.rec .end em{font:400 1.15em "Shadows Into Light Two",cursive;display:inline-block;padding:0 .12em;color:#c9987c;background:linear-gradient(transparent 58%,#f5e8da 58%,#f5e8da 92%,transparent 92%)}
+.rec .end em+em{color:#047578;background:linear-gradient(transparent 58%,#dfeccd 58%,#dfeccd 92%,transparent 92%)}
+
+@media(max-width:760px){
+ .rec{padding:60px 0 70px}
+ .rec .ttl{font-size:44px}
+ .rec .trk{--fw:74vw;--gap:50px;padding:46px 22px 10px;scroll-padding-inline:22px}
+ .rec .bn{font-size:48px}
+ .rec .fin-box{padding:26px 20px 22px}
+ .rec .tx p.rest{font-size:15px}
+ .rec .end{margin-top:56px}
+}
+@media(prefers-reduced-motion:reduce){.rec .deck .card,.rec .it{transition:none}.rec .hint svg{animation:none}.rec .it{opacity:1}}
+.rec .cnt-h{font:600 13px Montserrat,sans-serif;letter-spacing:.06em;color:#165a6c;white-space:nowrap}
+.rec .cnt-h b{font:400 26px "Playfair Display",serif;letter-spacing:0;margin-right:2px}
+.rec .segs{flex:1;display:flex;gap:6px}
+.rec .segs button{flex:1;height:22px;border:0;padding:0;background:none;cursor:pointer;position:relative}
+.rec .segs button::before{content:"";position:absolute;left:0;right:0;top:8px;height:6px;border-radius:6px;background:rgba(22,90,108,.14);transition:background .3s,transform .3s}
+.rec .segs button.past::before{background:#81a9a7}
+.rec .segs button.on::before{background:#165a6c;transform:scaleY(1.5)}
+.rec .segs button:focus-visible{outline:2px solid #dabb81;outline-offset:2px;border-radius:6px}
+@media(max-width:760px){.rec .foot{flex-wrap:wrap;gap:8px 12px}.rec .segs{order:3;flex-basis:100%}.rec .hint{margin-left:auto}}
+/* NOVEDAD en la portada */
+.nv1{position:absolute;left:max(4vw,22px);bottom:88px;z-index:4;width:360px;max-width:calc(100% - 44px);background:rgba(245,232,218,.12);border:1px solid rgba(245,232,218,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:18px;padding:14px;display:grid;grid-template-columns:78px 1fr;gap:16px;align-items:center;color:var(--crema);text-decoration:none;opacity:0;transition:background .3s}
+.nv1[hidden]{display:none}
+.nv1:hover{background:rgba(245,232,218,.2)}
+body.ready .nv1{animation:bnUp 1s cubic-bezier(.2,.7,.2,1) 1.1s forwards}
+.nv1 img{width:78px;border-radius:5px;box-shadow:0 10px 22px rgba(0,0,0,.3);transform:rotate(-3deg)}
+.nv1 .nv-tag{display:inline-flex;align-items:center;gap:6px;font:800 12px Montserrat,sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:7px 14px;border-radius:999px;background:#e9b44c;color:var(--tinta);line-height:1.2;box-shadow:0 0 0 0 rgba(233,180,76,.7);animation:nvPulse 2s ease-out infinite}
+.nv1 .nv-tag::before{content:'✦';font-size:13px;letter-spacing:0}
+@keyframes nvPulse{0%{box-shadow:0 0 0 0 rgba(233,180,76,.75)}70%{box-shadow:0 0 0 12px rgba(233,180,76,0)}100%{box-shadow:0 0 0 0 rgba(233,180,76,0)}}
+.nv1{border:1.5px solid rgba(233,180,76,.75)!important;box-shadow:0 14px 34px rgba(0,0,0,.25)}
+@media(prefers-reduced-motion:reduce){.nv1 .nv-tag{animation:none}}
+.nv1 b{display:block;font:400 20px/1.15 "Playfair Display",serif;color:#fff;margin:7px 0 6px}
+.nv1 .ln{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12.5px;font-weight:600}
+.nv1 .nv-price{font:500 17px "Playfair Display",serif;color:var(--dorado)}
+.nv1.free .nv-price{font:700 11.5px Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--lima)}
+.nv1 u{text-underline-offset:3px}
+@media(prefers-reduced-motion:reduce){.nv1{opacity:1;animation:none!important}}
+@media(max-width:820px){.nv1{left:16px;right:16px;width:auto;max-width:none;bottom:168px;background:rgba(17,76,92,.55);grid-template-columns:56px 1fr;padding:10px 12px;gap:12px}.nv1 img{width:56px}.nv1 b{font-size:16px;margin:4px 0 3px}}
+
+</style>
+</head>
+<body class="intro-on">
+
+<div class="intro" id="intro" aria-label="Bienvenida a Sana tu Mentte">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+  <div class="in-bible"><div class="ph"></div><div class="bloom"></div></div>
+  <div class="in-box">
+    <div class="in-logo"><svg viewBox="0 0 132 132"><circle cx="66" cy="66" r="64"/></svg><img src="img/logo.png" alt=""></div>
+    <div class="in-name" id="inName"></div>
+    <div class="in-tag">psicología + fe, con amor y evidencia</div>
+    <div class="in-line"><i></i></div>
+  </div>
+</div>
+<audio id="bgm" src="audio/fondo.mp3" loop preload="auto"></audio>
+<button class="snd" id="snd" aria-label="Activar o pausar música"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
+
+<header class="top">
+  <div class="w nav">
+    <a class="logo" href="index.html"><img src="img/logo.png" alt=""><b>Sana tu <i>Mentte</i></b></a>
+    <ul class="menu" id="menu">
+      <li><button type="button">Contenidos <span class="chev"></span></button>
+        <div class="drop">
+          <a href="#trayectoria">Mi trayectoria<small>Mi historia y mis logros, siempre en equipo</small></a>
+          <a href="#testimonios">Testimonios</a>
+          <a href="#faq">Preguntas frecuentes</a>
+        </div></li>
+      <li><button type="button">Tests gratuitos <span class="chev"></span></button>
+        <div class="drop">
+          <a href="#evaluacion" data-finder>Evaluación inicial<small>¿Por dónde empezar? · 3 min</small></a>
+          <a href="#" data-picker>Pruebas estandarizadas<small>Ansiedad, ánimo, autoestima y más</small></a>
+        </div></li>
+      <li><button type="button">Terapias y servicios <span class="chev"></span></button>
+        <div class="drop">
+          <a href="#areas">Motivos de consulta</a>
+          <a href="#proceso">Cómo funciona el proceso</a>
+          <a href="#sesiones">Sesiones y tarifas</a>
+          <a href="resenas.html">Reseñas</a>
+        </div></li>
+      <li><a href="recursos.html">Recursos</a></li>
+      <li><a href="recursos.html#libro">Mi libro</a></li>
+      <li><a class="cta" href="#sesiones">Iniciar terapia</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Abrir menú"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<main>
+<section class="banner" aria-label="Sana tu Mentte · Psi. Camila Salazar Ramírez">
+  <div class="bn-beam"></div><div class="bn-floor"></div>
+  <h1 class="bn-word"><span class="l1">Sana tu</span> <span class="l2">Mentte</span></h1>
+  <img class="bn-photo" src="img/camila_banner.png" alt="Psi. Camila Salazar Ramírez">
+  <div class="bn-fade"></div>
+  <div class="bn-left">
+    <img class="bn-logo" src="img/logo.png" alt="Logo Sana tu Mentte">
+    <p class="bn-tag">Psicología + fe, con amor y evidencia</p>
+    <span class="bn-line"></span>
+    <p class="bn-name">Psi. Camila Salazar Ramírez</p>
+  </div>
+  <a class="nv1" id="novedad" target="_blank" rel="noopener" hidden><img alt=""><span><span class="nv-tag">Nuevo</span><b></b><span class="ln"><span class="nv-price"></span><u>Más información →</u></span></span></a>
+</section>
+
+<section class="hero">
+  <div class="w hero-grid">
+    <div class="rv">
+      <h2 class="hero-h">Tu mente también merece <i>un lugar seguro</i></h2>
+      <span class="hand" aria-label="psicología + fe, con amor y evidencia"><b class="hw" aria-hidden="true">psicología</b><b class="hw" aria-hidden="true">+</b><b class="hw" aria-hidden="true">fe,</b><b class="hw" aria-hidden="true">con</b><b class="hw" aria-hidden="true">amor</b><b class="hw" aria-hidden="true">y</b><b class="hw" aria-hidden="true">evidencia</b></span>
+    </div>
+    <div class="rv">
+      <div class="ha">
+        <div class="b1-role">Psicóloga · Enfoque cognitivo-conductual</div>
+        <p class="b1-lead">Acompaño a adultos con:</p>
+        <div class="b1-pills">
+          <span class="b1-pill p1 pp" style="--i:0"><i><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></i>Ansiedad</span>
+          <span class="b1-pill p2 pp" style="--i:1"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></i>Inseguridad</span>
+          <span class="b1-pill p3 pp" style="--i:2"><i><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c.8-3 3-5 6-5s5.2 2 6 5M14 15c3 0 5.2 2 6 5"/></svg></i>Dificultades en sus relaciones</span>
+          <span class="b1-pill p4 pp" style="--i:3"><i><svg viewBox="0 0 24 24"><path d="M6 15a4 4 0 0 1 .5-8 5 5 0 0 1 9.6 1.5A3.5 3.5 0 0 1 17 15z"/><path d="M8 19l1-2M12 19l1-2M16 19l1-2"/></svg></i>Malestar emocional persistente</span>
+        </div>
+        <div class="b1-duo">
+          <div class="c pp" style="--i:4"><small>Ciencia</small>Integro la práctica clínica con la investigación en <b>bienestar psicológico, gratitud y psicología positiva</b>: trabajamos el malestar y también <b>fortalecemos tus recursos personales</b>.</div>
+          <div class="f pp" style="--i:5"><small>Fe</small>Si lo deseas, <b>incluyo tu fe en el proceso</b>, con respeto y sin imposiciones.</div>
+        </div>
+      </div>
+      <div class="row"><a class="btn" href="#sesiones" data-agendar="ind">Agendar primera sesión</a></div>
+      <div class="trust"><span>Sesiones online</span><span>Confidencial</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ÁREAS -->
+<section class="areas" id="areas">
+  <div class="w">
+    <div class="sh rv"><div><div class="kicker">Motivos de consulta</div><h2 class="h2">Lo que podemos <i>trabajar juntos</i></h2></div><p class="lead">Selecciona un área para responder un cuestionario breve de 5 preguntas.</p></div>
+    <div class="bento">
+      <button class="tile wide" data-area="ans"><img src="img/mente.jpg" alt=""><div class="lab"><h3>Ansiedad y sobrepensamiento</h3><p class="kw">Preocupación constante · Mente acelerada · Tensión física · Insomnio</p><span class="go">Cuestionario breve →</span></div></button>
+      <button class="tile" data-area="aut"><img src="img/abrazo.jpg" alt=""><div class="lab"><h3>Baja autoestima</h3><p class="kw">Inseguridad · Comparación · Autocrítica · Necesidad de aprobación</p><span class="go">Cuestionario breve →</span></div></button>
+      <button class="tile" data-area="her"><img src="img/fotos.jpg" alt=""><div class="lab"><h3>Culpa y heridas del pasado</h3><p class="kw">Culpa · Recuerdos dolorosos · Perdón · Duelo</p><span class="go">Cuestionario breve →</span></div></button>
+      <button class="tile" data-area="pro"><img src="img/montana.jpg" alt=""><div class="lab"><h3>Crisis de propósito</h3><p class="kw">Vacío · Falta de rumbo · Decisiones · Sentido de vida</p><span class="go">Cuestionario breve →</span></div></button>
+      <button class="tile" data-area="des"><img src="img/rodillas.jpg" alt=""><div class="lab"><h3>Desgaste emocional</h3><p class="kw">Agotamiento · Límites · Sobrecarga · Irritabilidad</p><span class="go">Cuestionario breve →</span></div></button>
+      <button class="tile wide" data-area="rel"><img src="img/pareja.jpg" alt=""><div class="lab"><h3>Conflictos relacionales</h3><p class="kw">Pareja · Familia · Comunicación · Apego</p><span class="go">Cuestionario breve →</span></div></button>
+    </div>
+    <p class="swipe">Desliza para ver más →</p>
+  </div>
+</section>
+
+<!-- MI TRAYECTORIA -->
+<section class="rec" id="trayectoria" aria-labelledby="recTitle">
+  <div class="w">
+    <div class="rec-head">
+      <div class="kick">Psi. Camila Salazar Ramírez</div>
+      <h2 class="ttl" id="recTitle"><span class="a">Mi</span><span class="b">trayectoria</span></h2>
+      <div class="ttl-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+
+  <div class="trk" id="trk" tabindex="0" aria-label="Línea de tiempo de mi trayectoria. Desliza para avanzar"></div>
+
+  <div class="w">
+    <div class="foot"><div class="prog" hidden><i id="prog"></i></div><span class="cnt-h" id="recCnt" aria-live="polite"></span><div class="segs" id="recSegs" role="group" aria-label="Ir a un hito de mi trayectoria"></div><span class="hint">Desliza <svg viewBox="0 0 26 14"><path d="M1 7h22M17 1l6 6-6 6"/></svg></span></div>
+    <div class="end">
+      <span class="q" aria-hidden="true">“</span>
+      <p>Mi propósito es el mismo desde que empecé: que el dolor sea acompañado <em>con amor,</em> y <em>con ciencia.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proc" id="proceso">
+  <div class="w">
+    <div class="rv"><div class="kicker">Paso a paso</div><h2 class="h2">¿Cómo funciona <i>el proceso?</i></h2></div>
+    <div class="steps">
+      <div class="step"><b>01</b><h3>Realiza el pago</h3><p>De forma segura, antes de la sesión.</p></div>
+      <div class="step"><b>02</b><h3>Agenda tu cita</h3><p>Elige el horario disponible que te funcione.</p></div>
+      <div class="step"><b>03</b><h3>Diligencia el formulario</h3><p>Datos básicos para conocerte antes de empezar.</p></div>
+      <div class="step"><b>04</b><h3>Evaluación inicial</h3><p>Revisamos tu historia y definimos objetivos.</p></div>
+      <div class="step"><b>05</b><h3>Seguimiento</h3><p>Intervención con técnicas basadas en evidencia.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="prices" id="sesiones">
+  <div class="w">
+    <div class="rv" style="text-align:center"><div class="kicker">Sesiones psicológicas</div><h2 class="h2">Tarifas</h2><p class="hab">Consultas online · habla hispana</p></div>
+    <div class="plans">
+      <div class="plan rv"><small>Sesión única</small><h3>Sesión individual</h3><div class="n"><span>USD</span>55</div><div class="per">por sesión</div>
+        <ul><li>40–50 minutos por videollamada</li><li>Espacio confidencial</li><li>Agenda sujeta a disponibilidad</li><li>Pago previo a cada sesión</li></ul>
+        <p class="ideal">Ideal si quieres empezar o tienes horarios variables.</p>
+        <a class="btn line" href="#sesiones" role="button" data-agendar="ind">Agendar sesión</a></div>
+      <div class="plan pop rv"><span class="tag">MÁS ELEGIDO</span><small>Proceso continuo</small><h3>Paquete mensual</h3><div class="n"><span>USD</span>135</div><div class="per">4 sesiones al mes · ahorras USD 85</div>
+        <ul><li>4 sesiones de 40–50 minutos</li><li>Horario fijo reservado cada semana</li><li>Mayor continuidad en el proceso</li><li>Seguimiento más estructurado</li></ul>
+        <p class="ideal">Ideal si quieres avanzar de forma constante.</p>
+        <a class="btn lime" href="#sesiones" role="button" data-agendar="mes">Agendar paquete</a></div>
+    </div>
+    <div class="priv">
+      <div><b>Secreto profesional</b><span>Lo que compartes en sesión es confidencial.</span></div>
+      <div><b>Protección de datos</b><span>Tu información no se comparte con terceros.</span></div>
+      <div><b>Ley 1090</b><span>Código Deontológico y Bioético del Psicólogo.</span></div>
+      <div><b>Sin juicios</b><span>Un espacio de respeto en cada sesión.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testi" id="testimonios">
+  <div class="w">
+    <div class="rv"><div class="kicker">Reseñas</div><h2 class="h2">Lo que dicen <i>mis pacientes</i></h2></div>
+    <div class="t-grid">
+      <div><div class="shots" id="shots"></div><p class="swipe" style="color:#fff">Desliza para ver más reseñas →</p></div>
+      <aside class="side rv">
+        <div class="stars">★★★★★</div>
+        <h3>¿Tuviste un proceso conmigo?</h3>
+        <p>Tu reseña puede ayudar a otra persona a decidir iniciar terapia.</p>
+        <a class="btn" href="resenas.html#escribir">Agregar reseña</a>
+        <a class="btn line" href="resenas.html">Ver todas las reseñas</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- RECURSOS -->
+<section class="res">
+  <div class="w">
+    <div class="sh rv"><div><div class="kicker">Recursos</div><h2 class="h2">Material de <i>apoyo</i></h2></div><a class="btn line" href="recursos.html">Ver todos los recursos →</a></div>
+    <div class="res-card">
+      <a class="rc" href="recursos.html?tipo=academico"><img src="img/investigacion.jpg" alt="" style="object-position:32% center"><div><small>Investigación</small><h3>Publicaciones</h3></div></a>
+      <a class="rc" href="#" data-picker><img src="img/busto.jpg" alt="" style="object-position:center 35%"><div><small>Gratis</small><h3>Tests psicológicos</h3></div></a>
+      <a class="rc" href="https://sanatumentte.github.io/ebook/"><img src="img/ebook-regalos.jpg" alt="" style="object-position:center 38%"><div><small>Ebook · USD 4.99</small><h3>¿Qué hago con mi vida?</h3></div></a>
+      <a class="rc" href="recursos.html?tipo=articulo"><img src="img/escribe.jpg" alt=""><div><small>Gratis</small><h3>Lecturas complementarias</h3></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="w faq-grid">
+    <div class="rv"><div class="kicker">Preguntas frecuentes</div><h2 class="h2">Antes de <i>empezar</i></h2></div>
+    <div class="rv">
+      <details open><summary>¿Las sesiones son virtuales?</summary><p>Sí. Todas las sesiones se realizan por videollamada segura, desde el lugar donde te sientas cómodo/a.</p></details>
+      <details><summary>¿Cuánto duran las sesiones?</summary><p>La primera sesión de evaluación dura 50 minutos. Las sesiones de seguimiento duran entre 40 y 50 minutos.</p></details>
+      <details><summary>¿Con qué frecuencia son las sesiones?</summary><p>Generalmente semanal o quincenal, según tu proceso. Lo definimos juntos en la primera sesión.</p></details>
+      <details><summary>¿La terapia incluye un enfoque espiritual?</summary><p>Solo si tú lo deseas. La base del trabajo es la psicología basada en evidencia; la dimensión espiritual se integra de forma respetuosa y sin imposiciones.</p></details>
+      <details><summary>¿Es confidencial?</summary><p>Sí. Todo lo que compartes en sesión está protegido por el secreto profesional.</p></details>
+      <details><summary>¿Qué pasa si debo cancelar una sesión?</summary><p>Puedes cancelar o reprogramar con al menos 24 horas de anticipación.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="follow" id="seguir">
+  <div class="w">
+    <div class="kicker">Comunidad</div>
+    <h2 class="h2">Suscríbete al canal y <i>sígueme en redes</i></h2>
+    <p class="lead">Nuevos videos, canciones y contenido de psicología y fe para acompañar tu proceso, cada semana.</p>
+    <div class="ytp" id="ytp">
+      <button type="button" class="ytp-cover" id="ytpPlay" aria-label="Reproducir la canción Vuelve a respirar">
+        <img src="img/yt_vuelve_a_respirar.jpg" alt="" loading="lazy">
+        <span class="ytp-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="ytp-cap"><small>Canción · Sana tu Mentte</small><b>Vuelve a respirar</b></span>
+      </button>
+    </div>
+    <div class="fbtns">
+      <a class="fbtn yt" href="https://www.youtube.com/@Sanatumentte1?sub_confirmation=1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg>Suscríbete en YouTube</a>
+      <a class="fbtn" href="https://instagram.com/sanatumentte" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>Instagram</a>
+      <a class="fbtn" href="https://tiktok.com/@sanatumentte" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.3V2h-3.4v13.7a2.9 2.9 0 1 1-2.1-2.8V9a6.3 6.3 0 1 0 5.5 6.3V8.2a8.3 8.3 0 0 0 4.8 1.5V6.3c-.4 0-.7 0-1-.1z"/></svg>TikTok</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta"><div class="bg"></div><h2>Tu proceso puede<br><i>empezar hoy</i></h2><a class="btn lt" href="#sesiones" role="button" data-agendar="ind">Agendar primera sesión</a></section>
+</main>
+
+<footer>
+  <div class="w">
+    <div class="f-grid">
+      <div><a class="logo" href="index.html"><img src="img/logo.png" alt=""><b>Sana tu <i>Mentte</i></b></a><p style="font-size:14px;color:var(--suave);margin-top:14px;max-width:300px">Psicología online. Ley 1090 — Código Deontológico y Bioético del Psicólogo.</p>
+        <div class="social">
+          <a href="https://wa.me/message/CVCEFMEVO3MYM1" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.760-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5a9.450 9.450 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36A9.43 9.43 0 0 1 2.6 12C2.6 6.8 6.84 2.56 12.05 2.56c2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.44-9.430 9.44m8.02-17.47A11.27 11.27 0 0 0 12.05.7C5.8.7.72 5.78.72 12.03c0 2 .52 3.95 1.52 5.66L.62 23.3l5.75-1.5a11.3 11.3 0 0 0 5.67 1.45c6.25 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.31-8.01"/></svg></a>
+          <a href="https://instagram.com/sanatumentte" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></a>
+          <a href="https://tiktok.com/@sanatumentte" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.3V2h-3.4v13.7a2.9 2.9 0 1 1-2.1-2.8V9a6.3 6.3 0 1 0 5.5 6.3V8.2a8.3 8.3 0 0 0 4.8 1.5V6.3c-.4 0-.7 0-1-.1z"/></svg></a>
+        </div></div>
+      <div><h4>Contenidos</h4><ul><li><a href="#trayectoria">Mi trayectoria</a></li><li><a href="#testimonios">Testimonios</a></li><li><a href="#faq">Preguntas frecuentes</a></li></ul></div>
+      <div><h4>Servicios</h4><ul><li><a href="#evaluacion" data-finder>Evaluación inicial</a></li><li><a href="#sesiones">Sesiones y tarifas</a></li><li><a href="recursos.html">Recursos</a></li><li><a href="resenas.html">Reseñas</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li><a href="https://wa.me/message/CVCEFMEVO3MYM1" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://instagram.com/sanatumentte" target="_blank" rel="noopener">Instagram @sanatumentte</a></li><li><a href="https://tiktok.com/@sanatumentte" target="_blank" rel="noopener">TikTok @sanatumentte</a></li></ul>
+        <a class="credito" id="credito" href="https://wa.me/573234303133?text=Hola%20David%2C%20vi%20la%20p%C3%A1gina%20de%20Sana%20tu%20Mentte%20y%20me%20gust%C3%B3%20mucho.%20Me%20interesa%20tener%20una%20p%C3%A1gina%20web%20similar%20para%20mi%20trabajo.%20Quisiera%20conocer%20sus%20servicios%2C%20tiempos%20y%20valores." target="_blank" rel="noopener">Página hecha por <b>David Salazar <span class="tel">+57 323 430 3133</span></b></a>
+        </div>
+    </div>
+    <div class="f-bottom"><span>© 2026 Sana tu Mentte · Camila Salazar Ramírez</span><span>Este sitio no reemplaza la evaluación ni el tratamiento profesional.</span></div>
+  </div>
+</footer>
+<a class="wa-float" href="https://wa.me/message/CVCEFMEVO3MYM1" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36A9.43 9.43 0 0 1 2.6 12C2.6 6.8 6.84 2.56 12.05 2.56c2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.44-9.43 9.44m8.02-17.47A11.27 11.27 0 0 0 12.05.7C5.8.7.72 5.78.72 12.03c0 2 .52 3.95 1.52 5.66L.62 23.3l5.75-1.5a11.3 11.3 0 0 0 5.67 1.45c6.25 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.31-8.01"/></svg></a>
+
+<div class="evp" id="evp" role="dialog" aria-modal="true" aria-label="Evaluación inicial gratuita">
+  <div class="evp-box">
+    <button class="evp-x" id="evpX" aria-label="Cerrar">×</button>
+    <div class="evp-txt">
+      <div class="evp-k">Evaluación inicial gratuita</div>
+      <h2>Descubre por dónde <i>podemos empezar</i></h2>
+      <p class="evp-lead">Si no tienes claro qué te está afectando más, esta evaluación te ayuda a identificarlo antes de tu primera sesión.</p>
+      <ol class="evp-steps">
+        <li><div><b>Respondes 12 preguntas breves</b><span>Sobre cómo te has sentido en las últimas dos semanas.</span></div></li>
+        <li><div><b>Identificas tu área prioritaria</b><span>Comparamos seis motivos de consulta frecuentes.</span></div></li>
+        <li><div><b>Continúas con una prueba estandarizada</b><span>Como GAD-7, PHQ-9 o la escala de Rosenberg, según tu resultado.</span></div></li>
+      </ol>
+      <button class="btn lime" data-finder>Comenzar evaluación →</button>
+      <div class="evp-meta"><span>3 minutos</span><span>Sin registro</span><span>Tus respuestas no se guardan</span></div>
+    </div>
+    <div class="evp-img"><img src="img/libreta.jpg" alt=""></div>
+  </div>
+</div>
+<button class="evmini" id="evMini" type="button"><span class="dot"></span>¿Por dónde empezar?</button>
+
+<div class="pay" id="pay" role="dialog" aria-modal="true" aria-label="Agendar sesión"><div class="pay-box"><button class="pay-x" id="payX" type="button" aria-label="Cerrar">×</button><div id="payBody"></div></div></div>
+<script src="tests-data.js?v=5"></script>
+<script src="comun.js?v=6"></script>
+<script>
+/* Reseñas escritas por pacientes (texto tal cual lo enviaron) */
+const SHOTS=[
+ {h:'Para mí fue luz en uno de los momentos más oscuros de mi vida',tags:['Fe','Sanar heridas'],p:['Llegué a Sana tu Mente sintiéndome en un túnel oscuro que parecía no tener salida. Gracias a Cami, poco a poco empecé a ver una luz y a recuperar la esperanza. Con su amor, paciencia, dedicación y conocimiento, me acompañó a sanar heridas, conocerme mejor y volver a sentirme bien.','Algo que para mí hace una diferencia enorme es que Dios y la fe están presentes en cada sesión. Se siente que Él está en medio del proceso, y eso ha sido realmente especial y transformador para mí.','Estoy profundamente agradecida con Dios y con Cami por todo lo que hizo por mí. Recomiendo a Cami a ojos cerrados; para mí fue luz en uno de los momentos más oscuros de mi vida. 🤍']},
+ {h:'La virtualidad se convirtió en cercanía para mi alma',tags:['Terapia online','Reencontrarme'],p:['Darme la oportunidad de asistir a terapia después de un suceso que me llevó a sentirme perdida en mi propio ser, ha sido para mí un acierto, en este proceso tuve un gran acompañamiento y pude ser consciente de cada avance; abrirme a la posibilidad de la virtualidad me ha llevado no solo a concertar conmigo misma sino a sentir empatía, seguridad, confianza y conexión con quien está al otro lado de la pantalla.','La virtualidad se convirtió en cercanía para mi alma. Gracias Camila Salazar por tu acompañamiento terapéutico en este tramo de mi vida.']},
+ {h:'He aprendido a manejar el estrés y la ansiedad de una manera mucho más sana',tags:['Ansiedad','Estrés'],p:['También quiero aprovechar y expresarte mi más sincero agradecimiento por tu guía y apoyo incondicional durante este proceso. Gracias a tu ayuda, he aprendido a manejar el estrés y la ansiedad de una manera mucho más sana. Realmente valoro tu dedicación para encontrar las herramientas adecuadas para tratarme y tu esfuerzo por enseñarme a ser más compasivo conmigo mismo y a valorarme en general, tu disposición para ayudarme está haciendo una gran diferencia en mi vida, Dios bendiga tu camino para que puedas seguir ayudando a muchas personas más por medio de tu carrera 🙏']},
+ {h:'Me sentí súper bien, segura, escuchada',tags:['Fe','Terapia online'],p:['Cami, paso por acá para agradecerte por la oportunidad que me diste de conocerte y de contarte mi historia y que me acompañaras en este proceso que al principio lo veía difícil de superar pero que con el pasar de los días y sesiones vistas me di cuenta que todo lo que nos proponemos y creyendo en Dios que él tiene el control sobre todo… Al final encontré la salida. Me sentí súper bien, segura, escuchada, en ningún momento me sentí rechazada o juzgada por lo que estaba pasando; al contrario siempre una sonrisa y miles de palabras de apoyo donde me alentaba a seguir adelante.','Pensé que las sesiones virtuales iban a impedir el proceso pero la verdad me sentí como si estuviera presencial.']}
+];
+const shots=document.getElementById('shots');
+/* Testimonios en video: agrega aquí más archivos de la carpeta video/ */
+const VIDEOS=[{src:'video/testimonio1.mp4',poster:'img/testimonio1.jpg'}];
+/* Notas escritas a mano (cada una es de un paciente distinto) */
+const NOTAS=[{src:'img/nota1.jpg',alt:'Nota escrita a mano por un paciente: Doctora Camila, espero que este libro sea de bendición para usted tanto como lo fue su ayuda en mi proceso psicológico. Con cariño y agradecimiento.'}];
+NOTAS.forEach(n=>{
+  const d=document.createElement('article');d.className='shot vcard';
+  d.innerHTML='<img alt="" style="width:100%;border-radius:16px;display:block"><div class="vft"><span class="rvw-av">♥</span><div><b>Paciente</b><small>Nota de agradecimiento</small></div><span class="vtag">Carta</span></div>';
+  const im=d.querySelector('img');im.alt=n.alt;im.src=n.src;im.loading='lazy';
+  shots.appendChild(d);
+});
+VIDEOS.forEach(v=>{
+  const d=document.createElement('article');d.className='shot vcard';
+  d.innerHTML='<video controls playsinline preload="metadata" controlslist="nodownload"></video><div class="vft"><span class="rvw-av">▶</span><div><b>Paciente</b><small>Testimonio en video</small></div><span class="vtag">Video</span></div>';
+  const el=d.querySelector('video');el.poster=v.poster;el.src=v.src;
+  shots.appendChild(d);
+});
+SHOTS.forEach((s,k)=>{
+  const d=document.createElement('article');d.className='shot rvw';
+  d.innerHTML='<div class="rvw-q">“</div><div class="rvw-st" aria-label="Reseña">'+'<span>★</span>'.repeat(5)+'</div><h3></h3><div class="rvw-body"></div><button class="rvw-more" type="button">Leer reseña completa</button><div class="rvw-ft"><span class="rvw-av">♡</span><div><b>Paciente</b><small>Proceso terapéutico online</small></div><div class="rvw-tags"></div></div>';
+  d.querySelector('h3').textContent='«'+s.h+'»';
+  const b=d.querySelector('.rvw-body');s.p.forEach(x=>{const q=document.createElement('p');q.textContent=x;b.appendChild(q)});
+  const t=d.querySelector('.rvw-tags');s.tags.forEach(x=>{const e=document.createElement('em');e.textContent=x;t.appendChild(e)});
+  const m=d.querySelector('.rvw-more');m.onclick=()=>{d.classList.toggle('open');m.textContent=d.classList.contains('open')?'Ver menos':'Leer reseña completa'};
+  shots.appendChild(d);
+  requestAnimationFrame(()=>{if(b.scrollHeight<=b.clientHeight+4)m.remove()});
+});
+/* ---------- Agendar sesión: elegir plan, pagar y enviar comprobante ---------- */
+/* Pega aquí el enlace de pago de cada medio. Si un enlace está vacío, se abre WhatsApp para pedirlo. */
+const PLANES={
+ ind:{n:'Sesión individual',p:'USD 55',l:{pse:'',paypal:'https://www.paypal.com/ncp/payment/NE5XVJ3DT3KSC',mp:'https://mpago.li/1oDWHsW',hotmart:'https://pay.hotmart.com/B106924617W'}},
+ mes:{n:'Paquete mensual (4 sesiones)',p:'USD 135',l:{pse:'',paypal:'https://www.paypal.com/ncp/payment/7WCEPM2LAERP2',mp:'https://mpago.li/2E8Uz4c',hotmart:'https://pay.hotmart.com/H107005480M'}}
+};
+const METODOS=[
+ {k:'otros',n:'Transferencia',d:'BreB, Bancolombia o Western Union · sin comisión'},
+ {k:'paypal',n:'PayPal',d:'Pago con tu cuenta PayPal. Valor de la sesión + comisión de la plataforma',logo:'img/pagos/paypal.png'},
+ {k:'mp',n:'Mercado Pago',d:'Tarjetas, PSE y más. Valor de la sesión + comisión de la plataforma',logo:'img/pagos/mp.png'},
+ {k:'hotmart',n:'Hotmart',d:'Más facilidades de pago. Valor de la sesión + comisión de la plataforma',logo:'img/pagos/hotmart.png'}
+];
+const pay=document.getElementById('pay'),payBody=document.getElementById('payBody');
+let payPlan='ind';
+function payOpen(k,v){payPlan=PLANES[k]?k:'ind';if(v==='disp')payViewDisp();else payView1();pay.classList.add('show');document.body.style.overflow='hidden';if(typeof evp!=='undefined'&&evp.classList.contains('show'))evp.classList.remove('show')}
+function payClose(){pay.classList.remove('show');document.body.style.overflow=''}
+function payView1(note){
+  payBody.innerHTML='<div class="pay-k">Agendar sesión</div><h2>Elige tu plan y cómo pagar</h2><div class="pay-plans">'+Object.keys(PLANES).map(k=>'<button type="button" class="pay-plan'+(k===payPlan?' on':'')+'" data-p="'+k+'"><b>'+PLANES[k].n+'</b><span>'+PLANES[k].p+'</span></button>').join('')+'</div><div class="pay-sub">Medio de pago</div><div class="pay-m">'+METODOS.map(m=>'<button type="button" class="pay-meth" data-m="'+m.k+'"><span class="pm-lg'+(m.k==='hotmart'?' ho':'')+'">'+(m.logo?'<img src="'+m.logo+'" alt="'+m.n+'">':'<b>'+m.n+'</b>')+'</span><span><small>'+m.d+'</small></span><em>→</em></button>').join('')+'</div>'+(note?'<p class="pay-note warn"></p>':'')+'<p class="pay-note">El valor final puede variar según la comisión de cada plataforma. Por transferencia o BreB no hay comisión de plataforma.</p><p class="pay-note">Pagas primero y luego coordinamos tu horario.</p><button type="button" class="pay-back" id="payDisp">Ver disponibilidad de horarios →</button>';
+  if(note)payBody.querySelector('.warn').textContent=note;
+  payBody.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{payPlan=b.dataset.p;payBody.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('on',x===b))});
+  payBody.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>payGo(b.dataset.m));
+  document.getElementById('payDisp').onclick=payViewDisp;
+}
+const KOALENDAR='https://koalendar.com/e/sesion-psicologica-9-2?embed=true';
+function payViewDisp(){
+  payBody.innerHTML='<div class="pay-k">Horarios</div><h2>Disponibilidad</h2><span class="pay-cal-tag">Solo consulta</span><div class="pay-cal"><iframe title="Disponibilidad de horarios" loading="lazy" tabindex="-1"></iframe><div class="lock" aria-hidden="true"></div></div><p class="pay-note">Aquí solo puedes ver los horarios disponibles. Para reservar, primero elige tu plan y realiza el pago.</p><button type="button" class="btn" id="payToPay">Elegir plan y pagar</button>';
+  payBody.querySelector('iframe').src=KOALENDAR;
+  document.getElementById('payToPay').onclick=()=>payView1();
+}
+function payViewOtros(){
+  const pl=PLANES[payPlan];
+  const row=(l,v)=>'<div class="po-r"><span>'+l+'</span><b>'+v+'</b><button type="button" class="po-c" data-v="'+v+'">Copiar</button></div>';
+  payBody.innerHTML='<div class="pay-k">Sin comisión</div><h2>Transferencia o BreB</h2><p class="pay-note" style="margin-top:0">'+pl.n+' · '+pl.p+'. Escríbeme por WhatsApp para confirmar el valor exacto en pesos.</p>'
+  +'<div class="po"><h4>BreB</h4>'+row('Llave','@camilas0327')+'</div>'
+  +'<div class="po"><h4>Bancolombia</h4>'+row('Titular','Camila Salazar Ramírez')+row('Tipo','Cuenta de ahorros')+row('N.º de cuenta','85262552573')+'</div>'
+  +'<div class="po"><h4>Western Union</h4><p class="pay-note" style="margin:0 0 6px">Transferencia bancaria a la misma cuenta Bancolombia, con estos datos:</p>'+row('Nacionalidad','Colombia')+row('Ciudad','Pereira')+row('Dirección','Calle 23, Pereira')+row('Código SWIFT','COLOCOBM')+'<p class="pay-note" style="margin:6px 0 0">Recuerda seleccionar <b>depósito a cuenta bancaria</b>.</p></div>'
+  +'<div class="pay-k" style="margin-top:22px">Después de pagar</div><p class="pay-note" style="margin-top:0;font-size:15px">Envía el comprobante por WhatsApp para agendar tu sesión.</p><a class="btn lime" id="payWa" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a><button type="button" class="pay-back" id="payBack">← Elegir otro medio de pago</button>';
+  document.getElementById('payWa').href=WA+encodeURIComponent('Hola Camila, ya realicé el pago de mi '+pl.n+' ('+pl.p+') por transferencia/BreB. Te envío el comprobante.');
+  document.getElementById('payBack').onclick=()=>payView1();
+  payBody.querySelectorAll('.po-c').forEach(b=>b.onclick=()=>{
+    const v=b.dataset.v;
+    const ok=()=>{b.textContent='¡Copiado!';b.classList.add('ok');setTimeout(()=>{b.textContent='Copiar';b.classList.remove('ok')},1600)};
+    const fb=()=>{try{const t=document.createElement('textarea');t.value=v;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();ok()}catch(e){b.textContent='Mantén pulsado el dato'}};
+    try{navigator.clipboard.writeText(v).then(ok,fb)}catch(e){fb()}
+  });
+}
+function payGo(k){
+  if(k==='otros'){payViewOtros();return}
+  const pl=PLANES[payPlan],m=METODOS.find(x=>x.k===k),url=pl.l[k];
+  if(url){payView2(k)}
+  else{payView1(m.n+' aún no está disponible. Elige otro medio de pago, por ejemplo PayPal u Hotmart.')}
+}
+function payView2(k){
+  const pl=PLANES[payPlan],m=METODOS.find(x=>x.k===k);
+  payBody.innerHTML='<div class="pay-k">Paso 1</div><h2>Realiza tu pago</h2><p class="pay-note" style="margin-top:0">'+pl.n+' · '+pl.p+' · '+m.n+'</p><a class="btn" id="payLink" target="_blank" rel="noopener">Ir a pagar con '+m.n+' →</a><div class="pay-k" style="margin-top:26px">Paso 2</div><h3 style="font-size:20px;margin-bottom:6px">Envía tu comprobante</h3><p class="pay-note" style="margin-top:0;font-size:15px">Cuando termines el pago, envía el comprobante por WhatsApp para agendar tu sesión.</p><a class="btn lime" id="payWa" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a><p class="pay-note">Se abre WhatsApp con el mensaje listo. Adjunta ahí la captura o el PDF de tu comprobante.</p><button type="button" class="pay-back" id="payBack">← Elegir otro medio de pago</button>';
+  document.getElementById('payLink').href=pl.l[k];
+  document.getElementById('payWa').href=WA+encodeURIComponent('Hola Camila, ya realicé el pago de mi '+pl.n+' ('+pl.p+') por '+m.n+'. Te envío el comprobante.');
+  document.getElementById('payBack').onclick=()=>payView1();
+}
+document.getElementById('payX').onclick=payClose;
+pay.addEventListener('click',e=>{if(e.target===pay)payClose()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&pay.classList.contains('show'))payClose()});
+document.querySelectorAll('[data-agendar]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();payOpen(a.dataset.agendar)}));
+document.querySelectorAll('[data-disp]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();payOpen('ind','disp')}));
+/* Ventana emergente de la evaluación: aparece 2 s después de la entrada; al cerrarla queda el botón pequeño */
+const evp=document.getElementById('evp'),evMini=document.getElementById('evMini');
+function evOpen(){evp.classList.add('show');evMini.classList.remove('show');document.body.style.overflow='hidden'}
+function evMinimize(){evp.classList.remove('show');evMini.classList.add('show');document.body.style.overflow='';try{sessionStorage.setItem('evMin','1')}catch(e){}}
+document.getElementById('evpX').onclick=evMinimize;
+evp.addEventListener('click',e=>{if(e.target===evp)evMinimize()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&evp.classList.contains('show'))evMinimize()});
+evMini.onclick=evOpen;
+evp.querySelector('[data-finder]').addEventListener('click',()=>{evp.classList.remove('show');evMini.classList.add('show')});
+function evSchedule(){let min=false;try{min=sessionStorage.getItem('evMin')==='1'}catch(e){}
+  if(min){evMini.classList.add('show');return}
+  setTimeout(()=>{if(!modal.classList.contains('open'))evOpen();else evMini.classList.add('show')},2000)}
+/* Previsualización de la canción en YouTube: carga el video al tocar y pausa la música de fondo */
+(function(){const b=document.getElementById('ytpPlay');if(!b)return;b.onclick=()=>{
+  const bg=document.getElementById('bgm'),sn=document.getElementById('snd');if(bg&&!bg.paused){bg.pause();if(sn)sn.classList.remove('play')}
+  const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/pmZ1kEgZKkI?autoplay=1&rel=0&modestbranding=1';f.title='Vuelve a respirar · Sana tu Mentte';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;
+  b.replaceWith(f)}})();
+/* ---------- Entrada con logo + música de fondo ---------- */
+(function(){
+  const intro=document.getElementById('intro'),bgm=document.getElementById('bgm'),snd=document.getElementById('snd');
+  const name='SANA TU MENTTE',el=document.getElementById('inName');
+  [...name].forEach((ch,i)=>{const s=document.createElement('span');s.textContent=ch===' '?' ':ch;s.style.animationDelay=(2.2+i*.05)+'s';if(i>=8)s.innerHTML='<i>'+s.textContent+'</i>';el.appendChild(s)});
+  let muted=false;try{muted=localStorage.getItem('stm-mute')==='1'}catch(e){}
+  const VOL=.08;let fadeT;
+  function fadeTo(v,ms){clearInterval(fadeT);const st=bgm.volume,steps=20;let n=0;fadeT=setInterval(()=>{n++;try{bgm.volume=Math.max(0,Math.min(1,st+(v-st)*n/steps))}catch(e){}if(n>=steps){clearInterval(fadeT);if(v===0)bgm.pause()}},ms/steps)}
+  function play(){if(muted)return;try{bgm.volume=0}catch(e){}const p=bgm.play();if(p&&p.then)p.then(()=>{fadeTo(VOL,2500);snd.classList.add('play')}).catch(()=>{});else{fadeTo(VOL,2500);snd.classList.add('play')}}
+  const rm=matchMedia('(prefers-reduced-motion: reduce)').matches,t0=Date.now();
+  // La música intenta sonar desde la entrada del logo; si el navegador la bloquea, arranca sola al primer toque o tecla (sin avisos)
+  // Escucha cualquier interacción (toque, clic, tecla, rueda) y no se rinde hasta que la música suene de verdad
+  const GEST=['pointerdown','pointerup','mousedown','click','keydown','touchstart','touchend','wheel'];
+  function firstGesture(){if(muted||!bgm.paused){stopListen();return}play()}
+  function stopListen(){GEST.forEach(e=>removeEventListener(e,firstGesture,true))}
+  GEST.forEach(e=>addEventListener(e,firstGesture,{capture:true,passive:true}));
+  bgm.addEventListener('playing',stopListen);
+  play();
+  setTimeout(close,rm?800:4900);
+  snd.onclick=e=>{e.stopPropagation();if(bgm.paused){muted=false;try{localStorage.removeItem('stm-mute')}catch(e){}play()}else{muted=true;try{localStorage.setItem('stm-mute','1')}catch(e){}snd.classList.remove('play');fadeTo(0,600)}};
+  let closed=false;
+  function close(){if(closed)return;closed=true;evSchedule();intro.classList.add('out');setTimeout(()=>document.body.classList.add('ready'),350);document.body.classList.remove('intro-on');snd.classList.add('vis');if(!bgm.paused)snd.classList.add('play');setTimeout(()=>intro.remove(),1100)}
+  intro.addEventListener('click',()=>{if(Date.now()-t0>500)close()});
+})();
+
+</script>
+<script>
+/* ---------- Mi trayectoria ---------- */
+{
+/* Textos tal cual los escribió Camila. [[ ]] solo marca la frase resaltada. */
+/* color de cada hito (solo colores de la marca): principal, segundo, tono claro, texto sobre el principal, color de la primera frase */
+const COL=[['#165a6c','#81a9a7','#dfeccd','#fff','#165a6c'],['#c9987c','#dabb81','#f5e8da','#fff','#165a6c'],['#047578','#81a9a7','#dfeccd','#fff','#047578'],['#dabb81','#c9987c','#e7decf','#165a6c','#165a6c']];
+const HITOS=[
+ {t:'Salgo de la universidad',p:'Salí de la universidad con mucha intriga sobre hacia dónde iba a llevarme mi profesión. Tenía el título en las manos y [[muchas preguntas en el corazón]].',fotos:[{src:'img/recorrido/h1-grado.webp',pos:'center 22%',alt:'Camila sonríe en su grado de la Universidad Católica de Pereira, con toga y su diploma de psicóloga en las manos'}]},
+ {t:'La docente que más admiraba',p:'Me contactó una de las docentes que más admiraba. Me apasionaba la manera como enseñaba, siendo tan joven y con tanta claridad. Me ofreció trabajar como joven investigadora, y [[ese fue el comienzo de todo lo que vino después]].',fotos:[{src:'img/recorrido/h2-docente.webp',pos:'center 40%',alt:'Selfie de Camila sonriendo junto a su docente en el campus de la universidad'}]},
+ {t:'Joven investigadora',p:'Mi campo de investigación fue el ámbito organizacional, y allí tuve mi primer acercamiento al mundo científico. Di clases a estudiantes de maestría, acompañé las preprácticas de estudiantes de psicología organizacional y también dicté clases dentro de la misma universidad. Además visité empresas para dar capacitaciones. Allí me apasioné por la investigación y [[entendí lo importante que es llevarla a la práctica]].',fotos:[
+  {vid:'img/recorrido/h3-charla.mp4',poster:'img/recorrido/h3-charla.webp',pos:'center 30%',alt:'Camila dicta una charla con micrófono frente a un auditorio lleno de estudiantes'},
+  {src:'img/recorrido/h3-inpec.webp?v=3',pos:'center 45%',alt:'Camila junto a un grupo de funcionarios del INPEC después de una capacitación'},
+  {src:'img/recorrido/h3-integracion.webp',pos:'center 40%',alt:'Camila con vestido típico junto a un grupo en una actividad al aire libre, todos con ruanas y sombreros'},
+  {src:'img/recorrido/h3-visita.webp',pos:'center 60%',alt:'Grupo de estudiantes de psicología con Camila frente a un centro de salud mental durante una visita'},
+  {src:'img/recorrido/h3-clase.webp',pos:'center 55%',alt:'Camila acompaña a una estudiante que trabaja en su computador durante una clase'}
+ ],car:true},
+ {t:'Investigación y reconocimientos, siempre en equipo',p:'En esta etapa participé en la publicación de artículos, capítulos de libro y otros trabajos de investigación científica. [[Todo fue un trabajo en equipo]], junto a mi colega y a otros profesionales y estudiantes de práctica. Creamos experiencias desde las metodologías activas de aprendizaje, y de ahí vinieron reconocimientos como el primer lugar en las JIISBU XVIII, nuestra ponencia en el Congreso Colombiano de Psicología 2025 y el segundo puesto en el XIII Encuentro Nacional de la Red IDDEAL 2026.',chips:['Primer lugar · JIISBU XVIII','Ponencia · Congreso Colombiano de Psicología 2025','Segundo puesto · XIII Encuentro Nacional de la Red IDDEAL 2026'],fotos:[
+  {src:'img/recorrido/h4-jiisbu.webp',pos:'center 55%',alt:'Camila y dos estudiantes reciben el reconocimiento de primer lugar en las JIISBU XVIII'},
+  {src:'img/recorrido/h4-ponencia.webp',pos:'center 45%',alt:'Camila presenta la ponencia en el Congreso Colombiano de Psicología 2025, con el título de la investigación en pantalla'},
+  {src:'img/recorrido/h4-congreso.webp',pos:'center 55%',alt:'Camila sonríe frente al panel del Congreso Colombiano de Psicología 2025'},
+  {src:'img/recorrido/h4-iddeal.webp',pos:'center 45%',alt:'Camila y su equipo con el reconocimiento del segundo puesto en el XIII Encuentro Nacional de la Red IDDEAL 2026, en la Universidad de América'},
+  {src:'img/recorrido/h4-reconocimiento.webp',pos:'center 40%',alt:'Equipo de trabajo sonriendo con un trofeo y un certificado de reconocimiento'},
+  {src:'img/recorrido/h4-gratitud.webp',pos:'center 30%',alt:'Camila presenta el material «El legado de la gratitud», una experiencia creada desde las metodologías activas de aprendizaje'}
+ ],car:true},
+ {t:'Mi fe',p:'[[Dios cambió toda mi vida.]] Cuando me vinculé con la investigación, me nació una inquietud: ¿se puede unir lo psicológico con la fe, teniendo en cuenta la fe de las personas? Como joven investigadora aprendí lo importante de tener siempre un sustento científico sólido, y quise que mi trabajo siguiera ese camino.',fotos:[
+  {src:'img/recorrido/h5-alabanza.webp',pos:'center 25%',alt:'Camila canta con alegría con un micrófono en un retiro'},
+  {src:'img/recorrido/h5-reflexion.webp',pos:'center 35%',alt:'Camila comparte una reflexión con micrófono frente a un atril'}
+ ],car:true},
+ {t:'La radio',p:'Esa inquietud encontró su lugar en una emisora de radio, donde formé parte del equipo. Allí empezó mi contacto con los medios: aprender a comunicar mi voz y a llevar un mensaje a través de estas plataformas. Allí también empecé a unir la psicología y la Biblia en mis reflexiones. Me puse a buscar información y me di cuenta de que existen investigaciones que respaldan esta práctica. Eso me motivó a ofrecerme como psicóloga que integra la fe en los acompañamientos psicológicos, y poco a poco quise crear Sanatumentte para [[conectar con personas tan maravillosas como ustedes]].',fotos:[
+  {vid:'img/recorrido/h6-radio.mp4',poster:'img/recorrido/h6-radio.webp',pos:'center 40%',alt:'Camila conversa en una grabación para la radio'},
+  {src:'img/recorrido/h6-podcast.webp',pos:'center 50%',alt:'Selfie de Camila en la cabina de grabación junto a su invitada, con micrófonos al frente'},
+  {src:'img/recorrido/h6-cabina.webp',pos:'center 40%',alt:'Camila sonríe frente al micrófono en la cabina de la emisora, con audífonos puestos'},
+  {src:'img/recorrido/h6-equipo.webp',pos:'center 40%',alt:'Camila junto al equipo de la emisora'}
+ ],car:true},
+ {t:'Sana tu Mentte',p:'Con la pasión que me dejaron la investigación y la radio, al comunicar a través de mi voz, empecé a llevar a mis pacientes herramientas siempre vinculadas a la ciencia. Entendí lo valioso de integrar la evidencia en los procesos terapéuticos, porque [[acompañar con respaldo científico es una forma de cuidar mejor a quien confía en mí]]. Hoy, en Sana tu Mentte se juntan todas mis experiencias: mi vivencia personal con Dios y lo que aprendí como joven investigadora, que me lleva a trabajar siempre basada en evidencia. También soy una mujer muy creativa, y siempre he buscado innovar en mis procesos terapéuticos con herramientas distintas, como [[la música y archivos interactivos]] para mis pacientes. Por eso, Sana tu Mentte es el lugar donde mi historia se conecta con la tuya: un espacio [[donde tu fe sí importa]], donde la virtualidad se convierte en un espacio de confianza y donde juntos buscamos recursos para acompañarte y ayudarte en tu proceso.',fotos:[
+  {vid:'img/recorrido/h7-recursos.mp4',poster:'img/recorrido/h7-recursos.webp',full:'img/recorrido/h7-completo.mp4',pos:'center 40%',alt:'Fragmento de un video de Camila que muestra recursos para sus pacientes: un calendario interactivo y la canción «Espejo Nuevo»'}
+ ]}
+];
+/* Títulos y frases clave elegidos por Camila.  */
+const PROP=[
+ {tt:['El primer paso fuera del aula'],k:[['Todo gran camino empieza con una pregunta; no tenía todas las respuestas, pero sí muchas ganas de buscarlas.']]},
+ {tt:['La invitación que lo cambió todo'],k:[['Una llamada puede cambiar el rumbo de toda una vida.']]},
+ {tt:['Investigar para transformar'],k:[['La ciencia cobra sentido cuando llega a la vida de las personas.']]},
+ {tt:['Juntos llegamos más lejos'],k:[['Lo que se construye en equipo deja huella.']]},
+ {tt:['La pregunta que me marcó'],k:[['Mi fe le dio un nuevo sentido a mi profesión.']]},
+ {tt:['Donde encontré mi voz: fe y psicología al aire'],k:[['En la radio encontré mi voz, y con ella una forma de unir la psicología y la fe para llegar al corazón de muchos.']]},
+ {tt:['Donde mi historia se conecta con la tuya'],k:[['Un espacio donde tu fe sí importa y tu proceso es acompañado.']]}
+];
+(function(){
+  const trk=document.getElementById('trk'),prog=document.getElementById('prog');
+  const CAM='<svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+  const ARR='<svg viewBox="0 0 26 14"><path d="M1 7h22M17 1l6 6-6 6"/></svg>';
+  const ARRL='<svg viewBox="0 0 26 14"><path d="M25 7H3M9 1L3 7l6 6"/></svg>';
+  const el=(t,c)=>{const e=document.createElement(t);if(c)e.className=c;return e};
+  const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const pic=f=>{
+    if(f.vid){/* clip corto, sin sonido y en bucle (como un gif) */
+      const w=el('div','vw'),v=el('video');v.muted=true;v.loop=true;v.autoplay=true;v.playsInline=true;v.setAttribute('playsinline','');v.setAttribute('muted','');
+      v.preload='metadata';v.poster=f.poster;v.src=f.vid;v.setAttribute('aria-label',f.alt);if(f.pos)v.style.objectPosition=f.pos;w.appendChild(v);
+      if(f.full){const b=el('button','play');b.type='button';b.innerHTML='<span><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg></span>Ver video completo';b.onclick=()=>abrir(f.full,f.poster);w.appendChild(b)}
+      return w}
+    if(f.src){const im=el('img');im.src=f.src;im.alt=f.alt||'';im.loading='lazy';im.decoding='async';im.draggable=false;if(f.pos)im.style.objectPosition=f.pos;return im}
+    const w=el('div','ph');w.setAttribute('role','img');w.setAttribute('aria-label',f.espera);w.innerHTML=CAM+esc(f.espera)+'<small>Aquí va tu foto</small>';return w};
+  /* ventana con el video completo: vertical, con sonido y controles */
+  const mod=el('div','rec-vmod');mod.setAttribute('role','dialog');mod.setAttribute('aria-modal','true');mod.setAttribute('aria-label','Video completo');
+  mod.innerHTML='<button class="x" type="button" aria-label="Cerrar video">×</button><video controls playsinline preload="none"></video>';document.body.appendChild(mod);
+  const mv=mod.querySelector('video'),mx=mod.querySelector('.x');let ult=null;
+  function abrir(src,poster){const bg=document.getElementById('bgm'),sn=document.getElementById('snd');if(bg&&!bg.paused){bg.pause();if(sn)sn.classList.remove('play')}ult=document.activeElement;mv.poster=poster;if(mv.getAttribute('src')!==src)mv.src=src;mod.classList.add('on');document.body.style.overflow='hidden';mx.focus();mv.play().catch(()=>{})}
+  function cerrar(){mv.pause();mod.classList.remove('on');document.body.style.overflow='';if(ult)ult.focus()}
+  mx.onclick=cerrar;mod.addEventListener('click',e=>{if(e.target===mod)cerrar()});addEventListener('keydown',e=>{if(e.key==='Escape'&&mod.classList.contains('on'))cerrar()});
+  const title=t=>{const w=t.split(' ');return w.map((x,k)=>k===w.length-1&&w.length>1?'<i>'+esc(x)+'</i>':esc(x)).join(' ')};
+
+  /* varias fotos: la del frente grande, las vecinas a los lados y detrás */
+  function deck(fo,it,i){
+    const cards=[...fo.children],n=cards.length;let cur=0,sx=0;
+    fo.tabIndex=0;fo.setAttribute('role','group');fo.setAttribute('aria-label','Fotos del hito '+(i+1)+'. Toca una foto o desliza para pasarla al frente');
+    const dk=el('div','dk');dk.innerHTML='<span class="cnt"></span><span class="dots"></span><span class="sw">Desliza '+ARRL+' o toca una foto</span>';
+    const cnt=dk.querySelector('.cnt'),dots=dk.querySelector('.dots');
+    cards.forEach((c,k)=>{const b=el('button');b.type='button';b.setAttribute('aria-label','Ver foto '+(k+1)+' de '+n);b.onclick=()=>{cur=k;sx=0;lay()};const ff=HITOS[i].fotos[k],u=ff&&(ff.src||ff.poster);if(u)b.style.backgroundImage='url("'+u+'")';dots.appendChild(b)});
+    const rel=k=>{let r=(k-cur+n)%n;if(r>n/2)r-=n;return r};
+    function lay(){cards.forEach((c,k)=>{const r=rel(k),a=Math.abs(r),sg=r<0?-1:1;
+      /* todas las fotos a la vista: la del frente grande y las demás abiertas a los lados */
+      const x=a?sg*(54+(a-1)*10):0,s=a?Math.max(.5,.74-(a-1)*.08):1;
+      c.style.transform='translateX('+(x+sx)+'%) scale('+s+') rotate('+(r*3)+'deg)';
+      c.style.opacity=1;c.style.zIndex=10-a;c.classList.toggle('front',r===0);c.setAttribute('aria-hidden',r!==0);c.dataset.r=r});
+      cnt.textContent=(cur+1)+' / '+n;[...dots.children].forEach((b,k)=>b.classList.toggle('on',k===cur))}
+    const go=s=>{cur=(cur+s+n)%n;sx=0;lay()};
+    let x0=0,dx=0,down=false,tgt=null;
+    fo.addEventListener('pointerdown',e=>{if(e.target.closest('.play'))return;down=true;x0=e.clientX;dx=0;tgt=e.target.closest('.card');fo.setPointerCapture(e.pointerId);cards.forEach(c=>c.style.transition='none')});
+    fo.addEventListener('pointermove',e=>{if(!down)return;dx=e.clientX-x0;sx=dx/cards[cur].offsetWidth*100*.6;lay()});
+    const up=()=>{if(!down)return;down=false;cards.forEach(c=>c.style.transition='');
+      if(Math.abs(dx)>30)go(dx<0?1:-1);
+      else if(Math.abs(dx)<6&&tgt&&+tgt.dataset.r!==0)go(+tgt.dataset.r);
+      else{sx=0;lay()}};
+    fo.addEventListener('pointerup',up);fo.addEventListener('pointercancel',up);
+    fo.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){go(e.key==='ArrowRight'?1:-1);e.preventDefault();e.stopPropagation()}});
+    lay();it.appendChild(dk);
+  }
+
+  HITOS.forEach((h,i)=>{
+    const html=esc(h.p).replace(/\[\[(.+?)\]\]/g,'<mark>$1</mark>');
+    /* Sana tu Mentte se une al hito anterior, dentro de un recuadro propio */
+    if(h.fin){const b=el('div','fin-box');b.innerHTML='<span class="kick-fin">Sana tu Mentte</span><h3 class="t-h"></h3><div class="leads"></div><p class="rest">'+html+'</p>';
+      trk.lastElementChild.querySelector('.tx').appendChild(b);h._box=b;return}
+    const [c,c2,t,ct,cl]=COL[i%4],it=el('article','it');
+    it.style.setProperty('--c',c);it.style.setProperty('--c2',c2);it.style.setProperty('--t',t);it.style.setProperty('--ct',ct);it.style.setProperty('--cl',cl);
+    it.setAttribute('aria-label','Hito '+(i+1)+' de '+HITOS.length+': '+h.t);
+    const fo=el('div','fo'+(h.car?' deck':''));
+    h.fotos.forEach(f=>{const cd=el('div','card');cd.appendChild(pic(f));fo.appendChild(cd)});
+    it.appendChild(fo);if(h.car)deck(fo,it,i);
+    /* título + frase clave adicional; debajo, la historia completa de corrido con sus resaltados */
+    const tx=el('div','tx');h._box=tx;
+    tx.innerHTML='<div class="tx-top"><span class="bn" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span><span class="tag">Hito '+(i+1)+'</span></div><h3 class="t-h"></h3><div class="leads"></div><p class="rest">'+html+'</p>';
+    if(h.chips){const cc=el('div','chips');h.chips.forEach(x=>{const s=el('span');s.textContent=x;cc.appendChild(s)});tx.appendChild(cc)}
+    it.appendChild(tx);trk.appendChild(it);
+  });
+
+  /* opciones de títulos y frases clave para elegir (solo en la vista previa) */
+  let selT=0,selK=0;
+  const paint=()=>{HITOS.forEach((h,i)=>{const P=PROP[i],T=P.tt[Math.min(selT,P.tt.length-1)],K=P.k[Math.min(selK,P.k.length-1)],bx=h._box;
+      bx.querySelector('.t-h').innerHTML=title(T);
+      bx.querySelector('.leads').innerHTML=K.map(x=>'<p class="lead">'+esc(x)+'</p>').join('');
+      if(!h.fin)bx.closest('.it').setAttribute('aria-label','Hito '+(i+1)+': '+T)});
+    document.querySelectorAll('.pick button[data-t]').forEach(b=>b.classList.toggle('on',+b.dataset.t===selT))};
+  document.querySelectorAll('.pick button').forEach(b=>b.onclick=()=>{
+    if(b.classList.contains('ir')){const it=trk.querySelectorAll('.it')[5];trk.scrollTo({left:it.offsetLeft-trk.querySelector('.it').offsetLeft,behavior:'smooth'});trk.scrollIntoView({behavior:'smooth'});return}
+    selT=+b.dataset.t;selK=+b.dataset.k;paint()});
+  paint();
+  const upd=()=>{const m=trk.scrollWidth-trk.clientWidth;prog.style.width=(m>0?Math.max(8,trk.scrollLeft/m*100):100)+'%'};
+  trk.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});upd();addEventListener('resize',upd);
+  const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('vis',e.isIntersecting)),{root:trk,threshold:.5});
+  trk.querySelectorAll('.it').forEach(x=>io.observe(x));
+  /* arrastrar con el mouse en computador */
+  let down=false,sx=0,sl=0,moved=false;
+  trk.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.target.closest('.deck,button'))return;down=true;moved=false;sx=e.clientX;sl=trk.scrollLeft});
+  addEventListener('pointermove',e=>{if(!down)return;const d=e.clientX-sx;if(Math.abs(d)>4){moved=true;trk.classList.add('drag')}trk.scrollLeft=sl-d});
+  addEventListener('pointerup',()=>{if(!down)return;down=false;trk.classList.remove('drag');
+    if(moved){const w=trk.querySelector('.it').offsetWidth+parseFloat(getComputedStyle(trk).columnGap);trk.scrollTo({left:Math.round(trk.scrollLeft/w)*w,behavior:'smooth'})}});
+  trk.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+  trk.addEventListener('keydown',e=>{const w=trk.querySelector('.it').offsetWidth;if(e.key==='ArrowRight')trk.scrollBy({left:w,behavior:'smooth'});if(e.key==='ArrowLeft')trk.scrollBy({left:-w,behavior:'smooth'})});
+  /* línea de avance: en qué hito va la persona (1 / 7, 2 / 7...) */
+  const segs=document.getElementById('recSegs'),cnt=document.getElementById('recCnt'),its=[...trk.querySelectorAll('.it')];
+  const paso=()=>its[1]?its[1].offsetLeft-its[0].offsetLeft:1;
+  its.forEach((it,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ir al hito '+(k+1)+' de '+its.length);b.onclick=()=>trk.scrollTo({left:k*paso(),behavior:'smooth'});segs.appendChild(b)});
+  const cur=()=>{const m=trk.scrollWidth-trk.clientWidth;let k=Math.round(trk.scrollLeft/paso());if(trk.scrollLeft>=m-4)k=its.length-1;k=Math.max(0,Math.min(its.length-1,k));
+    cnt.innerHTML='Hito <b>'+(k+1)+'</b> / '+its.length;[...segs.children].forEach((b,j)=>{b.classList.toggle('on',j===k);b.classList.toggle('past',j<k);b.setAttribute('aria-current',j===k?'step':'false')})};
+  trk.addEventListener('scroll',()=>requestAnimationFrame(cur),{passive:true});addEventListener('resize',cur);cur();
+})();
+}
+</script>
+
+<script>
+/* NOVEDAD en la portada: para anunciar algo nuevo cambia solo estos datos.
+   Si es gratis, escribe precio:'gratis'. Para quitarla, escribe mostrar:false. */
+const NOVEDAD={
+  mostrar:true,
+  titulo:'¿Qué hago con mi vida?',
+  precio:'USD 4.99',
+  imagen:'img/novedad/portada.png',
+  enlace:'https://sanatumentte.github.io/ebook/'
+};
+(function(){const N=NOVEDAD,a=document.getElementById('novedad');if(!a||!N.mostrar)return;
+ const free=String(N.precio).trim().toLowerCase()==='gratis';
+ a.href=N.enlace;a.querySelector('img').src=N.imagen;a.querySelector('img').alt=N.titulo;
+ a.querySelector('b').textContent=N.titulo;a.querySelector('.nv-price').textContent=free?'Gratis':N.precio;
+ a.classList.toggle('free',free);a.hidden=false;})();
+</script>
+</body>
+</html>
+

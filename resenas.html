@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reseñas · Sana tu Mentte</title>
+<link rel="icon" href="img/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+<style>
+:root{--salvia:#81a9a7;--petroleo:#165a6c;--dorado:#dabb81;--beige:#e7decf;--verde:#047578;--crema:#f5e8da;--terracota:#c9987c;--fondo:#faf4ec;--suave:#46666f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Montserrat,sans-serif;background:var(--fondo);color:#143f4b;line-height:1.7}
+a{color:inherit;text-decoration:none}
+.w{max-width:1100px;margin:0 auto;padding:0 22px}
+header{background:var(--salvia);padding:22px 0 90px;color:#fff;text-align:center}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:60px}
+.top a.logo{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-size:20px}
+.top img{width:42px}
+.back{background:#fff;color:var(--petroleo);border-radius:99px;padding:10px 20px;font-size:14px;font-weight:600}
+h1{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(40px,6vw,70px);line-height:1.05}
+h1 i{color:var(--petroleo)}
+.hand{font-family:"Shadows Into Light Two",cursive;font-size:28px;color:var(--petroleo);display:block;margin-top:10px}
+.list{columns:3;column-gap:22px;margin-top:-50px}
+.card{break-inside:avoid;background:#fff;border-radius:22px;padding:28px;margin-bottom:22px;box-shadow:0 16px 36px rgba(22,90,108,.08)}
+.card .st{color:var(--dorado);letter-spacing:3px;font-size:18px}
+.card p{font-family:"Playfair Display",serif;font-style:italic;font-size:18px;line-height:1.5;margin:10px 0 14px;color:var(--petroleo)}
+.card small{font-size:13px;color:var(--suave);font-weight:600}
+.empty{text-align:center;color:var(--suave);background:#fff;border-radius:22px;padding:40px}
+.form{background:var(--petroleo);color:#fff;border-radius:32px;padding:54px;margin:70px auto 90px;max-width:760px;scroll-margin-top:30px}
+.form h2{font-family:"Playfair Display",serif;font-weight:400;font-size:40px;line-height:1.1}
+.form h2 i{color:var(--crema)}
+.form>p{opacity:.85;margin:8px 0 26px}
+label{display:block;font-size:13px;font-weight:600;letter-spacing:.06em;margin:16px 0 6px}
+input[type=text],textarea{width:100%;border:0;border-radius:14px;padding:14px 16px;font:inherit;font-size:15px;color:#143f4b;background:var(--crema)}
+textarea{min-height:140px;resize:vertical}
+.stars{display:flex;gap:6px;font-size:34px;cursor:pointer;color:rgba(255,255,255,.35)}
+.stars span.on{color:var(--dorado)}
+.ok{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;opacity:.9;margin-top:16px}
+.btn{margin-top:24px;display:inline-flex;background:var(--crema);color:var(--petroleo);border:0;border-radius:99px;padding:15px 30px;font:inherit;font-weight:600;cursor:pointer}
+.err{color:var(--dorado);font-size:14px;margin-top:10px;min-height:20px}
+.note{font-size:12.5px;opacity:.75;margin-top:16px}
+@media(max-width:900px){.list{columns:2}}
+@media(max-width:600px){.list{columns:1}.form{padding:34px 24px}.top{margin-bottom:36px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="w">
+    <div class="top"><a class="logo" href="index.html"><img src="img/logo.png" alt="">Sana tu Mentte</a><a class="back" href="index.html#testimonios">← Volver</a></div>
+    <h1>Reseñas de <i>pacientes</i></h1>
+    <span class="hand">historias reales de procesos reales ♡</span>
+  </div>
+</header>
+<main class="w">
+  <div class="list" id="list"></div>
+  <section class="form" id="escribir">
+    <h2>Deja tu <i>reseña</i></h2>
+    <p>¿Fuiste parte de un proceso conmigo? Tu experiencia puede animar a alguien a dar el primer paso.</p>
+    <label for="rvName">Nombre o iniciales (como quieres que aparezca)</label>
+    <input type="text" id="rvName" placeholder="Ej.: M. G. o Paciente">
+    <label>Calificación</label>
+    <div class="stars" id="rvStars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <label for="rvText">Tu experiencia</label>
+    <textarea id="rvText" placeholder="Cuéntanos cómo fue tu proceso…"></textarea>
+    <label class="ok"><input type="checkbox" id="rvOk"> Autorizo que esta reseña se publique en la página, sin mi nombre completo.</label>
+    <button class="btn" id="rvSend">Enviar reseña →</button>
+    <div class="err" id="rvErr"></div>
+    <p class="note">Se abrirá WhatsApp con tu reseña lista para enviar. Camila la revisa antes de publicarla para cuidar la confidencialidad de todos.</p>
+  </section>
+</main>
+<script>
+let val=0;const st=[...document.querySelectorAll('#rvStars span')];
+st.forEach((s,i)=>s.onclick=()=>{val=i+1;st.forEach((x,k)=>x.classList.toggle('on',k<val))});
+document.getElementById('rvSend').onclick=()=>{
+  const n=document.getElementById('rvName').value.trim(),t=document.getElementById('rvText').value.trim(),e=document.getElementById('rvErr');
+  if(!val){e.textContent='Elige una calificación.';return}
+  if(t.length<10){e.textContent='Escribe un poco más sobre tu experiencia.';return}
+  if(!document.getElementById('rvOk').checked){e.textContent='Marca la autorización para poder publicarla.';return}
+  e.textContent='';
+  const msg='Hola Camila, te dejo mi reseña para la página web:\n\n'+'★'.repeat(val)+'\n"'+t+'"\n— '+(n||'Paciente')+'\n\nAutorizo publicarla sin mi nombre completo.';
+  window.open('https://wa.me/message/CVCEFMEVO3MYM1?text='+encodeURIComponent(msg),'_blank');
+};
+const L=document.getElementById('list');
+fetch('resenas.json').then(r=>r.json()).then(a=>{
+  if(!a.length){L.outerHTML='<p class="empty">Aún no hay reseñas publicadas. ¡Sé la primera persona!</p>';return}
+  a.forEach(r=>{const d=document.createElement('div');d.className='card';d.innerHTML='<div class="st">'+'★'.repeat(r.estrellas||5)+'</div><p></p><small></small>';d.querySelector('p').textContent='«'+r.texto+'»';d.querySelector('small').textContent='— '+r.nombre+(r.fecha?' · '+r.fecha:'');L.appendChild(d)});
+}).catch(()=>{L.outerHTML='<p class="empty">No se pudieron cargar las reseñas.</p>'});
+</script>
+</body>
+</html>

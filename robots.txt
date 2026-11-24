@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /actividades/
 
 Sitemap: https://sanatumentte.net/sitemap.xml

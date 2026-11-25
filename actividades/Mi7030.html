@@ -257,12 +257,15 @@ const ENL = H.match(/^([A-Za-z0-9]{4,16})\.(\d{8,15})?(?:\.([A-Za-z0-9_-]*))?(\.
 let ULT = {}; try{ ULT = JSON.parse(localStorage.getItem('sana_7030_enlace')||'{}')||{}; }catch(e){}
 if(ENL[1]&&!VISTA){ ULT = {t:ENL[1], w:ENL[2]||ULT.w}; try{ if(ENL[4]) localStorage.removeItem('sana_7030_enlace'); else localStorage.setItem('sana_7030_enlace', JSON.stringify(ULT)); }catch(e){} }
 const TOKEN = VISTA?'':(ENL[1]||''), EN_SESION = !!ENL[4];
+/* #vista<azar>.<WA>.<estado> = vista previa con SUS respuestas reales (solo lectura); #vista sola = ejemplo */
+const REAL = VISTA && !!(ENL[1]&&ENL[3]);
 const KEY = 'sana_7030_v1' + (TOKEN ? ':'+TOKEN : (VISTA?':vista':':libre'));
 const LOGO = document.querySelector('header img').src;
 const base = ()=>({campos:{}, dias:{}, detras:{}, creencias:[], frenos:[]});
 let estado = base();
 try{ const g = JSON.parse(localStorage.getItem(KEY)); if(g) estado = Object.assign(base(), g); }catch(e){}
 let ACTUALIZADA = false;
+if(ENL[3]&&REAL){ try{ const b=ENL[3].replace(/-/g,'+').replace(/_/g,'/'), bin=atob(b+'==='.slice((b.length+3)%4)); estado=Object.assign(base(), JSON.parse(new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))))); }catch(e){} }
 if(ENL[3]&&!VISTA){ try{ const b=ENL[3].replace(/-/g,'+').replace(/_/g,'/'), bin=atob(b+'==='.slice((b.length+3)%4));
   const o=JSON.parse(new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))));
   const vacio=!estado.campos.fecha&&!Object.keys(estado.dias||{}).length;
@@ -283,8 +286,8 @@ function fechaDia(n){ const [y,m,d]=(estado.campos.fecha||hoyIso()).split('-').m
 const listaDias = () => [...Array(DIAS)].map((_,k)=>iso(fechaDia(k+1)));
 const bonita = f => { const [y,m,d]=f.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString('es',{weekday:'long', day:'numeric', month:'long'}); };
 
-/* ===== Vista previa con ejemplo ===== */
-if(VISTA){
+/* ===== Vista previa con ejemplo (solo si no trae respuestas reales) ===== */
+if(VISTA&&!REAL){
   const ini = new Date(); ini.setDate(ini.getDate()-3);
   estado = base(); estado.campos = {fecha:iso(ini), ses:70};
   const d = k => iso(new Date(ini.getFullYear(),ini.getMonth(),ini.getDate()+k));
@@ -609,7 +612,7 @@ function lineaCrisis(){ let z=''; try{ z=Intl.DateTimeFormat().resolvedOptions()
   const m=L.find(([r])=>r.test(z)); return m?m[1]:'la línea de emergencias de tu país'; }
 document.querySelectorAll('.lineaCrisis').forEach(e=>e.textContent=lineaCrisis());
 const banner = t => document.body.insertAdjacentHTML('afterbegin', `<div style="background:#e7f1f0;border-bottom:1px solid #b9d6d2;color:#1f3d45;padding:10px 16px;font:600 .92rem Nunito,sans-serif;text-align:center">${t}</div>`);
-if(VISTA){ banner('👁 <b>Vista previa con ejemplo:</b> así lo ve el paciente. Aquí no se guarda ni se envía nada.'); document.querySelectorAll('.envio').forEach(e=>e.style.display='none'); }
+if(VISTA){ banner(REAL?'👁 <b>Vista previa con sus respuestas reales</b> (lo que está guardado en el caso). Solo para mirar: aquí no se cambia nada.':'👁 <b>Vista previa con ejemplo:</b> así lo ve el paciente. Aquí no se guarda ni se envía nada.'); document.querySelectorAll('.envio').forEach(e=>e.style.display='none'); }
 else if(EN_SESION) banner('🩺 <b>Modo sesión:</b> se abrió con lo más reciente (del caso o de este equipo). Todo se guarda solo aquí; al terminar toca «💾 Guardar en la plataforma» y pégalo con 📥.');
 else if(ACTUALIZADA) banner('✨ Tu ejercicio se actualizó con lo que trabajaron en sesión.');
 $('whatsapp').addEventListener('click', e=>{ const msg = mensajeSana();

@@ -6,13 +6,15 @@
 (function(){ if(window.__sesSegura) return; window.__sesSegura=1;
   var H=location.hash||'', SES=/\.p$/.test(H), VISTA=/^#vista/i.test(H), t0=Date.now(), sucio=false;
   try{ var P=Storage.prototype, orig=P.setItem, hecho={};
-    P.setItem=function(k,v){ try{ if(this===window.localStorage&&/^sana_/.test(k)&&!/:hist$|_enlace$/.test(k)){
+    P.setItem=function(k,v){ try{ if(this===window.localStorage&&/^sana_/.test(k)&&!/:hist$|_enlace$|^sana_buzon_/.test(k)&&!window.__buzonRecargando){
         if(!hecho[k]){ hecho[k]=1; var prev=this.getItem(k); if(prev&&prev!==v){ var h=JSON.parse(this.getItem(k+':hist')||'[]'); h.unshift({g:Date.now(),s:prev}); orig.call(this,k+':hist',JSON.stringify(h.slice(0,15))); } }
-        if(Date.now()-t0>1500&&window.__sesMarcar) window.__sesMarcar(); } }catch(e){}
+        if(Date.now()-t0>1500){ if(window.__sesMarcar) window.__sesMarcar(); if(window.__buzonCambio) window.__buzonCambio(); } } }catch(e){}
       return orig.call(this,k,v); };
   }catch(e){}
+  /* Buzón cifrado: guarda solo y trae lo más reciente de otros equipos (se carga después del recurso) */
+  if(!VISTA){ var bz=document.createElement('script'); bz.src='/actividades/buzon.js?v=1'; bz.defer=true; document.head.appendChild(bz); }
   if(!SES||VISTA) return;
-  window.addEventListener('beforeunload',function(e){ if(sucio){ e.preventDefault(); e.returnValue=''; } });
+  window.addEventListener('beforeunload',function(e){ if(sucio&&!window.__buzonRecargando){ e.preventDefault(); e.returnValue=''; } });
   function montar(){ if(document.getElementById('sesFlot')) return;
     var dest=document.getElementById('plataforma')||document.getElementById('btnCopiar')||[].slice.call(document.querySelectorAll('button,a')).filter(function(b){ return /Copiar para enviar/.test(b.textContent); })[0];
     if(!dest) return;

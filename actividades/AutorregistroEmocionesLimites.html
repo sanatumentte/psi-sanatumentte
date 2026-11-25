@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>/* Sesión segura (norma 2026-11-25): nada se pierde. Respaldo antes de reemplazar (últimas 15 en <clave>:hist),
+   en sesión (.p) botón fijo «💾 Guardar en la plataforma» y aviso al cerrar si hay cambios sin pasar. */
+(function(){ if(window.__sesSegura) return; window.__sesSegura=1;
+  var H=location.hash||'', SES=/\.p$/.test(H), VISTA=/^#vista/i.test(H), t0=Date.now(), sucio=false;
+  try{ var P=Storage.prototype, orig=P.setItem, hecho={};
+    P.setItem=function(k,v){ try{ if(this===window.localStorage&&/^sana_/.test(k)&&!/:hist$|_enlace$/.test(k)){
+        if(!hecho[k]){ hecho[k]=1; var prev=this.getItem(k); if(prev&&prev!==v){ var h=JSON.parse(this.getItem(k+':hist')||'[]'); h.unshift({g:Date.now(),s:prev}); orig.call(this,k+':hist',JSON.stringify(h.slice(0,15))); } }
+        if(Date.now()-t0>1500&&window.__sesMarcar) window.__sesMarcar(); } }catch(e){}
+      return orig.call(this,k,v); };
+  }catch(e){}
+  if(!SES||VISTA) return;
+  window.addEventListener('beforeunload',function(e){ if(sucio){ e.preventDefault(); e.returnValue=''; } });
+  function montar(){ if(document.getElementById('sesFlot')) return;
+    var dest=document.getElementById('plataforma')||document.getElementById('btnCopiar')||[].slice.call(document.querySelectorAll('button,a')).filter(function(b){ return /Copiar para enviar/.test(b.textContent); })[0];
+    if(!dest) return;
+    var b=document.createElement('button'); b.id='sesFlot'; b.type='button';
+    b.style.cssText='position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 18px;background:#155e6b;color:#fff;font:700 .95rem Nunito,system-ui,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer;max-width:calc(100vw - 28px)';
+    b.innerHTML='💾 <span>Guardar en la plataforma</span>'; document.body.appendChild(b);
+    var lbl=b.querySelector('span');
+    window.__sesMarcar=function(){ sucio=true; lbl.textContent='Guardar en la plataforma (hay cambios)'; b.style.background='#b5654a'; };
+    var listo=function(){ sucio=false; lbl.textContent='Copiado: pégalo en la plataforma con 📥'; b.style.background='#2e7d6b'; };
+    dest.addEventListener('click',listo);
+    b.onclick=function(){ dest.click(); };
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(montar,600); }); else setTimeout(montar,600);
+})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mi autorregistro</title>
@@ -236,7 +263,7 @@ let ACTUALIZADA = false;
 if(ENL[3]){ try{ const b=ENL[3].replace(/-/g,'+').replace(/_/g,'/'), bin=atob(b+'==='.slice((b.length+3)%4));
   const o=JSON.parse(new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))));
   const vacio=!Object.keys(estado.campos||{}).length&&!(estado.emo||[]).some(lleno)&&!(estado.lim||[]).some(lleno);
-  if(o&&typeof o==='object'&&(EN_SESION||vacio||(+o._t||0)>(+estado._t||0))){ ACTUALIZADA=!vacio&&!EN_SESION; estado=Object.assign(base(), o); localStorage.setItem(KEY, JSON.stringify(estado)); } }catch(e){} }
+  if(o&&typeof o==='object'&&(vacio||(+o._t||0)>(+estado._t||0))){ ACTUALIZADA=!vacio&&!EN_SESION; estado=Object.assign(base(), o); localStorage.setItem(KEY, JSON.stringify(estado)); } }catch(e){} }
 const guardar = ()=>{ estado._t = Date.now(); try{ localStorage.setItem(KEY, JSON.stringify(estado)); }catch(e){} if(actual===1) pintarTira(); };
 const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const C = k => String(estado.campos[k]==null?'':estado.campos[k]).trim();
@@ -502,7 +529,7 @@ function lineaCrisis(){ let z=''; try{ z=Intl.DateTimeFormat().resolvedOptions()
     [/^(Europe\/Madrid|Atlantic\/Canary|Africa\/Ceuta)$/,'la línea 024 (España)'],[/^America\/Guayaquil$/,'la línea 911 (Ecuador)'],[/^America\/Lima$/,'la Línea 113, opción 5 (Perú)'],[/^America\/Santiago$/,'la línea *4141 (Chile)']];
   const m=L.find(([r])=>r.test(z)); return m?m[1]:'la línea de emergencias de tu país'; }
 document.querySelectorAll('.lineaCrisis').forEach(e=>e.textContent=lineaCrisis());
-if(EN_SESION||ACTUALIZADA) document.body.insertAdjacentHTML('afterbegin', `<div style="background:#e7f1f0;border-bottom:1px solid #b9d6d2;color:#1f3d45;padding:10px 16px;font:600 .92rem Nunito,sans-serif;text-align:center">${EN_SESION?'🩺 <b>Modo sesión:</b> se abrió con lo último guardado en el caso. Al terminar, toca «📋 Copiar para enviar a mi psicóloga» y pégalo en la plataforma con 📥.':'✨ <b>Tu registro se actualizó</b> con lo más reciente que trabajaste con tu psicóloga.'}</div>`);
+if(EN_SESION||ACTUALIZADA) document.body.insertAdjacentHTML('afterbegin', `<div style="background:#e7f1f0;border-bottom:1px solid #b9d6d2;color:#1f3d45;padding:10px 16px;font:600 .92rem Nunito,sans-serif;text-align:center">${EN_SESION?'🩺 <b>Modo sesión:</b> se abrió con lo más reciente (del caso o de este equipo). Al terminar, toca «📋 Copiar para enviar a mi psicóloga» y pégalo en la plataforma con 📥.':'✨ <b>Tu registro se actualizó</b> con lo más reciente que trabajaste con tu psicóloga.'}</div>`);
 document.getElementById('whatsapp').addEventListener('click', e=>{ e.currentTarget.href = 'https://api.whatsapp.com/send?phone='+MI_WA+'&text='+encodeURIComponent(mensajeSana()); });
 document.getElementById('plataforma').onclick = ()=>{
   const msg = mensajeSana();

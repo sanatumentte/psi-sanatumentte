@@ -12,7 +12,7 @@
       return orig.call(this,k,v); };
   }catch(e){}
   /* Buzón cifrado: guarda solo y trae lo más reciente de otros equipos (se carga después del recurso) */
-  if(!VISTA){ var bz=document.createElement('script'); bz.src='/actividades/buzon.js?v=1'; bz.defer=true; document.head.appendChild(bz); }
+  if(!VISTA){ var bz=document.createElement('script'); bz.src='/actividades/buzon.js?v=2'; bz.defer=true; document.head.appendChild(bz); }
   if(!SES||VISTA) return;
   window.addEventListener('beforeunload',function(e){ if(sucio&&!window.__buzonRecargando){ e.preventDefault(); e.returnValue=''; } });
   function montar(){ if(document.getElementById('sesFlot')) return;

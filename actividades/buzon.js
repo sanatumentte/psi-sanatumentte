@@ -45,9 +45,12 @@
 
   /* ---- Bajar al abrir: si en otro equipo hay algo más nuevo, se trae y se recarga una vez ---- */
   listo.then(function(){ return fetch(URL_BUZON+'?id='+ID).then(function(r){ return r.json(); }); }).then(function(r){
-    if(!r || !r.t || !r.eq) { if((+ls.getItem(LC)||0) > (+ls.getItem(LT)||0)) subir(); return; }
-    var local = Math.max(+ls.getItem(LC)||0, +ls.getItem(LT)||0);
-    if(r.t <= local){ if((+ls.getItem(LC)||0) > r.t) subir(); return; }
+    /* hora de lo guardado en este equipo (también lo anterior al buzón: _t dentro de cada clave) */
+    var tDatos=0, ks=misClaves(); Object.keys(ks).forEach(function(k){ try{ var o=JSON.parse(ks[k]); if(o&&+o._t>tDatos) tDatos=+o._t; }catch(e){} });
+    var hayDatos=Object.keys(ks).length>0;
+    if(!r || !r.t || !r.eq){ if(hayDatos){ if(!(+ls.getItem(LC))) ls.setItem(LC, String(tDatos||Date.now())); subir(); } return; }
+    var local = Math.max(+ls.getItem(LC)||0, +ls.getItem(LT)||0, tDatos);
+    if(r.t <= local){ if(local > r.t && hayDatos){ ls.setItem(LC, String(local)); subir(); } return; }
     return descifrar(String(r.eq).replace(/^SBD1\./,'')).then(function(o){
       var marca='buzonRecarga:'+tok+':'+r.t; if(sessionStorage.getItem(marca)) return;
       window.__buzonRecargando = true;

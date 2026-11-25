@@ -266,8 +266,12 @@ let ACTUALIZADA = false;
 if(ENL[3]&&!VISTA){ try{ const b=ENL[3].replace(/-/g,'+').replace(/_/g,'/'), bin=atob(b+'==='.slice((b.length+3)%4));
   const o=JSON.parse(new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))));
   const vacio=!estado.campos.fecha&&!Object.keys(estado.dias||{}).length;
-  if(o&&typeof o==='object'&&(EN_SESION||vacio||(+o._t||0)>(+estado._t||0))){ ACTUALIZADA=!vacio&&!EN_SESION; estado=Object.assign(base(), o); try{ localStorage.setItem(KEY, JSON.stringify(estado)); }catch(e){} } }catch(e){} }
-const guardar = ()=>{ if(VISTA) return; estado._t = Date.now(); try{ localStorage.setItem(KEY, JSON.stringify(estado)); }catch(e){} };
+  /* Gana SIEMPRE la versión más reciente (también en sesión): lo llenado en este equipo nunca se pisa con algo más viejo. */
+  if(o&&typeof o==='object'&&(vacio||(+o._t||0)>(+estado._t||0))){ ACTUALIZADA=!vacio&&!EN_SESION; if(!vacio) respaldar(estado); estado=Object.assign(base(), o); try{ localStorage.setItem(KEY, JSON.stringify(estado)); }catch(e){} } }catch(e){} }
+/* Respaldo: antes de reemplazar lo guardado, queda una copia (últimas 15) en KEY:hist */
+function respaldar(s){ try{ const h=JSON.parse(localStorage.getItem(KEY+':hist')||'[]'); h.unshift({g:Date.now(),s}); localStorage.setItem(KEY+':hist', JSON.stringify(h.slice(0,15))); }catch(e){} }
+let SIN_ENVIAR = false;
+const guardar = ()=>{ if(VISTA) return; estado._t = Date.now(); SIN_ENVIAR = true; try{ localStorage.setItem(KEY, JSON.stringify(estado)); }catch(e){} if(window.marcarSinEnviar) marcarSinEnviar(); };
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const $ = id => document.getElementById(id);
 
@@ -606,7 +610,7 @@ function lineaCrisis(){ let z=''; try{ z=Intl.DateTimeFormat().resolvedOptions()
 document.querySelectorAll('.lineaCrisis').forEach(e=>e.textContent=lineaCrisis());
 const banner = t => document.body.insertAdjacentHTML('afterbegin', `<div style="background:#e7f1f0;border-bottom:1px solid #b9d6d2;color:#1f3d45;padding:10px 16px;font:600 .92rem Nunito,sans-serif;text-align:center">${t}</div>`);
 if(VISTA){ banner('👁 <b>Vista previa con ejemplo:</b> así lo ve el paciente. Aquí no se guarda ni se envía nada.'); document.querySelectorAll('.envio').forEach(e=>e.style.display='none'); }
-else if(EN_SESION) banner('🩺 <b>Modo sesión:</b> se abrió con lo último guardado en el caso. Al terminar, toca «📋 Copiar para enviar a mi psicóloga» y pégalo en la plataforma con 📥.');
+else if(EN_SESION) banner('🩺 <b>Modo sesión:</b> se abrió con lo más reciente (del caso o de este equipo). Todo se guarda solo aquí; al terminar toca «💾 Guardar en la plataforma» y pégalo con 📥.');
 else if(ACTUALIZADA) banner('✨ Tu ejercicio se actualizó con lo que trabajaron en sesión.');
 $('whatsapp').addEventListener('click', e=>{ const msg = mensajeSana();
   if(msg.length > WA_MAX){ e.preventDefault(); try{ navigator.clipboard.writeText(msg); }catch(err){}
@@ -616,8 +620,18 @@ $('whatsapp').addEventListener('click', e=>{ const msg = mensajeSana();
 $('plataforma').onclick = ()=>{
   const msg = mensajeSana(), av = $('platAviso'); av.style.display='block';
   const manual = ()=>{ av.innerHTML='Copia este texto y envíalo por WhatsApp a tu psicóloga:<textarea style="width:100%;min-height:90px;margin-top:6px" readonly>'+msg+'</textarea>'; };
-  try{ navigator.clipboard.writeText(msg).then(()=>{ av.innerHTML='✅ Copiado. Pégalo en el chat de WhatsApp con tu psicóloga.'; }, manual); }catch(e){ manual(); }
+  try{ navigator.clipboard.writeText(msg).then(()=>{ av.innerHTML='✅ Copiado. Pégalo en el chat de WhatsApp con tu psicóloga.'; enviado(); }, manual); }catch(e){ manual(); }
 };
+/* Modo sesión: botón fijo «💾 Guardar en la plataforma» + aviso si se cierra sin guardar */
+function enviado(){ SIN_ENVIAR=false; const f=$('sesFlot'); if(f){ f.querySelector('span').textContent='✅ Copiado: pégalo en la plataforma con 📥'; f.style.background='#2e7d6b'; } }
+if(EN_SESION){
+  document.body.insertAdjacentHTML('beforeend','<button id="sesFlot" type="button" style="position:fixed;right:14px;bottom:14px;z-index:9999;border:0;border-radius:999px;padding:12px 18px;background:#155e6b;color:#fff;font:700 .95rem Nunito,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer;max-width:calc(100vw - 28px)">💾 <span>Guardar en la plataforma</span></button>');
+  window.marcarSinEnviar=()=>{ const f=$('sesFlot'); f.querySelector('span').textContent='Guardar en la plataforma (hay cambios)'; f.style.background='#b5654a'; };
+  $('sesFlot').onclick=()=>{ const msg=mensajeSana();
+    const ok=()=>{ enviado(); }, manual=()=>{ const av=$('platAviso'); av.style.display='block'; av.innerHTML='Copia este texto y pégalo en la plataforma con 📥:<textarea style="width:100%;min-height:90px;margin-top:6px" readonly>'+msg+'</textarea>'; av.scrollIntoView({block:'center'}); };
+    try{ navigator.clipboard.writeText(msg).then(ok, manual); }catch(e){ manual(); } };
+  window.addEventListener('beforeunload', e=>{ if(SIN_ENVIAR){ e.preventDefault(); e.returnValue=''; } });
+}
 function imprimir(){ $('pdf').innerHTML = armarDoc(); setTimeout(()=>window.print(), 150); }
 $('imprimir').onclick = imprimir;
 $('borrar').onclick = ()=>{

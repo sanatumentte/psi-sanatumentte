@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Mi libro de terapia · Sana tu Mentte</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Caveat:wght@600&family=Nunito:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="motor.css">
+<style>
+  /* ---------- Libro de terapia: armar (✏️) y vista previa (👁) ---------- */
+  .lb-top{position:sticky;top:0;z-index:30;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:rgba(251,246,239,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--beige)}
+  .lb-top b{font-family:"DM Serif Display",Georgia,serif;font-weight:400;color:var(--petroleo);font-size:1.2rem;flex:1}
+  .lb-modo{display:flex;background:#fff;border:2px solid var(--beige);border-radius:999px;padding:3px}
+  .lb-modo button{border:0;background:none;font:inherit;font-weight:800;color:var(--petroleo);padding:7px 14px;border-radius:999px;cursor:pointer}
+  .lb-modo button[aria-pressed="true"]{background:var(--petroleo);color:#fff}
+  .lb-wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px;display:grid;gap:18px}
+  .lb-card{background:#fff;border:1px solid var(--beige);border-radius:18px;padding:16px 18px;display:grid;gap:10px}
+  .lb-card h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400;color:var(--petroleo);font-size:1.45rem;margin:0}
+  .lb-card .sub{color:var(--suave);font-size:.9rem;margin:0}
+  .lb-card label{font-weight:800;color:var(--petroleo);font-size:.9rem}
+  .lb-in{width:100%;border:2px solid var(--beige);border-radius:12px;padding:9px 12px;font:inherit;color:var(--tinta);background:var(--papel)}
+  textarea.lb-in{min-height:90px;resize:vertical}
+  .lb-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .lb-row > *{flex:1 1 200px}
+  .lb-ej{border:2px solid var(--beige);border-radius:16px;padding:12px 14px;display:grid;gap:10px;background:#fffdf9}
+  .lb-ej h3{margin:0;color:var(--petroleo);font-size:1.05rem}
+  .lb-seg{display:flex;flex-wrap:wrap;gap:6px}
+  .lb-seg button{border:2px solid var(--beige);background:#fff;color:var(--petroleo);border-radius:999px;padding:6px 12px;font:inherit;font-weight:800;font-size:.85rem;cursor:pointer}
+  .lb-seg button[aria-pressed="true"]{background:var(--verde);border-color:var(--verde);color:#fff}
+  .lb-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .lb-th{display:grid;gap:6px;align-content:start}
+  .lb-th .mini{height:200px;overflow:hidden;border-radius:10px;border:2px solid var(--beige);background:#fff;position:relative;pointer-events:none}
+  .lb-th .mini > div{width:600px;transform:scale(.25);transform-origin:top left}
+  .lb-th.on .mini{border-color:var(--verde);box-shadow:0 0 0 3px rgba(4,117,120,.2)}
+  .lb-th small{font-weight:700;color:var(--suave);font-size:.78rem;line-height:1.2}
+  .lb-th > button{border:2px solid var(--beige);background:#fff;color:var(--petroleo);border-radius:999px;padding:5px 8px;font:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+  .lb-th.on > button{background:var(--verde);border-color:var(--verde);color:#fff}
+  .lb-qa{display:grid;gap:4px}.lb-qa b{color:var(--verde);font-size:.9rem}
+  .lb-x{border:0;background:none;color:#b0413e;font-weight:800;cursor:pointer;font:inherit;font-size:.85rem;justify-self:end}
+  .lb-cat{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;max-height:260px;overflow:auto}
+  .lb-cat button{text-align:left;border:2px solid var(--beige);background:#fff;border-radius:12px;padding:8px 10px;font:inherit;font-weight:700;color:var(--tinta);cursor:pointer}
+  /* ---------- Vista previa: páginas del libro ---------- */
+  .lb-book{display:grid;gap:22px;justify-items:center}
+  .lb-pg{width:min(100%,720px);background:#fffdf9;border-radius:6px;box-shadow:0 12px 34px rgba(22,90,108,.14);padding:34px 38px 46px;position:relative;display:grid;gap:14px;align-content:start;min-height:500px}
+  .lb-pg .pie{position:absolute;left:38px;right:38px;bottom:14px;display:flex;justify-content:space-between;font-size:.72rem;color:var(--suave);font-weight:700}
+  .lb-pg h2.cap{font-family:"DM Serif Display",Georgia,serif;font-weight:400;color:var(--terracota);font-size:1.9rem;margin:0;border-bottom:3px solid var(--arena);padding-bottom:4px;justify-self:start}
+  .lb-pg h3.ej{margin:0;color:var(--petroleo);font-size:1.15rem}.lb-pg h3.ej small{color:var(--suave);font-weight:700;font-size:.8rem}
+  .lb-box{border:1px solid var(--beige);border-radius:14px;padding:12px 16px;background:#fff}
+  .lb-box h4{margin:0 0 4px;color:var(--petroleo);font-size:1rem}
+  .lb-box .ed{white-space:pre-wrap;outline:none;border-radius:8px;padding:2px 4px;margin:0 -4px}
+  .lb-box .ed:hover{background:#f6f1e8}.lb-box .ed:focus{background:#fff;box-shadow:0 0 0 2px var(--salvia)}
+  .lb-box.alerta{background:#fdf3ec}.lb-box.tools{background:#eef5f3}.lb-box.oro{background:#fbf1dc}
+  .lb-cover{background:linear-gradient(160deg,#f5e8da,#fbf6ef 60%,#e3ecea);text-align:center;justify-items:center;align-content:center;min-height:860px;overflow:hidden}
+  .lb-cover .eyebrow{font-family:"Caveat",cursive;font-size:1.6rem;color:var(--terracota)}
+  .lb-cover h1{font-family:"DM Serif Display",Georgia,serif;font-weight:400;color:var(--petroleo);font-size:3rem;margin:0}
+  .lb-cover .nom{font-family:"DM Serif Display",Georgia,serif;font-style:italic;color:var(--verde);font-size:1.7rem}
+  .lb-cover .blob{position:absolute;border-radius:50%}
+  .lb-pg .pg{box-shadow:none;border:1px solid var(--beige)}
+  .lb-pg .sec{box-shadow:none;width:auto!important;max-width:none!important;margin-left:0!important}
+  .lb-pg .ar-big,.lb-pg .noprint-in-book{display:none!important}
+  .lb-scene{border-radius:16px;padding:14px 16px;display:grid;gap:10px}
+  .lb-scene .ic{font-size:2.4rem;line-height:1}
+  .lb-qa .ed{background:rgba(255,255,255,.75);border-radius:10px;padding:8px 10px;white-space:pre-wrap;outline:none}
+  .lb-qa .ed:focus{box-shadow:0 0 0 2px var(--salvia);background:#fff}
+  .lb-aviso{font-size:.8rem;color:var(--suave);font-style:italic}
+  /* Computador: ocupa la pantalla */
+  @media (min-width:1200px){ .lb-wrap{max-width:min(1240px,94vw)} }
+  @media print{
+    @page{size:A4;margin:10mm}
+    body{background:#fff}.lb-top,.lb-armar{display:none!important}
+    .lb-wrap{padding:0;max-width:none}.lb-book{gap:0}
+    .lb-pg{box-shadow:none;width:100%;break-after:page;border-radius:0;min-height:auto}
+    .lb-cover{min-height:265mm}
+    .pg textarea.f,.pg input.f{border-color:transparent!important;background:transparent!important}
+    .sec textarea.f{border-color:var(--beige)}
+    figure,.lb-box,.sec,.lb-scene{break-inside:avoid}
+  }
+</style></head><body>
+<script src="motor.js"></script>
+<div class="lb-top"><b>📖 Mi libro de terapia <small id="ejemplo" hidden style="font-family:Nunito;font-size:.75rem;color:var(--terracota)">EJEMPLO CON DATOS INVENTADOS</small></b>
+  <div class="lb-modo"><button id="mArmar" aria-pressed="true">✏️ Armar</button><button id="mVer" aria-pressed="false">👁 Vista previa</button></div>
+  <button class="btn teal" id="bPdf" style="padding:8px 16px">🖨️ Guardar PDF</button></div>
+<div class="lb-wrap"><div id="vista"></div></div>
+<script>
+/* Datos: la app los envía en el enlace (#L.<base64>). Sin enlace se muestra un paciente de PRUEBA inventado. */
+const DEMO={id:'demo',nombre:'Prueba',inicio:'2026-03-02',cierre:'2026-10-01',
+  sec:{camino:'Llegué porque la ansiedad no me dejaba estudiar ni dormir. Me propuse volver a disfrutar mis días sin huir de lo que me asusta.',
+    logros:'• Volví a presentar exámenes sin salir del salón.\n• Aprendí a hablarme con más amabilidad.\n• Retomé el dibujo los fines de semana.',
+    herramientas:'• Respiración 4-6: para bajar la activación — cuando siento el pecho apretado.\n• Registro de pensamientos: para revisar lo que pienso — cuando una emoción me sube mucho.\n• Mi escala de ansiedad: para saber qué hacer según mi nivel.',
+    senales:'• Empiezo a cancelar planes → hago igual una cosa pequeña.\n• Duermo mal varios días → vuelvo a mi rutina de noche.',
+    maldia:'Los altibajos son normales y pasan. Si tengo un mal día, respiro, reviso este libro y hago una sola cosa que me cuide.',
+    valores:'Me importa mi familia, aprender y crear. Próximo paso: inscribirme al curso de ilustración.',
+    autosesion:'Una vez a la semana, 15 minutos:\n• ¿Cómo estuvo mi semana? ¿Qué salió bien?\n• ¿Apareció alguna señal de alerta? ¿Qué herramienta uso?\n• ¿Qué me propongo para esta semana?',
+    noOlvidar:'• Mis emociones pasan.\n• Puedo con lo difícil, paso a paso.\n• Pedir ayuda también es valentía.',
+    ayuda:'Vuelvo a pedir ayuda si las señales duran más de dos semanas aunque use mis herramientas, si me aíslo o si tengo pensamientos de hacerme daño.',
+    mensaje:'Fue un honor acompañarte. Todo lo que hay en este libro lo construiste tú.'},
+  ej:[
+    {id:'e1',titulo:'Mi árbol de la vida',fecha:'2026-04-01',fichas:['arbol'],s:{ar_raices:'La finca de mis abuelos\nLa música de casa',ar_suelo:'Mi carrera\nCaminar los domingos',ar_tronco:'Soy constante\nEscucho\nMe río de mí',ar_hojas:'Mamá\nMi hermana\nLaura\nEl profe Andrés',ar_frutos:'Paciencia\nCreatividad\nSer buena amiga',ar_ramas:'Ilustrar un libro\nViajar con mi mamá',ar_tormentas:'Ansiedad en exámenes\nPerder a mi abuelo',ar_pasado:'Crecí en el campo y aprendí a ser fuerte.',ar_presente:'Hoy estudio y me cuido más.',ar_futuro:'Me veo ilustrando y tranquila.'}},
+    {id:'e2',titulo:'Mi escala de ansiedad',fecha:'2026-05-10',fichas:['escala'],s:{'@Hoy me siento en el nivel':'es20n1',es21n0:'Sigo con mi día y me felicito.',es21n1:'Salgo a caminar 10 minutos.',es21n2:'Respiración 4-6 y me hablo con calma.',es21n3:'Llamo a mi hermana y uso mi tarjeta.',es21n4:'Aplico mi plan y pido ayuda.'}},
+    {id:'e3',titulo:'Mi iceberg de la ansiedad',fecha:'2026-04-20',fichas:['iceberg'],s:{ai6ves:'Me quedo callada, sudo, cancelo planes.',ai6nov:'Miedo a fallar, pensar que no soy suficiente, cansancio, presión por ser perfecta.',ai4pen:'«Si me equivoco, todos lo van a notar».',ai4com:'Evitar exámenes orales.'}},
+    {id:'e4',titulo:'Registro de pensamientos',fecha:'2026-06-02',escena:['☁️','#e9f1f0'],res:[{label:'Situación',val:'Me corrigieron en clase delante de todos.'},{label:'Pensamiento automático',val:'«Soy un fracaso» (80 %)'},{label:'Pensamiento alternativo',val:'Una corrección no define quién soy; estoy aprendiendo (70 %).'}]},
+    {id:'e6',titulo:'Ansiedad: libro de actividades',fecha:'2026-07-01',fichas:['@ansiedad'],s:{p6ves:'Me quedo callada y sudo.',p6nov:'Miedo a fallar y a no ser suficiente.',p30:'Aprendí que la ansiedad no es mi enemiga: es una alarma que puedo calmar.'}},
+    {id:'e5',titulo:'Registro semanal de emociones',fecha:'2026-06-10',res:[{label:'Registros que hice',val:'12'},{label:'Emociones que aprendí a reconocer',val:'Miedo, culpa, alegría, calma'}]}
+  ]};
+const SECS=[['camino','Mi camino',''],['logros','Lo que logré (y lo hice yo)',''],['herramientas','Mi caja de herramientas','tools'],['senales','Mis señales de alerta y qué hago','alerta'],
+  ['maldia','Si tengo un mal día','alerta'],['valores','Hacia dónde voy',''],['autosesion','Mis sesiones conmigo',''],['ayuda','Cuándo pedir ayuda','']];
+let D=DEMO;
+try{ const h=decodeURIComponent(location.hash.slice(1)); if(h.startsWith('L.')) D=deB64(h.slice(2)); }catch(_){}
+const KEY='sana_libro_'+(D.id||'demo');
+let B; try{ B=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(_){}
+const nuevoEj=e=>({id:e.id,modo:e.modo||(e.fichas?'diseno':'texto'),pags:null,s:JSON.parse(JSON.stringify(e.s||{})),res:JSON.parse(JSON.stringify(e.res||[]))});
+const desdeApp=()=>({nombre:D.nombre||'',inicio:D.inicio||'',cierre:D.cierre||'',sec:Object.assign({},D.sec),secOff:Object.assign({},D.secOff||{}),ej:D.ej.map(nuevoEj),extra:[]});
+if(!B) B=desdeApp();
+else D.ej.forEach(e=>{ if(!B.ej.some(x=>x.id===e.id)) B.ej.push(nuevoEj(e)); });   // ejercicios nuevos que llegaron desde la app
+const guardar=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(B)); }catch(_){} };
+const ejD=id=>D.ej.find(e=>e.id===id);
+let MODO='armar';
+
+/* ---------- Cargar las fichas (sus páginas quedan en PAG con p.ficha = clave) ---------- */
+const CARGADAS=new Set();
+const cargarFicha=k=>CARGADAS.has(k)?Promise.resolve():(CARGADAS.add(k), k==='@ansiedad'?cargarAnsiedad():new Promise(ok=>{ const s=document.createElement('script'); s.src=k+'.js'; s.onload=ok; s.onerror=ok; document.body.appendChild(s); }));
+/* Cartilla «Ansiedad: libro de actividades» (30 páginas): se leen sus páginas de su propio index.html, con sus imágenes */
+async function cargarAnsiedad(){
+  for(const base of ['../Cartilla-Ansiedad-GitHub/ansiedad/','../../Cartilla-Ansiedad-GitHub/ansiedad/']){
+    try{ const r=await fetch(base+'index.html'); if(!r.ok) continue; const t=await r.text();
+      const a=t.indexOf('const P=(n,t,hint,f)=>'), b=t.indexOf('/* ---------- Estado guardado'); if(a<0||b<0) continue;
+      const cuerpo=t.slice(t.indexOf('\n',a)+1,b);
+      FICHAS.push({clave:'@ansiedad',titulo:'Ansiedad: libro de actividades'});
+      new Function('P',cuerpo)((n,tt,hint,f)=>PAG.push({n:PAG.length+1,t:tt,hint,f:f||[],ficha:'@ansiedad',img:base+'p'+String(n).padStart(2,'0')+'.jpg',W:648,H:792}));
+      return; }catch(e){ console.warn('cartilla ansiedad',e); } } }
+const pagsDe=claves=>PAG.filter(p=>claves.includes(p.ficha));
+const fichaDe=k=>FICHAS.find(f=>f.clave===k)||{};
+const idPag=p=>p.ficha+'#'+pagsDe([p.ficha]).indexOf(p);
+const pagPorId=id=>{ const [k,i]=id.split('#'); return pagsDe([k])[+i]; };
+
+/* ---------- Pintar una página de ficha con un estado S (mismo diseño que la ficha) ---------- */
+const activo=(f,S)=>f.k==='x'?!!(f.activo&&f.activo(S)):f.k==='nivel'?S['@'+f.g]===f.id:(f.k==='ta'||f.k==='in')?!!String(S[f.id]||'').trim():!!S[f.id];
+const pos=f=>`--x:${f.x};--y:${f.y};--w:${f.w};--h:${f.h}${f.fs?';--fs:'+f.fs:''}${f.lh?';--lh:calc('+f.lh+'*var(--u))':''}`;
+function campo(f,S){ const v=S[f.id];
+  if(f.k==='x') return `<div class="fx" data-fid="${f.id}">${f.html(S)}</div>`;
+  if(f.k==='ta') return `<textarea class="f ${f.cls||''}" data-fid="${f.id}" style="${pos(f)}" placeholder=" ">${esc(v||'')}</textarea>`;
+  if(f.k==='in') return `<input class="f${f.cls?' '+f.cls:''}" data-fid="${f.id}" style="${pos(f)}" placeholder=" " value="${esc(v||'')}">`;
+  if(!['chk','hl','oval','nivel','pinta'].includes(f.k)) return '';
+  return `<button type="button" class="f ${f.k}" data-fid="${f.id}" style="${pos(f)}" aria-pressed="${activo(f,S)}">${f.k==='chk'?`<span class="mk" style="left:calc(${f.mx||2}*var(--u))">✓</span>`:''}</button>`; }
+function pintarPagina(p,S,cont){
+  const el=document.createElement('div'); el.dataset.pid=idPag(p);
+  if(p.html){ el.innerHTML=`<section class="sec ${p.cls==='noprint'?'':(p.cls||'')}">${p.html}</section>`; cont.appendChild(el);
+    p.f.forEach(f=>{ const x=el.querySelector('#'+CSS.escape(f.id)); if(!x) return; x.dataset.fid=f.id;
+      if(f.k==='ta'||f.k==='in') x.value=S[f.id]||''; else if(f.k!=='x') x.setAttribute('aria-pressed',activo(f,S)); });
+    const fi=fichaDe(p.ficha); if(fi.alCambiar) try{ fi.alCambiar(S); }catch(_){}
+    el.querySelectorAll('[id]').forEach(x=>x.removeAttribute('id'));   // así otra copia de la misma ficha no choca
+  } else { el.innerHTML=`<figure><div class="pg" style="--W:${p.W};--H:${p.H}"><img src="${p.img}" alt="${esc(p.t)}">${p.f.map(f=>campo(f,S)).join('')}</div></figure>`; cont.appendChild(el); }
+  return el; }
+/* Edición directa sobre las páginas: lo que cambies queda solo en el libro */
+function editable(cont,S,alCambiar){
+  const PF={}; PAG.forEach(p=>p.f.forEach(f=>PF[f.id]=f));
+  cont.addEventListener('input',e=>{ const x=e.target.closest('[data-fid]'); if(!x||!('value' in x)) return; S[x.dataset.fid]=x.value; guardar(); });
+  cont.addEventListener('change',()=>alCambiar&&alCambiar());
+  cont.addEventListener('click',e=>{ const b=e.target.closest('button.f[data-fid]'); if(!b) return; const f=PF[b.dataset.fid]; if(!f) return; const on=b.getAttribute('aria-pressed')!=='true';
+    if(f.k==='nivel'){ cont.querySelectorAll('button.f.nivel').forEach(x=>{ const g=PF[x.dataset.fid]; if(g&&g.g===f.g) x.setAttribute('aria-pressed',x===b&&on); }); S['@'+f.g]=on?f.id:''; }
+    else { b.setAttribute('aria-pressed',on); S[f.id]=on; } guardar(); }); }
+
+/* ================= ✏️ ARMAR ================= */
+function armar(){
+  const v=document.getElementById('vista');
+  v.innerHTML=`<div class="lb-armar" style="display:grid;gap:18px">
+  <div class="lb-card"><h2>Portada</h2><div class="lb-row">
+    <div><label>Nombre</label><input class="lb-in" data-b="nombre" value="${esc(B.nombre)}"></div>
+    <div><label>Inicio del proceso</label><input type="date" class="lb-in" data-b="inicio" value="${esc(B.inicio)}"></div>
+    <div><label>Cierre</label><input type="date" class="lb-in" data-b="cierre" value="${esc(B.cierre)}"></div></div></div>
+  <div class="lb-card"><h2>Lo que aprendí</h2><p class="sub">Todo se puede cambiar. Desmarca una sección para que no salga.</p>
+    ${SECS.concat([['noOlvidar','Cosas que no debo olvidar','oro'],['mensaje','Mensaje de tu psicóloga','']]).map(([k,t])=>`<div><label><input type="checkbox" data-off="${k}" ${B.secOff[k]?'':'checked'}> ${t}</label>
+      <textarea class="lb-in" data-sec="${k}">${esc(B.sec[k]||'')}</textarea></div>`).join('')}</div>
+  <div class="lb-card"><h2>Sus ejercicios</h2><p class="sub">Elige para cada uno: <b>🎨 con su diseño</b> (eliges qué hojas van) o <b>📝 como está</b> (solo sus respuestas en texto).</p><div id="ejs" style="display:grid;gap:12px"></div></div>
+  <div class="lb-card"><h2>Páginas agregadas</h2><p class="sub">Agrega páginas que no estén en sus ejercicios: una página libre o una hoja de cualquier ficha.</p>
+    <div id="extras" style="display:grid;gap:12px"></div>
+    <div class="lb-seg"><button id="addLibre">📝 Página libre</button><button id="addFicha">📄 Hoja de una ficha</button></div><div id="cat"></div></div>
+  <div style="text-align:center;display:grid;gap:10px;justify-items:center"><button class="btn teal" id="irVer">👁 Ver vista previa</button><button class="btn sec" id="reset" style="font-size:.85rem">↺ Volver a cargar todo desde la app (borra los cambios del libro)</button></div></div>`;
+  v.querySelectorAll('[data-b]').forEach(x=>x.oninput=()=>{ B[x.dataset.b]=x.value; guardar(); });
+  v.querySelectorAll('[data-sec]').forEach(x=>x.oninput=()=>{ B.sec[x.dataset.sec]=x.value; guardar(); });
+  v.querySelectorAll('[data-off]').forEach(x=>x.onchange=()=>{ B.secOff[x.dataset.off]=!x.checked; guardar(); });
+  document.getElementById('irVer').onclick=()=>modo('ver');
+  document.getElementById('reset').onclick=()=>{ if(!confirm('¿Volver a cargar el libro desde la app? Se pierden los cambios hechos aquí.')) return; B=desdeApp(); guardar(); armar(); };
+  pintarEjs(); pintarExtras();
+  document.getElementById('addLibre').onclick=()=>{ B.extra.push({id:'x'+Date.now(),tipo:'libre',t:'Nueva página',v:''}); guardar(); pintarExtras(); };
+  document.getElementById('addFicha').onclick=catalogo;
+}
+function pintarEjs(){
+  const c=document.getElementById('ejs'); c.innerHTML='';
+  B.ej.forEach(be=>{ const e=ejD(be.id); if(!e) return;
+    const box=document.createElement('div'); box.className='lb-ej';
+    box.innerHTML=`<div class="lb-row" style="justify-content:space-between"><h3 style="flex:2 1 220px">${esc(e.titulo)} <small style="color:var(--suave)">· ${fecha(e.fecha)}</small></h3>
+      <div class="lb-seg" style="flex:0 1 auto">${e.fichas?`<button data-m="diseno" aria-pressed="${be.modo==='diseno'}">🎨 Con su diseño</button>`:''}<button data-m="texto" aria-pressed="${be.modo==='texto'}">📝 Como está</button><button data-m="fuera" aria-pressed="${be.modo==='fuera'}">✕ No incluir</button></div></div><div class="cuerpo"></div>`;
+    c.appendChild(box);
+    box.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{ be.modo=b.dataset.m; guardar(); pintarEjs(); });
+    const cu=box.querySelector('.cuerpo');
+    if(be.modo==='diseno'){
+      const P_=pagsDe(e.fichas); if(be.pags===null) be.pags=P_.filter(p=>p.f.some(f=>activo(f,be.s))||(p.html&&!p.f.length)).map(idPag);   // por defecto: las hojas que respondió (y las de resumen visual, como el árbol)
+      cu.innerHTML=`<div class="lb-seg" style="margin-bottom:8px"><button class="todo">📚 Agregar formato completo</button><button class="nada">Quitar todas</button></div><div class="lb-thumbs"></div>`;
+      cu.querySelector('.todo').onclick=()=>{ be.pags=P_.map(idPag); guardar(); pintarEjs(); };
+      cu.querySelector('.nada').onclick=()=>{ be.pags=[]; guardar(); pintarEjs(); };
+      const T=cu.querySelector('.lb-thumbs');
+      P_.forEach(p=>{ const id=idPag(p), on=be.pags.includes(id), th=document.createElement('div'); th.className='lb-th'+(on?' on':'');
+        th.innerHTML=`<div class="mini"><div></div></div><small>${esc(p.t)}</small><button>${on?'✓ En el libro':'➕ Agregar al libro'}</button>`; T.appendChild(th);
+        pintarPagina(p,be.s,th.querySelector('.mini > div'));
+        th.querySelector('button').onclick=()=>{ be.pags=on?be.pags.filter(x=>x!==id):P_.map(idPag).filter(x=>x===id||be.pags.includes(x)); guardar(); pintarEjs(); }; });
+    } else if(be.modo==='texto'){
+      const res=be.res.length?be.res:textoDeFicha(e,be.s);
+      cu.innerHTML=res.map((r,i)=>`<div class="lb-qa"><b>${esc(r.label)}</b><textarea class="lb-in" data-i="${i}" style="min-height:60px">${esc(r.val)}</textarea></div>`).join('')||'<p class="sub">Sin respuestas.</p>';
+      cu.querySelectorAll('[data-i]').forEach(t=>t.oninput=()=>{ if(!be.res.length) be.res=res; be.res[+t.dataset.i].val=t.value; guardar(); });
+    } });
+}
+/* Respuestas en texto de una ficha (para el modo «como está») */
+function textoDeFicha(e,S){ const out=[]; pagsDe(e.fichas||[]).forEach(p=>p.f.forEach(f=>{
+  if((f.k==='ta'||f.k==='in')&&String(S[f.id]||'').trim()) out.push({label:(f.g||f.lab||p.t),val:String(S[f.id]).trim()});
+  else if(f.k==='nivel'&&S['@'+f.g]===f.id) out.push({label:f.g,val:f.lab}); else if((f.k==='chk'||f.k==='hl'||f.k==='oval')&&S[f.id]) out.push({label:f.g||'Marcado',val:f.lab}); }));
+  return out; }
+function pintarExtras(){
+  const c=document.getElementById('extras'); c.innerHTML='';
+  B.extra.forEach((x,i)=>{ const box=document.createElement('div'); box.className='lb-ej';
+    if(x.tipo==='libre'){ box.innerHTML=`<input class="lb-in" data-k="t" value="${esc(x.t)}" style="font-weight:800;color:var(--petroleo)"><textarea class="lb-in" data-k="v" placeholder="Escribe aquí el contenido de la página…">${esc(x.v)}</textarea>`;
+      box.querySelectorAll('[data-k]').forEach(t=>t.oninput=()=>{ x[t.dataset.k]=t.value; guardar(); }); }
+    else { const p=pagPorId(x.pid); box.innerHTML=`<h3>📄 ${esc(fichaDe(x.pid.split('#')[0]).titulo||'')} · ${esc(p?p.t:'')}</h3><div class="lb-th on" style="max-width:170px"><div class="mini"><div></div></div></div>`;
+      if(p) pintarPagina(p,x.s||{},box.querySelector('.mini > div')); }
+    const del=document.createElement('button'); del.className='lb-x'; del.textContent='🗑 Quitar página'; del.onclick=()=>{ B.extra.splice(i,1); guardar(); pintarExtras(); }; box.appendChild(del);
+    c.appendChild(box); });
+}
+const CATALOGO=['iceberg','sintomas','lucha-huida','ventana','desencadenantes','escala','control','juicio','reformular','arbol','valores','gratitud','logros','autocuidado','rueda','bondad','critico','afirmaciones','proposito','anclaje','regulacion','vagales'];
+async function catalogo(){
+  const c=document.getElementById('cat'); c.innerHTML='<p class="sub">Cargando fichas…</p>';
+  for(const k of CATALOGO) await cargarFicha(k);
+  c.innerHTML=`<p class="sub">Elige la ficha y luego la hoja:</p><div class="lb-cat">${FICHAS.filter(f=>CATALOGO.includes(f.clave)).map(f=>`<button data-k="${f.clave}">${esc(f.titulo)}</button>`).join('')}</div><div class="lb-thumbs" style="margin-top:10px"></div>`;
+  c.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{ const T=c.querySelector('.lb-thumbs'); T.innerHTML='';
+    pagsDe([b.dataset.k]).forEach(p=>{ const th=document.createElement('div'); th.className='lb-th';
+      th.innerHTML=`<div class="mini"><div></div></div><small>${esc(p.t)}</small><button>➕ Agregar al libro</button>`; T.appendChild(th); pintarPagina(p,{},th.querySelector('.mini > div'));
+      th.querySelector('button').onclick=()=>{ B.extra.push({id:'x'+Date.now(),tipo:'ficha',pid:idPag(p),s:{}}); guardar(); pintarExtras(); c.innerHTML='<p class="ok">✓ Hoja agregada. Puedes llenarla en la vista previa.</p>'; }; }); });
+}
+
+/* ================= 👁 VISTA PREVIA (también es lo que se imprime) ================= */
+function ver(){
+  const v=document.getElementById('vista'); v.innerHTML='<div class="lb-book" id="book"></div>';
+  const bk=document.getElementById('book'); let n=0;
+  const pagina=(cls)=>{ const pg=document.createElement('div'); pg.className='lb-pg '+(cls||''); n++;
+    pg.innerHTML=`<div class="pie"><span>SANA TU MENTTE · Psi. Camila Salazar Ramírez</span><span>${esc('Mi libro de terapia'+(B.nombre?' · '+B.nombre:''))}</span></div>`; bk.appendChild(pg); return pg; };
+  const add=(pg,html)=>{ pg.insertAdjacentHTML('beforeend',html); return pg.lastElementChild; };
+  // Portada
+  const cv=pagina('lb-cover'); cv.querySelector('.pie').remove();
+  add(cv,`<div><span class="blob" style="width:300px;height:300px;right:-90px;top:-110px;background:#81a9a7;opacity:.55"></span><span class="blob" style="width:260px;height:260px;left:-90px;bottom:-90px;background:#dabb81;opacity:.5"></span>
+    <img src="img/logo-sana.png" onerror="this.remove()" alt="" style="width:170px;position:relative">
+    <div class="eyebrow">Lo que aprendí y no quiero olvidar</div><h1>Mi libro de terapia</h1>
+    ${B.nombre?`<div class="nom">${esc(B.nombre)}</div>`:''}<p style="color:var(--suave);font-weight:700">${B.inicio?`Proceso terapéutico: ${fecha(B.inicio)} – ${fecha(B.cierre)}`:''}</p>
+    <p style="font-style:italic;max-width:420px;margin:30px auto 0;color:var(--tinta)">Este libro reúne lo que construiste en terapia. Vuelve a él cuando lo necesites: todo lo que hay aquí ya lo hiciste tú.</p></div>`);
+  // Lo que aprendí (editable aquí mismo)
+  const secs=SECS.filter(([k])=>!B.secOff[k]&&String(B.sec[k]||'').trim());
+  if(secs.length){ const pg=pagina(); add(pg,'<h2 class="cap">Lo que aprendí</h2>');
+    secs.forEach(([k,t,c])=>{ const b=add(pg,`<div class="lb-box ${c}"><h4>${t}</h4><div class="ed" contenteditable="true" data-sec="${k}">${esc(B.sec[k])}</div></div>`); }); }
+  // Ejercicios
+  const ejs=B.ej.filter(be=>be.modo!=='fuera'&&ejD(be.id));
+  if(ejs.length){ let pg=pagina(); add(pg,'<h2 class="cap">Mis ejercicios</h2>');
+    ejs.forEach((be,i)=>{ const e=ejD(be.id);
+      if(be.modo==='diseno'){ const P_=(be.pags||[]).map(pagPorId).filter(Boolean); if(!P_.length) return;
+        if(i>0) pg=pagina();
+        add(pg,`<h3 class="ej">${esc(e.titulo)} <small>· ${fecha(e.fecha)}</small></h3>`);
+        P_.forEach((p,j)=>{ if(j>0){ pg=pagina(); } const wrap=add(pg,'<div></div>'); pintarPagina(p,be.s,wrap); editable(wrap,be.s,()=>{ if(p.html) ver(); }); });
+      } else { const res=be.res.length?be.res:textoDeFicha(e,be.s); const [ic,bg]=e.escena||['🌿','#eef4f2'];
+        const box=add(pg,`<div class="lb-scene" style="background:linear-gradient(160deg,#fff 35%,${bg})"><div class="lb-row"><span class="ic" style="flex:0">${ic}</span><h3 class="ej" style="flex:1">${esc(e.titulo)} <small>· ${fecha(e.fecha)}</small></h3></div>
+          ${res.map((r,k)=>`<div class="lb-qa"><b>${esc(r.label)}</b><div class="ed" contenteditable="true" data-k="${k}">${esc(r.val)}</div></div>`).join('')}</div>`);
+        box.querySelectorAll('[data-k]').forEach(d=>d.oninput=()=>{ if(!be.res.length) be.res=res; be.res[+d.dataset.k].val=d.innerText; guardar(); }); } }); }
+  // Páginas agregadas
+  B.extra.forEach(x=>{ const pg=pagina();
+    if(x.tipo==='libre'){ const b=add(pg,`<div style="display:grid;gap:10px"><h2 class="cap ed" contenteditable="true" data-x="t">${esc(x.t)}</h2><div class="lb-box"><div class="ed" contenteditable="true" data-x="v" style="min-height:120px">${esc(x.v||'Escribe aquí…')}</div></div></div>`);
+      b.querySelectorAll('[data-x]').forEach(d=>d.oninput=()=>{ x[d.dataset.x]=d.innerText; guardar(); }); }
+    else { const p=pagPorId(x.pid); if(!p) return; x.s=x.s||{}; const w=add(pg,'<div></div>'); pintarPagina(p,x.s,w); editable(w,x.s,()=>{ if(p.html) ver(); }); } });
+  // Para releer
+  const fin=[['noOlvidar','Cosas que no debo olvidar','oro'],['mensaje','Mensaje de tu psicóloga','']].filter(([k])=>!B.secOff[k]&&String(B.sec[k]||'').trim());
+  if(fin.length){ const pg=pagina(); add(pg,'<h2 class="cap">Para releer</h2>');
+    fin.forEach(([k,t,c])=>add(pg,`<div class="lb-box ${c}"><h4>${t}</h4><div class="ed" contenteditable="true" data-sec="${k}">${esc(B.sec[k])}</div></div>`));
+    add(pg,'<p class="lb-aviso">Documento personal de tu proceso terapéutico. No reemplaza la atención profesional: si las señales de alerta vuelven y no ceden, pide ayuda.</p>'); }
+  bk.querySelectorAll('[data-sec]').forEach(d=>d.oninput=()=>{ B.sec[d.dataset.sec]=d.innerText; guardar(); });
+}
+const fecha=iso=>{ if(!iso) return ''; const [a,m,d]=String(iso).split('-'); return d&&m&&a?`${d}/${m}/${a}`:iso; };
+function modo(m){ MODO=m; document.getElementById('mArmar').setAttribute('aria-pressed',m==='armar'); document.getElementById('mVer').setAttribute('aria-pressed',m==='ver'); scrollTo(0,0); m==='armar'?armar():ver(); }
+document.getElementById('mArmar').onclick=()=>modo('armar');
+document.getElementById('mVer').onclick=()=>modo('ver');
+document.getElementById('bPdf').onclick=()=>{ if(MODO!=='ver') modo('ver'); setTimeout(()=>window.print(),400); };
+if(D===DEMO) document.getElementById('ejemplo').hidden=false;
+(async()=>{ for(const e of D.ej) for(const k of (e.fichas||[])) await cargarFicha(k); for(const x of B.extra) if(x.pid) await cargarFicha(x.pid.split('#')[0]); modo('armar'); })();
+</script></body></html>

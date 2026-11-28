@@ -193,6 +193,7 @@
 <script>
 const KW={autoestima:'autoestima valor inseguridad rosenberg',relaciones:'pareja apego relaciones vínculos',ansiedad:'ansiedad preocupación nervios gad-7 sobrepensamiento',animo:'depresión ánimo tristeza phq-9 desgaste',resiliencia:'resiliencia afrontamiento estrés',crecimiento:'trauma heridas pasado crecimiento duelo'};
 const R=[
+ {tipo:'actividad',precio:'gratis',t:'Mi radio de pensamientos',d:'Cuando un pensamiento te pese, anótalo aquí: le pones nombre, lo revisas, le respondes y ves cuánto baja. Actividad interactiva para hacer desde el celular durante una semana.',img:'img/radio-pensamientos.png',pos:'center top',kw:'pensamientos sobrepensamiento ansiedad rumiación regalo registro semana',href:'https://sanatumentte.github.io/actividades/RadioPensamientos-regalo.html',cta:'Empezar actividad'},
  {tipo:'academico',precio:'gratis',t:'Effects of a gamified intervention on gratitude in a Colombian population',d:'Artículo científico · Frontiers in Education, 2026.',img:'img/publicaciones/gratitud.webp',pos:'center top',video:'https://www.instagram.com/p/DfRuYaBhPdB/',kw:'gratitud investigación gamificación psicología positiva',href:'https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2026.1939198/full',cta:'Leer'},
  {tipo:'academico',precio:'gratis',t:'Más allá del juego: escape rooms y desarrollo del talento humano',d:'Capítulo de libro · Editorial EIDEC, 2025.',img:'img/publicaciones/mas-alla-del-juego.webp',fit:1,kw:'escape room talento humano metodologías activas',href:'https://www.researchgate.net/publication/399997160_Mas_alla_del_juego_escape_rooms_y_desarrollo_del_talento_humano',cta:'Leer'},
  {tipo:'academico',precio:'gratis',t:'Metodologías activas de aprendizaje y desarrollo de recursos en los trabajadores',d:'Capítulo de libro · Editorial EIDEC, 2025.',img:'img/publicaciones/metodologias-activas.webp',fit:1,kw:'metodologías activas aprendizaje trabajadores recursos',href:'https://www.researchgate.net/publication/395135992_El_rol_de_las_metodologias_activas_de_aprendizaje_en_el_desarrollo_de_recursos_en_los_trabajadores',cta:'Leer'},
@@ -203,7 +204,7 @@ const R=[
  {tipo:'articulo',precio:'gratis',t:'El camino a la resiliencia',d:'Cómo afrontar la adversidad y fortalecer tus recursos. American Psychological Association (APA).',img:'img/lecturas/resiliencia-apa.jpg',kw:'resiliencia adversidad afrontamiento',href:'https://www.apa.org/topics/resilience/camino',cta:'Leer'},
  {tipo:'articulo',precio:'gratis',t:'4 ways to boost your self-compassion',d:'Cuatro formas de cultivar la autocompasión. Harvard Health Publishing (en inglés).',img:'img/lecturas/autocompasion-harvard.jpg',kw:'autocompasión autoestima bienestar',href:'https://www.health.harvard.edu/mental-health/4-ways-to-boost-your-self-compassion',cta:'Leer'},
 ];
-const TIPOS={academico:'Artículos publicados',prueba:'Tests',ebook:'Ebook',articulo:'Lecturas recomendadas'};
+const TIPOS={actividad:'Actividades interactivas',academico:'Artículos publicados',prueba:'Tests',ebook:'Ebook',articulo:'Lecturas recomendadas'};
 const PRECIOS={todos:'Todos',gratis:'Gratis',pago:'De pago'};
 const st={precio:'todos',tipo:'todos',q:''};
 const p=new URLSearchParams(location.search);if(TIPOS[p.get('tipo')])st.tipo=p.get('tipo');if(PRECIOS[p.get('precio')])st.precio=p.get('precio');

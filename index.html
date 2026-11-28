@@ -880,6 +880,7 @@ body.ready .nv1{animation:bnUp 1s cubic-bezier(.2,.7,.2,1) 1.1s forwards}
 
 <div class="pay" id="pay" role="dialog" aria-modal="true" aria-label="Agendar sesión"><div class="pay-box"><button class="pay-x" id="payX" type="button" aria-label="Cerrar">×</button><div id="payBody"></div></div></div>
 <script src="tests-data.js?v=5"></script>
+<script src="resenas-diseno.js?v=1"></script>
 <script src="comun.js?v=12"></script>
 <script>
 /* Reseñas escritas por pacientes (texto tal cual lo enviaron) */
@@ -906,16 +907,9 @@ VIDEOS.forEach(v=>{
   const el=d.querySelector('video');el.poster=v.poster;el.src=v.src;
   shots.appendChild(d);
 });
-SHOTS.forEach((s,k)=>{
-  const d=document.createElement('article');d.className='shot rvw';
-  d.innerHTML='<div class="rvw-q">“</div><div class="rvw-st" aria-label="Reseña">'+'<span>★</span>'.repeat(5)+'</div><h3></h3><div class="rvw-body"></div><button class="rvw-more" type="button">Leer reseña completa</button><div class="rvw-ft"><span class="rvw-av">♡</span><div><b>Paciente</b><small>Proceso terapéutico online</small></div><div class="rvw-tags"></div></div>';
-  d.querySelector('h3').textContent='«'+s.h+'»';
-  const b=d.querySelector('.rvw-body');s.p.forEach(x=>{const q=document.createElement('p');q.textContent=x;b.appendChild(q)});
-  const t=d.querySelector('.rvw-tags');s.tags.forEach(x=>{const e=document.createElement('em');e.textContent=x;t.appendChild(e)});
-  const m=d.querySelector('.rvw-more');m.onclick=()=>{d.classList.toggle('open');m.textContent=d.classList.contains('open')?'Ver menos':'Leer reseña completa'};
-  shots.appendChild(d);
-  requestAnimationFrame(()=>{if(b.scrollHeight<=b.clientHeight+4)m.remove()});
-});
+SHOTS.forEach(s=>{const d=tarjetaResena(Object.assign({nombre:'Paciente',sub:'Proceso terapéutico online',estrellas:5},s));shots.appendChild(d);requestAnimationFrame(d.ajustar)});
+/* Reseñas nuevas que llegan por el formulario: se diseñan solas y salen primero */
+cargarResenas().then(a=>{const ref=shots.querySelector('.rvw');a.forEach(r=>{if(!String(r.texto||'').trim())return;const d=tarjetaResena(disenoResena(r));shots.insertBefore(d,ref);requestAnimationFrame(d.ajustar)})});
 /* ---------- Agendar sesión: elegir plan, pagar y enviar comprobante ---------- */
 /* Pega aquí el enlace de pago de cada medio. Si un enlace está vacío, se abre WhatsApp para pedirlo. */
 const PLANES={

@@ -33,6 +33,22 @@ h1{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(40px,6vw
 h1 i{color:var(--petroleo)}
 .hand{font-family:"Shadows Into Light Two",cursive;font-size:28px;color:var(--petroleo);display:block;margin-top:10px}
 .list{columns:3;column-gap:22px;margin-top:-50px}
+.shot{break-inside:avoid;margin-bottom:22px}
+.rvw{position:relative;background:#fffdf7;border-radius:24px;padding:26px 24px 20px;box-shadow:0 18px 40px rgba(14,40,48,.16);overflow:hidden}
+.rvw-q{position:absolute;right:18px;top:-14px;font-family:"Playfair Display",serif;font-size:120px;line-height:1;color:var(--dorado);opacity:.35;pointer-events:none}
+.rvw-st{color:var(--dorado);font-size:17px;letter-spacing:3px;margin-bottom:10px}
+.rvw h3{font-family:"Playfair Display",serif;font-weight:400;font-style:italic;font-size:22px;line-height:1.25;color:var(--petroleo);margin-bottom:12px;padding-right:20px}
+.rvw-body{font-size:14.5px;line-height:1.6;color:var(--suave);max-height:7.9em;overflow:hidden;position:relative;transition:max-height .5s}
+.rvw-body::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3em;background:linear-gradient(transparent,#fffdf7);transition:opacity .3s}
+.rvw.open .rvw-body{max-height:80em}.rvw.open .rvw-body::after{opacity:0}
+.rvw-body p+p{margin-top:9px}
+.rvw-more{border:0;background:none;color:var(--verde);font:600 13px Montserrat,system-ui,sans-serif;padding:8px 0 0;cursor:pointer;border-bottom:1px solid currentColor}
+.rvw-ft{display:flex;align-items:center;gap:11px;margin-top:16px;padding-top:14px;border-top:1px solid var(--beige);flex-wrap:wrap}
+.rvw-av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--salvia);color:#fff;font-family:"Playfair Display",serif;font-size:17px}
+.rvw-ft b{display:block;font-size:14px;color:var(--petroleo)}
+.rvw-ft small{font-size:12px;color:var(--suave)}
+.rvw-tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.rvw-tags em{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--petroleo);background:rgba(129,169,167,.2);padding:5px 10px;border-radius:99px}
 .card{break-inside:avoid;background:#fff;border-radius:22px;padding:28px;margin-bottom:22px;box-shadow:0 16px 36px rgba(22,90,108,.08)}
 .card .st{color:var(--dorado);letter-spacing:3px;font-size:18px}
 .card p{font-family:"Playfair Display",serif;font-style:italic;font-size:18px;line-height:1.5;margin:10px 0 14px;color:var(--petroleo)}
@@ -82,20 +98,13 @@ textarea{min-height:140px;resize:vertical}
     <p class="note" id="rvNote">Tu reseña se publicará en esta página. Por tu privacidad, usa solo tu nombre o tus iniciales.</p>
   </section>
 </main>
+<script src="resenas-diseno.js?v=1"></script>
 <script>
-/* Enlace de la hoja de Google (Apps Script). Mientras esté vacío, las reseñas se envían por WhatsApp. */
-const RESENAS_URL='https://script.google.com/macros/s/AKfycbx_969dNQrc8uxsPfmNgO_hBtnHn74nhbDbWlayeFHXmc42qI-LOVs-QozQnwxaazwQZA/exec';
 if(!RESENAS_URL)document.getElementById('rvNote').textContent='Se abrirá WhatsApp con tu reseña lista para enviar.';
 let val=0;const st=[...document.querySelectorAll('#rvStars span')];
 st.forEach((s,i)=>s.onclick=()=>{val=i+1;st.forEach((x,k)=>x.classList.toggle('on',k<val))});
 const L=document.getElementById('list');
-function tarjeta(r,arriba){
-  const d=document.createElement('div');d.className='card';d.innerHTML='<div class="st"></div><p></p><small></small>';
-  d.querySelector('.st').textContent='★'.repeat(Math.max(1,Math.min(5,r.estrellas||5)));
-  d.querySelector('p').textContent='«'+r.texto+'»';
-  d.querySelector('small').textContent='— '+(r.nombre||'Paciente')+(r.fecha?' · '+r.fecha:'');
-  arriba?L.prepend(d):L.appendChild(d);
-}
+function tarjeta(r,arriba){const d=tarjetaResena(disenoResena(r));arriba?L.prepend(d):L.appendChild(d);requestAnimationFrame(d.ajustar)}
 const vacio=document.createElement('p');vacio.className='empty';
 document.getElementById('rvSend').onclick=async()=>{
   const btn=document.getElementById('rvSend'),n=document.getElementById('rvName').value.trim(),t=document.getElementById('rvText').value.trim(),e=document.getElementById('rvErr');
@@ -119,7 +128,7 @@ document.getElementById('rvSend').onclick=async()=>{
   }
 };
 Promise.all([
-  RESENAS_URL?fetch(RESENAS_URL).then(r=>r.json()).catch(()=>[]):Promise.resolve([]),
+  cargarResenas(),
   fetch('resenas.json').then(r=>r.json()).catch(()=>[])
 ]).then(([nuevas,fijas])=>{
   const a=[...(Array.isArray(nuevas)?nuevas:[]),...fijas];

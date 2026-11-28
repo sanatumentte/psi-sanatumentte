@@ -48,6 +48,7 @@ textarea{min-height:140px;resize:vertical}
 .stars{display:flex;gap:6px;font-size:34px;cursor:pointer;color:rgba(255,255,255,.35)}
 .stars span.on{color:var(--dorado)}
 .ok{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;opacity:.9;margin-top:16px}
+.btn:disabled{opacity:.6;cursor:wait}
 .btn{margin-top:24px;display:inline-flex;background:var(--crema);color:var(--petroleo);border:0;border-radius:99px;padding:15px 30px;font:inherit;font-weight:600;cursor:pointer}
 .err{color:var(--dorado);font-size:14px;margin-top:10px;min-height:20px}
 .note{font-size:12.5px;opacity:.75;margin-top:16px}
@@ -75,28 +76,56 @@ textarea{min-height:140px;resize:vertical}
     <label for="rvText">Tu experiencia</label>
     <textarea id="rvText" placeholder="Cuéntanos cómo fue tu proceso…"></textarea>
     <label class="ok"><input type="checkbox" id="rvOk"> Autorizo que esta reseña se publique en la página, sin mi nombre completo.</label>
+    <input type="text" id="rvWeb" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <button class="btn" id="rvSend">Enviar reseña →</button>
     <div class="err" id="rvErr"></div>
-    <p class="note">Se abrirá WhatsApp con tu reseña lista para enviar. Camila la revisa antes de publicarla para cuidar la confidencialidad de todos.</p>
+    <p class="note" id="rvNote">Tu reseña se publicará en esta página. Por tu privacidad, usa solo tu nombre o tus iniciales.</p>
   </section>
 </main>
 <script>
+/* Enlace de la hoja de Google (Apps Script). Mientras esté vacío, las reseñas se envían por WhatsApp. */
+const RESENAS_URL='https://script.google.com/macros/s/AKfycbx_969dNQrc8uxsPfmNgO_hBtnHn74nhbDbWlayeFHXmc42qI-LOVs-QozQnwxaazwQZA/exec';
+if(!RESENAS_URL)document.getElementById('rvNote').textContent='Se abrirá WhatsApp con tu reseña lista para enviar.';
 let val=0;const st=[...document.querySelectorAll('#rvStars span')];
 st.forEach((s,i)=>s.onclick=()=>{val=i+1;st.forEach((x,k)=>x.classList.toggle('on',k<val))});
-document.getElementById('rvSend').onclick=()=>{
-  const n=document.getElementById('rvName').value.trim(),t=document.getElementById('rvText').value.trim(),e=document.getElementById('rvErr');
+const L=document.getElementById('list');
+function tarjeta(r,arriba){
+  const d=document.createElement('div');d.className='card';d.innerHTML='<div class="st"></div><p></p><small></small>';
+  d.querySelector('.st').textContent='★'.repeat(Math.max(1,Math.min(5,r.estrellas||5)));
+  d.querySelector('p').textContent='«'+r.texto+'»';
+  d.querySelector('small').textContent='— '+(r.nombre||'Paciente')+(r.fecha?' · '+r.fecha:'');
+  arriba?L.prepend(d):L.appendChild(d);
+}
+const vacio=document.createElement('p');vacio.className='empty';
+document.getElementById('rvSend').onclick=async()=>{
+  const btn=document.getElementById('rvSend'),n=document.getElementById('rvName').value.trim(),t=document.getElementById('rvText').value.trim(),e=document.getElementById('rvErr');
   if(!val){e.textContent='Elige una calificación.';return}
   if(t.length<10){e.textContent='Escribe un poco más sobre tu experiencia.';return}
   if(!document.getElementById('rvOk').checked){e.textContent='Marca la autorización para poder publicarla.';return}
   e.textContent='';
-  const msg='Hola Camila, te dejo mi reseña para la página web:\n\n'+'★'.repeat(val)+'\n"'+t+'"\n— '+(n||'Paciente')+'\n\nAutorizo publicarla sin mi nombre completo.';
-  window.open('https://wa.me/message/CVCEFMEVO3MYM1?text='+encodeURIComponent(msg),'_blank');
+  if(!RESENAS_URL){
+    const msg='Hola Camila, te dejo mi reseña para la página web:\n\n'+'★'.repeat(val)+'\n"'+t+'"\n— '+(n||'Paciente')+'\n\nAutorizo publicarla sin mi nombre completo.';
+    window.open('https://wa.me/message/CVCEFMEVO3MYM1?text='+encodeURIComponent(msg),'_blank');return;
+  }
+  btn.disabled=true;btn.textContent='Publicando…';
+  try{
+    await fetch(RESENAS_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams({nombre:n||'Paciente',estrellas:val,texto:t,web:document.getElementById('rvWeb').value})});
+    vacio.remove();
+    const hoy=new Date();tarjeta({nombre:n||'Paciente',estrellas:val,texto:t,fecha:hoy.getFullYear()+'-'+String(hoy.getMonth()+1).padStart(2,'0')},true);
+    document.getElementById('escribir').innerHTML='<h2>¡Gracias por tu <i>reseña!</i></h2><p>Ya está publicada. Tu experiencia puede animar a alguien a dar el primer paso. ♡</p>';
+    L.scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(err){
+    btn.disabled=false;btn.textContent='Enviar reseña →';e.textContent='No se pudo enviar. Revisa tu conexión e intenta de nuevo.';
+  }
 };
-const L=document.getElementById('list');
-fetch('resenas.json').then(r=>r.json()).then(a=>{
-  if(!a.length){L.outerHTML='<p class="empty">Aún no hay reseñas publicadas. ¡Sé la primera persona!</p>';return}
-  a.forEach(r=>{const d=document.createElement('div');d.className='card';d.innerHTML='<div class="st">'+'★'.repeat(r.estrellas||5)+'</div><p></p><small></small>';d.querySelector('p').textContent='«'+r.texto+'»';d.querySelector('small').textContent='— '+r.nombre+(r.fecha?' · '+r.fecha:'');L.appendChild(d)});
-}).catch(()=>{L.outerHTML='<p class="empty">No se pudieron cargar las reseñas.</p>'});
+Promise.all([
+  RESENAS_URL?fetch(RESENAS_URL).then(r=>r.json()).catch(()=>[]):Promise.resolve([]),
+  fetch('resenas.json').then(r=>r.json()).catch(()=>[])
+]).then(([nuevas,fijas])=>{
+  const a=[...(Array.isArray(nuevas)?nuevas:[]),...fijas];
+  if(!a.length){vacio.textContent='Aún no hay reseñas publicadas. ¡Sé la primera persona!';L.before(vacio);return}
+  a.forEach(r=>tarjeta(r));
+});
 </script>
 <a class="wa-float" href="https://wa.me/message/CVCEFMEVO3MYM1" target="_blank" rel="noopener" aria-label="Escríbeme por WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36A9.43 9.43 0 0 1 2.6 12C2.6 6.8 6.84 2.56 12.05 2.56c2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.44-9.43 9.44m8.02-17.47A11.27 11.27 0 0 0 12.05.7C5.8.7.72 5.78.72 12.03c0 2 .52 3.95 1.52 5.66L.62 23.3l5.75-1.5a11.3 11.3 0 0 0 5.67 1.45c6.25 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.87-3.31-8.01"/></svg></a>
 </body>

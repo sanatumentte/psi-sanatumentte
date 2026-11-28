@@ -177,12 +177,40 @@ function fullTest(id){
 }
 
 /* ----- Enlaces, menú y animaciones ----- */
+/* Menú de tres líneas (celular): lleva al inicio y a todas las secciones */
+(function(){
+  const bur=document.getElementById('burger');if(!bur)return;
+  const H=document.getElementById('trayectoria')?'':'index.html';
+  const G=[['',[[H?'index.html':'#','Inicio']]],
+   ['Sobre mí',[[H+'#trayectoria','Mi trayectoria'],[H+'#publicaciones','Artículos publicados']]],
+   ['Terapias y servicios',[[H+'#areas','Motivos de consulta'],[H+'#proceso','Cómo funciona el proceso'],[H+'#sesiones','Sesiones y tarifas'],[H+'#testimonios','Testimonios'],['resenas.html','Reseñas'],[H+'#faq','Preguntas frecuentes']]],
+   ['Tests gratuitos',[['#','Evaluación inicial','data-finder'],['#','Pruebas estandarizadas','data-picker']]],
+   ['Mis productos digitales',[['recursos.html#libro','Ebooks'],['recursos.html?precio=gratis','Material de apoyo gratuito'],['recursos.html?tipo=articulo','Lecturas recomendadas']]]];
+  const REDES=[["https://www.youtube.com/@Sanatumentte1?sub_confirmation=1", "YouTube", "<svg viewBox=\"0 0 24 24\"><path d=\"M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z\"/></svg>"], ["https://instagram.com/sanatumentte", "Instagram", "<svg viewBox=\"0 0 24 24\"><path d=\"M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z\"/></svg>"], ["https://tiktok.com/@sanatumentte", "TikTok", "<svg viewBox=\"0 0 24 24\"><path d=\"M19.6 6.7a4.8 4.8 0 0 1-3.8-4.3V2h-3.4v13.7a2.9 2.9 0 1 1-2.1-2.8V9a6.3 6.3 0 1 0 5.5 6.3V8.2a8.3 8.3 0 0 0 4.8 1.5V6.3c-.4 0-.7 0-1-.1z\"/></svg>"]];
+  const d=document.createElement('div');d.className='drw';d.id='drw';
+  d.innerHTML='<div class="drw-bg"></div><nav class="drw-pn" role="dialog" aria-modal="true" aria-label="Menú"><div class="drw-hd"><b>Menú</b><button type="button" class="drw-x" aria-label="Cerrar menú">×</button></div>'
+   +G.map((g,i)=>{const ls=g[1].map(l=>'<a href="'+l[0]+'"'+(l[2]?' '+l[2]:'')+'>'+l[1]+'</a>').join('');
+     return g[0]?'<div class="drw-g"><button type="button" class="drw-k" aria-expanded="false" aria-controls="drwg'+i+'">'+g[0]+'<span class="drw-ch" aria-hidden="true"></span></button><div class="drw-ls" id="drwg'+i+'" hidden>'+ls+'</div></div>':'<div class="drw-home">'+ls+'</div>'}).join('')
+   +'<a class="drw-cta" href="'+H+'#sesiones">Iniciar terapia</a>'
+   +'<div class="drw-soc-k">Suscríbete y sígueme</div><div class="drw-soc">'+REDES.map(r=>'<a href="'+r[0]+'" target="_blank" rel="noopener" aria-label="'+r[1]+'" title="'+r[1]+'">'+r[2]+'</a>').join('')+'</div></nav>';
+  document.body.appendChild(d);
+  const cerrar=()=>{d.classList.remove('show');bur.setAttribute('aria-expanded','false');document.documentElement.style.overflow=''};
+  window.cerrarDrw=cerrar;
+  bur.setAttribute('aria-expanded','false');
+  bur.addEventListener('click',e=>{e.stopImmediatePropagation();d.classList.add('show');bur.setAttribute('aria-expanded','true');document.documentElement.style.overflow='hidden';d.querySelector('.drw-x').focus()},true);
+  d.querySelectorAll('.drw-k').forEach(b=>b.addEventListener('click',()=>{const ab=b.getAttribute('aria-expanded')!=='true';
+    d.querySelectorAll('.drw-k').forEach(x=>{x.setAttribute('aria-expanded','false');x.nextElementSibling.hidden=true});
+    if(ab){b.setAttribute('aria-expanded','true');b.nextElementSibling.hidden=false}}));
+  d.querySelector('.drw-bg').onclick=cerrar;d.querySelector('.drw-x').onclick=cerrar;
+  d.querySelectorAll('a').forEach(a=>a.addEventListener('click',cerrar));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&d.classList.contains('show'))cerrar()});
+})();
 document.querySelectorAll('[data-area]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();areaQuiz(b.dataset.area)}));
 document.querySelectorAll('[data-finder]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();menu.classList.remove('open');finder()}));
 document.querySelectorAll('[data-picker]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();menu.classList.remove('open');testPicker()}));
 document.querySelectorAll('[data-test]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();fullTest(b.dataset.test)}));
 const menu=document.getElementById('menu');
-document.getElementById('burger').onclick=()=>menu.classList.toggle('open');
+
 menu.querySelectorAll('li>button').forEach(b=>b.onclick=e=>{e.stopPropagation();const li=b.parentNode,was=li.classList.contains('op');menu.querySelectorAll('li.op').forEach(x=>x.classList.remove('op'));if(!was)li.classList.add('op')});
 document.addEventListener('click',e=>{if(!menu.contains(e.target))menu.querySelectorAll('li.op').forEach(x=>x.classList.remove('op'))});
 menu.addEventListener('scroll',()=>menu.querySelectorAll('li.op').forEach(x=>x.classList.remove('op')),{passive:true});
